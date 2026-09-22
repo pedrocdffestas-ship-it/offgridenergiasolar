@@ -149,33 +149,29 @@ export default function VslPlayer() {
 
     window.clearTimeout(restartTimer.current);
 
-    try {
-      // Recarrega o vídeo em vez de combinar pause, seek e play durante o
-      // carregamento. Isso garante que a reprodução comece novamente no zero.
-      player.loadVideoById({
-        videoId: VIDEO_ID,
-        startSeconds: 0,
-      });
-      player.unMute();
-      player.setVolume(100);
-      player.playVideo();
-    } catch {
-      // Alguns carregamentos ainda podem estar finalizando no iframe. O retry
-      // acontece após o iframe receber o novo vídeo.
-      restartTimer.current = window.setTimeout(() => {
-        const currentPlayer = playerRef.current;
-        if (!currentPlayer || !mountedRef.current) return;
-
-        try {
-          currentPlayer.seekTo(0, true);
-          currentPlayer.unMute();
-          currentPlayer.setVolume(100);
-          currentPlayer.playVideo();
-        } catch {
-          /* noop */
+    // Estratégia nova: NÃO recarregar o vídeo e NÃO dar seek. Recarregar ou
+    // buscar o tempo enquanto o iframe ainda está bufferizando é o que
+    // paralisa a reprodução. Aqui apenas removemos o mudo e garantimos o play,
+    // mantendo o buffer que já estava rodando desde o autoplay silencioso.
+    const applySound = () => {
+      const current = playerRef.current;
+      if (!current || !mountedRef.current) return;
+      try {
+        current.unMute();
+        current.setVolume(100);
+        if (current.getPlayerState?.() !== 1) {
+          current.playVideo();
         }
-      }, 180);
-    }
+      } catch {
+        /* noop */
+      }
+    };
+
+    applySound();
+
+    // Reforço único caso o navegador ainda não tenha liberado o áudio no
+    // primeiro toque. Continua sem tocar no tempo do vídeo.
+    restartTimer.current = window.setTimeout(applySound, 250);
 
     setUnmuted(true);
     setPlaying(true);
