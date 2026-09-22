@@ -202,7 +202,7 @@ export default function VslPlayer() {
             <div className="h-[6px] w-full overflow-hidden rounded-full bg-white/25">
               <div
                 className="h-full rounded-full bg-solar transition-[width] duration-200 ease-linear"
-                style={{ width: `${progress}%` }}}
+                style={{ width: `${progress}%` }}
               />
             </div>
           </div>
