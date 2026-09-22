@@ -34,7 +34,6 @@ function fmt(t: number) {
 }
 
 export default function VslPlayer() {
-  const wrapRef = useRef<HTMLDivElement | null>(null);
   const hostRef = useRef<HTMLDivElement | null>(null);
   const playerRef = useRef<any>(null);
   const hintTimer = useRef<number | undefined>(undefined);
@@ -44,13 +43,10 @@ export default function VslPlayer() {
   const [progress, setProgress] = useState(0);
   const [current, setCurrent] = useState(0);
   const [duration, setDuration] = useState(0);
-  const userPausedRef = useRef(false);
-
 
   useEffect(() => {
     let cancelled = false;
-    let raf = 0;
-    let observer: IntersectionObserver | null = null;
+    let tickId = 0;
 
     loadApi().then((YT) => {
       if (cancelled || !hostRef.current) return;
@@ -67,28 +63,15 @@ export default function VslPlayer() {
           modestbranding: 1,
           iv_load_policy: 3,
           playsinline: 1,
-          showinfo: 0,
+          origin: typeof window !== "undefined" ? window.location.origin : undefined,
         },
         events: {
           onReady: (e: any) => {
             e.target.mute();
             e.target.playVideo();
             setDuration(e.target.getDuration?.() || 0);
-            if (wrapRef.current) {
-              observer = new IntersectionObserver(
-                (entries) => {
-                  for (const entry of entries) {
-                    if (entry.isIntersecting && !userPausedRef.current) e.target.playVideo();
-                  }
-                },
-                { threshold: 0.4 },
-              );
-              observer.observe(wrapRef.current);
-            }
           },
           onStateChange: (e: any) => {
-            const p = playerRef.current;
-            if (p?.getDuration) setDuration(p.getDuration() || 0);
             if (e.data === 1) setPlaying(true);
             if (e.data === 2) setPlaying(false);
             if (e.data === 0) setPlaying(false);
@@ -105,16 +88,15 @@ export default function VslPlayer() {
           setDuration(d);
           setProgress(d > 0 ? Math.min(100, (c / d) * 100) : 0);
         }
-        raf = window.setTimeout(tick, 250);
+        tickId = window.setTimeout(tick, 250);
       };
       tick();
     });
 
     return () => {
       cancelled = true;
-      window.clearTimeout(raf);
+      window.clearTimeout(tickId);
       window.clearTimeout(hintTimer.current);
-      observer?.disconnect();
       try {
         playerRef.current?.destroy?.();
       } catch {
@@ -138,7 +120,6 @@ export default function VslPlayer() {
     p.playVideo();
     setUnmuted(true);
     setPlaying(true);
-    userPausedRef.current = false;
   };
 
   const togglePlay = () => {
@@ -148,24 +129,17 @@ export default function VslPlayer() {
     if (state === 1) {
       p.pauseVideo();
       setPlaying(false);
-      userPausedRef.current = true;
       showHint("pause");
     } else {
       p.playVideo();
       setPlaying(true);
-      userPausedRef.current = false;
       showHint("play");
     }
-
   };
 
   return (
-    <div
-      ref={wrapRef}
-      className="relative z-[1] mx-auto mb-[26px] max-w-[400px] rounded-3xl bg-navy p-[10px] shadow-[0_24px_50px_-20px_rgb(27_42_65/0.28)]"
-    >
+    <div className="relative z-[1] mx-auto mb-[26px] max-w-[400px] rounded-3xl bg-navy p-[10px] shadow-[0_24px_50px_-20px_rgb(27_42_65/0.28)]">
       <div className="relative aspect-[9/16] overflow-hidden rounded-2xl bg-[#0B1523]">
-        {/* iframe layer — scaled up so no external branding/edges can appear */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <div
             ref={hostRef}
@@ -173,7 +147,6 @@ export default function VslPlayer() {
           />
         </div>
 
-        {/* click surface: blocks YouTube UI, toggles play/pause after sound is on */}
         {unmuted ? (
           <button
             type="button"
