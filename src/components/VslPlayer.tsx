@@ -12,12 +12,19 @@ declare global {
 let apiPromise: Promise<any> | null = null;
 
 function loadApi(): Promise<any> {
-  if (typeof window === "undefined") return Promise.reject(new Error("ssr"));
-  if (window.YT && window.YT.Player) return Promise.resolve(window.YT);
+  if (typeof window === "undefined") {
+    return Promise.reject(new Error("YouTube API indisponível durante o SSR"));
+  }
+
+  if (window.YT?.Player) {
+    return Promise.resolve(window.YT);
+  }
+
   if (apiPromise) return apiPromise;
 
   apiPromise = new Promise((resolve) => {
     const previousCallback = window.onYouTubeIframeAPIReady;
+
     window.onYouTubeIframeAPIReady = () => {
       previousCallback?.();
       resolve(window.YT);
@@ -28,26 +35,31 @@ function loadApi(): Promise<any> {
     );
 
     if (!existingScript) {
-      const tag = document.createElement("script");
-      tag.src = "https://www.youtube.com/iframe_api";
-      document.head.appendChild(tag);
+      const script = document.createElement("script");
+      script.src = "https://www.youtube.com/iframe_api";
+      script.async = true;
+      document.head.appendChild(script);
     }
   });
 
   return apiPromise;
 }
 
-function fmt(t: number) {
-  const s = Math.max(0, Math.floor(t));
-  return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+function formatTime(time: number) {
+  const seconds = Math.max(0, Math.floor(time));
+  return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`;
 }
 
 export default function VslPlayer() {
   const hostRef = useRef<HTMLDivElement | null>(null);
   const playerRef = useRef<any>(null);
-  const hintTimer = useRef<number | undefined>(undefined);
+  const readyRef = useRef(false);
+  const activatingRef = useRef(false);
   const mountedRef = useRef(true);
+  const hintTimerRef = useRef<number | undefined>(undefined);
+
   const [unmuted, setUnmuted] = useState(false);
+  const [activating, setActivating] = useState(false);
   const [playing, setPlaying] = useState(true);
   const [hint, setHint] = useState<"play" | "pause" | null>(null);
   const [progress, setProgress] = useState(0);
@@ -76,31 +88,58 @@ export default function VslPlayer() {
             modestbranding: 1,
             iv_load_policy: 3,
             playsinline: 1,
-            origin:
-              typeof window !== "undefined" ? window.location.origin : undefined,
+            origin: window.location.origin,
           },
           events: {
             onReady: (event: any) => {
-              event.target.mute();
-              event.target.setVolume(0);
-              event.target.playVideo();
-              setDuration(event.target.getDuration?.() || 0);
+              if (cancelled) return;
+
+              const player = event.target;
+              readyRef.current = true;
+              player.mute();
+              player.setVolume(0);
+              player.playVideo();
+              setDuration(player.getDuration?.() || 0);
             },
             onStateChange: (event: any) => {
-              if (event.data === 1) setPlaying(true);
-              if (event.data === 2) setPlaying(false);
-              if (event.data === 0) setPlaying(false);
+              if (cancelled) return;
+
+              if (event.data === 1) {
+                if (activatingRef.current) {
+                  activatingRef.current = false;
+                  setActivating(false);
+                }
+                setPlaying(true);
+              }
+
+              if (event.data === 2 && !activatingRef.current) {
+                setPlaying(false);
+              }
+
+              if (event.data === 0) {
+                activatingRef.current = false;
+                setActivating(false);
+                setPlaying(false);
+              }
+            },
+            onError: () => {
+              if (!cancelled) {
+                activatingRef.current = false;
+                setActivating(false);
+                setPlaying(false);
+              }
             },
           },
         });
 
-        const tick = () => {
+        const updateProgress = () => {
           if (cancelled) return;
 
           const player = playerRef.current;
           if (player?.getCurrentTime && player?.getDuration) {
             const total = player.getDuration() || 0;
             const elapsed = player.getCurrentTime() || 0;
+
             setCurrent(elapsed);
             setDuration(total);
             setProgress(
@@ -108,10 +147,10 @@ export default function VslPlayer() {
             );
           }
 
-          tickId = window.setTimeout(tick, 250);
+          tickId = window.setTimeout(updateProgress, 250);
         };
 
-        tick();
+        updateProgress();
       })
       .catch(() => {
         if (!cancelled) setPlaying(false);
@@ -120,13 +159,16 @@ export default function VslPlayer() {
     return () => {
       cancelled = true;
       mountedRef.current = false;
+      readyRef.current = false;
+      activatingRef.current = false;
+
       if (tickId !== undefined) window.clearTimeout(tickId);
-      window.clearTimeout(hintTimer.current);
+      window.clearTimeout(hintTimerRef.current);
 
       try {
         playerRef.current?.destroy?.();
       } catch {
-        /* noop */
+        // O player pode já ter sido destruído pelo YouTube.
       }
 
       playerRef.current = null;
@@ -135,19 +177,32 @@ export default function VslPlayer() {
 
   const showHint = (kind: "play" | "pause") => {
     setHint(kind);
-    window.clearTimeout(hintTimer.current);
-    hintTimer.current = window.setTimeout(() => {
+    window.clearTimeout(hintTimerRef.current);
+    hintTimerRef.current = window.setTimeout(() => {
       if (mountedRef.current) setHint(null);
     }, 700);
   };
 
   const enableSound = () => {
     const player = playerRef.current;
-    if (!player || !mountedRef.current) return;
+
+    if (
+      !player ||
+      !readyRef.current ||
+      !mountedRef.current ||
+      activatingRef.current ||
+      unmuted
+    ) {
+      return;
+    }
+
+    activatingRef.current = true;
+    setActivating(true);
 
     try {
-      // Todas as chamadas ficam dentro do clique do usuário. O vídeo é
-      // reposicionado ao início sem recarregar o iframe nem criar outro player.
+      // A sequência é intencional: interrompe o estado anterior, reposiciona
+      // sem recarregar o iframe, ativa o áudio e inicia uma única reprodução.
+      player.pauseVideo();
       player.seekTo(0, true);
       player.unMute();
       player.setVolume(100);
@@ -156,24 +211,28 @@ export default function VslPlayer() {
       setUnmuted(true);
       setPlaying(true);
     } catch {
-      /* noop */
+      activatingRef.current = false;
+      setActivating(false);
     }
   };
 
   const togglePlay = () => {
     const player = playerRef.current;
-    if (!player) return;
+
+    if (!player || !readyRef.current || activatingRef.current) return;
 
     const state = player.getPlayerState?.();
+
     if (state === 1) {
       player.pauseVideo();
       setPlaying(false);
       showHint("pause");
-    } else {
-      player.playVideo();
-      setPlaying(true);
-      showHint("play");
+      return;
     }
+
+    player.playVideo();
+    setPlaying(true);
+    showHint("play");
   };
 
   return (
@@ -186,14 +245,17 @@ export default function VslPlayer() {
           />
         </div>
 
-        {unmuted ? (
+        {unmuted && (
           <button
             type="button"
             onClick={togglePlay}
             aria-label={playing ? "Pausar vídeo" : "Reproduzir vídeo"}
-            className="absolute inset-0 z-10 h-full w-full cursor-pointer bg-transparent"
+            disabled={activating}
+            className="absolute inset-0 z-10 h-full w-full cursor-pointer bg-transparent disabled:cursor-wait"
           />
-        ) : (
+        )}
+
+        {!unmuted && (
           <div className="absolute inset-0 z-10" aria-hidden="true" />
         )}
 
@@ -202,7 +264,8 @@ export default function VslPlayer() {
             type="button"
             onClick={enableSound}
             aria-label="Ativar o som do vídeo"
-            className="animate-btn-pulse absolute top-1/2 left-1/2 z-20 flex h-[74px] w-[74px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-solar"
+            disabled={activating}
+            className="animate-btn-pulse absolute top-1/2 left-1/2 z-20 flex h-[74px] w-[74px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-solar disabled:cursor-wait disabled:opacity-80"
           >
             <svg
               width="30"
@@ -223,7 +286,7 @@ export default function VslPlayer() {
 
         {!unmuted && (
           <p className="absolute right-[14px] bottom-[14px] left-[14px] z-20 text-center text-[12.5px] font-extrabold text-white/80">
-            Toque para ouvir com som
+            {activating ? "Carregando o vídeo com som..." : "Toque para ouvir com som"}
           </p>
         )}
 
@@ -245,8 +308,8 @@ export default function VslPlayer() {
         {unmuted && (
           <div className="pointer-events-none absolute right-[14px] bottom-[14px] left-[14px] z-20">
             <div className="mb-[6px] flex justify-between text-[11px] font-extrabold text-white/75">
-              <span>{fmt(current)}</span>
-              <span>{fmt(duration)}</span>
+              <span>{formatTime(current)}</span>
+              <span>{formatTime(duration)}</span>
             </div>
             <div className="h-[6px] w-full overflow-hidden rounded-full bg-white/25">
               <div
