@@ -114,10 +114,25 @@ export default function VslPlayer() {
   const enableSound = () => {
     const p = playerRef.current;
     if (!p) return;
+    // Sequência estável: pausa -> volta ao início -> tira o mudo -> play com som.
+    // Evita o loop de reinícios que acontecia ao dar seek e play ao mesmo tempo
+    // enquanto o autoplay mudo ainda estava rodando.
+    try {
+      p.pauseVideo();
+    } catch {
+      /* noop */
+    }
     p.seekTo(0, true);
     p.unMute();
     p.setVolume(100);
-    p.playVideo();
+    // Pequeno atraso para o seek assentar antes de retomar a reprodução.
+    window.setTimeout(() => {
+      const pl = playerRef.current;
+      if (!pl) return;
+      pl.unMute();
+      pl.setVolume(100);
+      pl.playVideo();
+    }, 120);
     setUnmuted(true);
     setPlaying(true);
   };
