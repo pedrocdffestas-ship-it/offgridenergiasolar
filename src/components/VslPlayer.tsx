@@ -46,7 +46,6 @@ export default function VslPlayer() {
   const hostRef = useRef<HTMLDivElement | null>(null);
   const playerRef = useRef<any>(null);
   const hintTimer = useRef<number | undefined>(undefined);
-  const restartTimer = useRef<number | undefined>(undefined);
   const mountedRef = useRef(true);
   const [unmuted, setUnmuted] = useState(false);
   const [playing, setPlaying] = useState(true);
@@ -123,7 +122,6 @@ export default function VslPlayer() {
       mountedRef.current = false;
       if (tickId !== undefined) window.clearTimeout(tickId);
       window.clearTimeout(hintTimer.current);
-      window.clearTimeout(restartTimer.current);
 
       try {
         playerRef.current?.destroy?.();
@@ -145,36 +143,21 @@ export default function VslPlayer() {
 
   const enableSound = () => {
     const player = playerRef.current;
-    if (!player) return;
+    if (!player || !mountedRef.current) return;
 
-    window.clearTimeout(restartTimer.current);
+    try {
+      // Todas as chamadas ficam dentro do clique do usuário. O vídeo é
+      // reposicionado ao início sem recarregar o iframe nem criar outro player.
+      player.seekTo(0, true);
+      player.unMute();
+      player.setVolume(100);
+      player.playVideo();
 
-    // Estratégia nova: NÃO recarregar o vídeo e NÃO dar seek. Recarregar ou
-    // buscar o tempo enquanto o iframe ainda está bufferizando é o que
-    // paralisa a reprodução. Aqui apenas removemos o mudo e garantimos o play,
-    // mantendo o buffer que já estava rodando desde o autoplay silencioso.
-    const applySound = () => {
-      const current = playerRef.current;
-      if (!current || !mountedRef.current) return;
-      try {
-        current.unMute();
-        current.setVolume(100);
-        if (current.getPlayerState?.() !== 1) {
-          current.playVideo();
-        }
-      } catch {
-        /* noop */
-      }
-    };
-
-    applySound();
-
-    // Reforço único caso o navegador ainda não tenha liberado o áudio no
-    // primeiro toque. Continua sem tocar no tempo do vídeo.
-    restartTimer.current = window.setTimeout(applySound, 250);
-
-    setUnmuted(true);
-    setPlaying(true);
+      setUnmuted(true);
+      setPlaying(true);
+    } catch {
+      /* noop */
+    }
   };
 
   const togglePlay = () => {
