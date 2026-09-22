@@ -44,6 +44,8 @@ export default function VslPlayer() {
   const [progress, setProgress] = useState(0);
   const [current, setCurrent] = useState(0);
   const [duration, setDuration] = useState(0);
+  const userPausedRef = useRef(false);
+
 
   useEffect(() => {
     let cancelled = false;
@@ -76,7 +78,7 @@ export default function VslPlayer() {
               observer = new IntersectionObserver(
                 (entries) => {
                   for (const entry of entries) {
-                    if (entry.isIntersecting) e.target.playVideo();
+                    if (entry.isIntersecting && !userPausedRef.current) e.target.playVideo();
                   }
                 },
                 { threshold: 0.4 },
@@ -136,6 +138,7 @@ export default function VslPlayer() {
     p.playVideo();
     setUnmuted(true);
     setPlaying(true);
+    userPausedRef.current = false;
   };
 
   const togglePlay = () => {
@@ -145,12 +148,15 @@ export default function VslPlayer() {
     if (state === 1) {
       p.pauseVideo();
       setPlaying(false);
+      userPausedRef.current = true;
       showHint("pause");
     } else {
       p.playVideo();
       setPlaying(true);
+      userPausedRef.current = false;
       showHint("play");
     }
+
   };
 
   return (
