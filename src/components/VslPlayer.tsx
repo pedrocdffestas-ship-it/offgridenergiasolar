@@ -15,16 +15,25 @@ function loadApi(): Promise<any> {
   if (typeof window === "undefined") return Promise.reject(new Error("ssr"));
   if (window.YT && window.YT.Player) return Promise.resolve(window.YT);
   if (apiPromise) return apiPromise;
+
   apiPromise = new Promise((resolve) => {
-    const prev = window.onYouTubeIframeAPIReady;
+    const previousCallback = window.onYouTubeIframeAPIReady;
     window.onYouTubeIframeAPIReady = () => {
-      prev?.();
+      previousCallback?.();
       resolve(window.YT);
     };
-    const tag = document.createElement("script");
-    tag.src = "https://www.youtube.com/iframe_api";
-    document.head.appendChild(tag);
+
+    const existingScript = document.querySelector(
+      'script[src="https://www.youtube.com/iframe_api"]',
+    );
+
+    if (!existingScript) {
+      const tag = document.createElement("script");
+      tag.src = "https://www.youtube.com/iframe_api";
+      document.head.appendChild(tag);
+    }
   });
+
   return apiPromise;
 }
 
@@ -37,6 +46,8 @@ export default function VslPlayer() {
   const hostRef = useRef<HTMLDivElement | null>(null);
   const playerRef = useRef<any>(null);
   const hintTimer = useRef<number | undefined>(undefined);
+  const restartTimer = useRef<number | undefined>(undefined);
+  const mountedRef = useRef(true);
   const [unmuted, setUnmuted] = useState(false);
   const [playing, setPlaying] = useState(true);
   const [hint, setHint] = useState<"play" | "pause" | null>(null);
@@ -45,108 +56,142 @@ export default function VslPlayer() {
   const [duration, setDuration] = useState(0);
 
   useEffect(() => {
+    mountedRef.current = true;
     let cancelled = false;
-    let tickId = 0;
+    let tickId: number | undefined;
 
-    loadApi().then((YT) => {
-      if (cancelled || !hostRef.current) return;
-      playerRef.current = new YT.Player(hostRef.current, {
-        videoId: VIDEO_ID,
-        host: "https://www.youtube-nocookie.com",
-        playerVars: {
-          autoplay: 1,
-          mute: 1,
-          controls: 0,
-          disablekb: 1,
-          fs: 0,
-          rel: 0,
-          modestbranding: 1,
-          iv_load_policy: 3,
-          playsinline: 1,
-          origin: typeof window !== "undefined" ? window.location.origin : undefined,
-        },
-        events: {
-          onReady: (e: any) => {
-            e.target.mute();
-            e.target.playVideo();
-            setDuration(e.target.getDuration?.() || 0);
+    loadApi()
+      .then((YT) => {
+        if (cancelled || !hostRef.current || !YT?.Player) return;
+
+        playerRef.current = new YT.Player(hostRef.current, {
+          videoId: VIDEO_ID,
+          host: "https://www.youtube-nocookie.com",
+          playerVars: {
+            autoplay: 1,
+            mute: 1,
+            controls: 0,
+            disablekb: 1,
+            fs: 0,
+            rel: 0,
+            modestbranding: 1,
+            iv_load_policy: 3,
+            playsinline: 1,
+            origin:
+              typeof window !== "undefined" ? window.location.origin : undefined,
           },
-          onStateChange: (e: any) => {
-            if (e.data === 1) setPlaying(true);
-            if (e.data === 2) setPlaying(false);
-            if (e.data === 0) setPlaying(false);
+          events: {
+            onReady: (event: any) => {
+              event.target.mute();
+              event.target.setVolume(0);
+              event.target.playVideo();
+              setDuration(event.target.getDuration?.() || 0);
+            },
+            onStateChange: (event: any) => {
+              if (event.data === 1) setPlaying(true);
+              if (event.data === 2) setPlaying(false);
+              if (event.data === 0) setPlaying(false);
+            },
           },
-        },
+        });
+
+        const tick = () => {
+          if (cancelled) return;
+
+          const player = playerRef.current;
+          if (player?.getCurrentTime && player?.getDuration) {
+            const total = player.getDuration() || 0;
+            const elapsed = player.getCurrentTime() || 0;
+            setCurrent(elapsed);
+            setDuration(total);
+            setProgress(
+              total > 0 ? Math.min(100, (elapsed / total) * 100) : 0,
+            );
+          }
+
+          tickId = window.setTimeout(tick, 250);
+        };
+
+        tick();
+      })
+      .catch(() => {
+        if (!cancelled) setPlaying(false);
       });
-
-      const tick = () => {
-        const p = playerRef.current;
-        if (p?.getCurrentTime && p?.getDuration) {
-          const d = p.getDuration() || 0;
-          const c = p.getCurrentTime() || 0;
-          setCurrent(c);
-          setDuration(d);
-          setProgress(d > 0 ? Math.min(100, (c / d) * 100) : 0);
-        }
-        tickId = window.setTimeout(tick, 250);
-      };
-      tick();
-    });
 
     return () => {
       cancelled = true;
-      window.clearTimeout(tickId);
+      mountedRef.current = false;
+      if (tickId !== undefined) window.clearTimeout(tickId);
       window.clearTimeout(hintTimer.current);
+      window.clearTimeout(restartTimer.current);
+
       try {
         playerRef.current?.destroy?.();
       } catch {
         /* noop */
       }
+
+      playerRef.current = null;
     };
   }, []);
 
   const showHint = (kind: "play" | "pause") => {
     setHint(kind);
     window.clearTimeout(hintTimer.current);
-    hintTimer.current = window.setTimeout(() => setHint(null), 700);
+    hintTimer.current = window.setTimeout(() => {
+      if (mountedRef.current) setHint(null);
+    }, 700);
   };
 
   const enableSound = () => {
-    const p = playerRef.current;
-    if (!p) return;
-    // Sequência estável: pausa -> volta ao início -> tira o mudo -> play com som.
-    // Evita o loop de reinícios que acontecia ao dar seek e play ao mesmo tempo
-    // enquanto o autoplay mudo ainda estava rodando.
+    const player = playerRef.current;
+    if (!player) return;
+
+    window.clearTimeout(restartTimer.current);
+
     try {
-      p.pauseVideo();
+      // Recarrega o vídeo em vez de combinar pause, seek e play durante o
+      // carregamento. Isso garante que a reprodução comece novamente no zero.
+      player.loadVideoById({
+        videoId: VIDEO_ID,
+        startSeconds: 0,
+      });
+      player.unMute();
+      player.setVolume(100);
+      player.playVideo();
     } catch {
-      /* noop */
+      // Alguns carregamentos ainda podem estar finalizando no iframe. O retry
+      // acontece após o iframe receber o novo vídeo.
+      restartTimer.current = window.setTimeout(() => {
+        const currentPlayer = playerRef.current;
+        if (!currentPlayer || !mountedRef.current) return;
+
+        try {
+          currentPlayer.seekTo(0, true);
+          currentPlayer.unMute();
+          currentPlayer.setVolume(100);
+          currentPlayer.playVideo();
+        } catch {
+          /* noop */
+        }
+      }, 180);
     }
-    p.seekTo(0, true);
-    p.unMute();
-    p.setVolume(100);
-    // Pequeno atraso para o seek assentar antes de retomar a reprodução.
-    window.setTimeout(() => {
-      const pl = playerRef.current;
-      if (!pl) return;
-      pl.unMute();
-      pl.setVolume(100);
-      pl.playVideo();
-    }, 120);
+
     setUnmuted(true);
     setPlaying(true);
   };
 
   const togglePlay = () => {
-    const p = playerRef.current;
-    if (!p) return;
-    const state = p.getPlayerState?.();
+    const player = playerRef.current;
+    if (!player) return;
+
+    const state = player.getPlayerState?.();
     if (state === 1) {
-      p.pauseVideo();
+      player.pauseVideo();
       setPlaying(false);
       showHint("pause");
     } else {
-      p.playVideo();
+      player.playVideo();
       setPlaying(true);
       showHint("play");
     }
@@ -175,11 +220,21 @@ export default function VslPlayer() {
 
         {!unmuted && (
           <button
+            type="button"
             onClick={enableSound}
             aria-label="Ativar o som do vídeo"
             className="animate-btn-pulse absolute top-1/2 left-1/2 z-20 flex h-[74px] w-[74px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-solar"
           >
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <svg
+              width="30"
+              height="30"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="white"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <path d="M11 5 6 9H2v6h4l5 4z" fill="white" />
               <path d="m23 9-6 6" />
               <path d="m17 9 6 6" />
