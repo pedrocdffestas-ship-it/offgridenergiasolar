@@ -362,11 +362,15 @@ const [modalOpen, setModalOpen] = useState(false);
               className="h-auto w-full max-w-[340px]"
             />
           </div>
-          <h1 className="font-display mx-auto mb-[30px] max-w-[600px] text-[clamp(24px,3.6vw,32px)] leading-[1.15] font-extrabold text-navy">
-            +120 Projetos: Aprenda a Gerar sua Própria Energia Solar com
-            Baterias na Sua Casa, Agora, e Dimensione seu Sistema Off-Grid
-            Antes de Comprar os Equipamentos
+          <h1 className="font-display mx-auto mb-[14px] max-w-[600px] text-[clamp(24px,3.6vw,32px)] leading-[1.15] font-extrabold text-navy">
+            Aprenda a gerar sua própria energia solar com baterias e descubra
+            como dimensionar seu sistema off-grid antes de gastar dinheiro com
+            equipamentos que podem não ser adequados ao seu projeto.
           </h1>
+          <p className="font-display mx-auto mb-[30px] max-w-[600px] text-[clamp(15px,2.2vw,19px)] leading-[1.4] font-extrabold text-navy">
+            Do básico ao avançado, entenda como calcular, escolher e planejar
+            seu sistema para casa, comércio, barco ou fazenda.
+          </p>
 
 <div className="relative mx-auto mt-[26px] mb-[30px] max-w-[560px]">
             <Glow className="top-1/2 left-1/2 h-[340px] w-[340px] -translate-x-1/2 -translate-y-1/2 bg-solar" />
