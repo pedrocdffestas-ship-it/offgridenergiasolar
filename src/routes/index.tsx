@@ -4,13 +4,10 @@ import produto from "@/assets/produto.png.asset.json";
 import produtoPdf from "@/assets/produto-pdf.png.asset.json";
 import ofertaSimples from "@/assets/oferta-simples.png.asset.json";
 import solarBg from "@/assets/solar-bg.jpg.asset.json";
-import prova1 from "@/assets/prova1.png.asset.json";
-import prova2 from "@/assets/prova2.png.asset.json";
-import prova3 from "@/assets/prova3.png.asset.json";
-import prova4 from "@/assets/prova4.png.asset.json";
 import selo from "@/assets/selo-garantia.png.asset.json";
 import VslPlayer from "@/components/VslPlayer";
 import BonusMarquee from "@/components/BonusMarquee";
+import SocialProofSection from "@/components/SocialProofSection";
 import fotoBaterias from "@/assets/foto-baterias.jpg";
 import fotoPaineis from "@/assets/foto-paineis.jpg";
 import fotoControlador from "@/assets/foto-controlador.jpg";
@@ -388,8 +385,8 @@ const [modalOpen, setModalOpen] = useState(false);
           </div>
 
           <p className="animate-soft-pulse font-display mx-auto mt-9 mb-2 max-w-[720px] px-4 text-[clamp(20px,3vw,30px)] leading-[1.25] font-extrabold text-navy">
-            <span className="text-leaf">Economize até 95%</span> na conta de
-            luz. <span className="text-solar-deep">Garantia de 30 dias.</span>{" "}
+            <span className="text-leaf">Economize até 80% na conta de luz</span>,
+            dependendo do consumo e da configuração do sistema. <span className="text-solar-deep">Garantia de 30 dias.</span>{" "}
             Faça você mesmo — sem gastar muito, sabendo resolver todos os
             cálculos sozinho.
           </p>
@@ -739,7 +736,10 @@ const [modalOpen, setModalOpen] = useState(false);
         </div>
       </div>
 
+      <SocialProofSection />
+
       {/* OFERTAS */}
+      <div id="ofertas" className="scroll-mt-4" />
       <Section bg="bg-cream">
         <div className="reveal">
           <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-peach-icon px-[18px] py-[9px] text-sm font-extrabold uppercase tracking-[0.06em] text-solar-deep">
@@ -828,40 +828,6 @@ const [modalOpen, setModalOpen] = useState(false);
               </BtnPrimary>
             </div>
           </div>
-        </div>
-      </Section>
-
-      {/* DEPOIMENTOS */}
-      <Section bg="bg-white">
-        <div className="reveal">
-          <H2>O que dizem nossos clientes</H2>
-          <div className="mx-auto grid max-w-[360px] gap-6">
-            <img
-              src={prova1.url}
-              alt="Depoimento real de cliente enviado por WhatsApp"
-              loading="lazy"
-              className="mx-auto w-full rounded-[22px] shadow-[0_18px_40px_-18px_rgb(27_42_65/0.32)]"
-            />
-            <img
-              src={prova2.url}
-              alt="Segundo depoimento real de cliente enviado por WhatsApp"
-              loading="lazy"
-              className="mx-auto w-full rounded-[22px] shadow-[0_18px_40px_-18px_rgb(27_42_65/0.32)]"
-            />
-            <img
-              src={prova3.url}
-              alt="Terceiro depoimento real de cliente enviado por WhatsApp"
-              loading="lazy"
-              className="mx-auto w-full rounded-[22px] shadow-[0_18px_40px_-18px_rgb(27_42_65/0.32)]"
-            />
-            <img
-              src={prova4.url}
-              alt="Quarto depoimento real de cliente enviado por WhatsApp"
-              loading="lazy"
-              className="mx-auto w-full rounded-[22px] shadow-[0_18px_40px_-18px_rgb(27_42_65/0.32)]"
-            />
-          </div>
-
         </div>
       </Section>
 
