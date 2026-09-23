@@ -359,7 +359,7 @@ const [modalOpen, setModalOpen] = useState(false);
             <img
               src="/uploads/ChatGPT_Image_18_de_set._de_2026_21_32_17.png"
               alt="Guia Solar com Baterias Off-Grid"
-              className="h-auto w-full max-w-[280px]"
+              className="h-auto w-full max-w-[340px]"
             />
           </div>
           <h1 className="font-display mx-auto mb-[30px] max-w-[600px] text-[clamp(24px,3.6vw,32px)] leading-[1.15] font-extrabold text-navy">
