@@ -355,13 +355,12 @@ const [modalOpen, setModalOpen] = useState(false);
         <Glow className="top-24 -left-24 h-72 w-72 bg-solar" />
         <Glow className="top-64 -right-24 h-72 w-72 bg-leaf" />
         <div className="relative mx-auto max-w-[800px] px-6 text-center">
-          <div className="mb-[22px] inline-flex items-center gap-[9px]">
-            <span className="flex h-[26px] w-[26px] items-center justify-center rounded-full bg-gradient-to-br from-solar to-leaf text-[13px]">
-              ⚡
-            </span>
-            <span className="font-display text-[15px] font-bold text-navy">
-              Guia <b className="text-solar-deep">Solar com Baterias</b>
-            </span>
+          <div className="mb-[22px] flex items-center justify-center">
+            <img
+              src="/uploads/ChatGPT_Image_18_de_set._de_2026_21_32_17.png"
+              alt="Guia Solar com Baterias Off-Grid"
+              className="h-auto w-full max-w-[280px]"
+            />
           </div>
           <h1 className="font-display mx-auto mb-[30px] max-w-[600px] text-[clamp(24px,3.6vw,32px)] leading-[1.15] font-extrabold text-navy">
             +120 Projetos: Aprenda a Gerar sua Própria Energia Solar com
