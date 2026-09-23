@@ -454,34 +454,46 @@ const [modalOpen, setModalOpen] = useState(false);
         </div>
       </Section>
 
-      {/* ANTES / DEPOIS */}
-      <Section bg="bg-white">
-        <div className="reveal">
-          <H2>
-            Menos tentativa e erro.{" "}
-            <span className="text-leaf">Mais energia própria</span> funcionando.
-          </H2>
+      {/* PRÓS E CONTRAS */}
+      <Section bg="bg-white" className="!max-w-none">
+        <div className="reveal mx-auto max-w-[800px]">
+          <div className="mx-auto mb-9 max-w-[620px] text-left">
+            <h2 className="font-display mb-3 text-[clamp(26px,4vw,36px)] leading-[1.1] font-extrabold text-navy">
+              Cansado de tanta dúvida na hora de montar seu sistema solar off-grid?
+            </h2>
+            <p className="text-[15px] font-semibold leading-[1.45] text-ink-soft">
+              Você não está sozinho. Muitas pessoas se sentem perdidas com tantas informações, equipamentos e cálculos.
+              É o medo de errar e perder dinheiro.
+            </p>
+          </div>
+
           <div className="mx-auto grid max-w-[620px] grid-cols-1 gap-5 text-left sm:grid-cols-2">
-            <div className="rounded-[20px] bg-white p-[26px_22px] shadow-[0_10px_30px_-14px_rgb(27_42_65/0.18)]">
-              <h3 className="mb-4 text-sm font-bold tracking-[0.06em] text-ink-soft uppercase">
-                Antes
+            <div className="rounded-[22px] bg-cream p-[26px_22px] shadow-[0_10px_30px_-14px_rgb(27_42_65/0.18)]">
+              <h3 className="mb-5 text-sm font-bold tracking-[0.06em] text-ink-soft uppercase">
+                Contras
               </h3>
-              <ul className="grid gap-[11px]">
+              <ul className="grid gap-[13px]">
                 {before.map((b) => (
-                  <li key={b} className="text-[14.5px] font-bold text-ink-soft">
-                    ✕ {b}
+                  <li key={b} className="flex items-start gap-2 text-[14.5px] font-bold text-ink-soft">
+                    <span className="mt-[-1px] text-base text-[#D95C4F]">✕</span>
+                    <span>{b}</span>
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="rounded-[20px] bg-navy p-[26px_22px] text-white shadow-[0_24px_50px_-20px_rgb(27_42_65/0.28)]">
-              <h3 className="mb-4 text-sm font-bold tracking-[0.06em] text-[#7FE0AE] uppercase">
-                Depois
+
+            <div className="rounded-[22px] bg-mint p-[26px_22px] shadow-[0_10px_30px_-14px_rgb(27_42_65/0.18)]">
+              <h3 className="mb-3 text-[clamp(20px,3vw,25px)] leading-tight font-extrabold text-navy">
+                Imagine ter segurança para produzir sua própria energia.
               </h3>
-              <ul className="grid gap-[11px]">
+              <p className="mb-5 text-[14px] font-semibold leading-[1.4] text-ink-soft">
+                Com o conhecimento certo, você pode:
+              </p>
+              <ul className="grid gap-[13px]">
                 {after.map((a) => (
-                  <li key={a} className="text-[14.5px] font-bold">
-                    <span className="text-[#7FE0AE]">✓</span> {a}
+                  <li key={a} className="flex items-start gap-2 text-[14.5px] font-bold text-ink">
+                    <span className="mt-[-1px] text-base text-leaf">✓</span>
+                    <span>{a}</span>
                   </li>
                 ))}
               </ul>
