@@ -468,35 +468,51 @@ const [modalOpen, setModalOpen] = useState(false);
           </div>
 
           <div className="mx-auto grid max-w-[620px] grid-cols-1 gap-5 text-left sm:grid-cols-2">
-            <div className="rounded-[22px] bg-cream p-[26px_22px] shadow-[0_10px_30px_-14px_rgb(27_42_65/0.18)]">
-              <h3 className="mb-5 text-sm font-bold tracking-[0.06em] text-ink-soft uppercase">
-                Contras
-              </h3>
-              <ul className="grid gap-[13px]">
-                {before.map((b) => (
-                  <li key={b} className="flex items-start gap-2 text-[14.5px] font-bold text-ink-soft">
-                    <span className="mt-[-1px] text-base text-[#D95C4F]">✕</span>
-                    <span>{b}</span>
-                  </li>
-                ))}
-              </ul>
+            <div className="overflow-hidden rounded-[22px] bg-cream shadow-[0_10px_30px_-14px_rgb(27_42_65/0.18)]">
+              <img
+                src="/uploads/colado-20260922-211610.png"
+                alt="Dificuldades para montar um sistema solar off-grid"
+                loading="lazy"
+                className="h-[190px] w-full object-cover object-center sm:h-[210px]"
+              />
+              <div className="p-[26px_22px]">
+                <h3 className="mb-5 text-sm font-bold tracking-[0.06em] text-ink-soft uppercase">
+                  Contras
+                </h3>
+                <ul className="grid gap-[13px]">
+                  {before.map((b) => (
+                    <li key={b} className="flex items-start gap-2 text-[14.5px] font-bold text-ink-soft">
+                      <span className="mt-[-1px] text-base text-[#D95C4F]">✕</span>
+                      <span>{b}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
 
-            <div className="rounded-[22px] bg-mint p-[26px_22px] shadow-[0_10px_30px_-14px_rgb(27_42_65/0.18)]">
-              <h3 className="mb-3 text-[clamp(20px,3vw,25px)] leading-tight font-extrabold text-navy">
-                Imagine ter segurança para produzir sua própria energia.
-              </h3>
-              <p className="mb-5 text-[14px] font-semibold leading-[1.4] text-ink-soft">
-                Com o conhecimento certo, você pode:
-              </p>
-              <ul className="grid gap-[13px]">
-                {after.map((a) => (
-                  <li key={a} className="flex items-start gap-2 text-[14.5px] font-bold text-ink">
-                    <span className="mt-[-1px] text-base text-leaf">✓</span>
-                    <span>{a}</span>
-                  </li>
-                ))}
-              </ul>
+            <div className="overflow-hidden rounded-[22px] bg-mint shadow-[0_10px_30px_-14px_rgb(27_42_65/0.18)]">
+              <img
+                src="/uploads/colado-20260922-211627.png"
+                alt="Benefícios de aprender a montar um sistema solar off-grid"
+                loading="lazy"
+                className="h-[190px] w-full object-cover object-center sm:h-[210px]"
+              />
+              <div className="p-[26px_22px]">
+                <h3 className="mb-3 text-[clamp(20px,3vw,25px)] leading-tight font-extrabold text-navy">
+                  Imagine ter segurança para produzir sua própria energia.
+                </h3>
+                <p className="mb-5 text-[14px] font-semibold leading-[1.4] text-ink-soft">
+                  Com o conhecimento certo, você pode:
+                </p>
+                <ul className="grid gap-[13px]">
+                  {after.map((a) => (
+                    <li key={a} className="flex items-start gap-2 text-[14.5px] font-bold text-ink">
+                      <span className="mt-[-1px] text-base text-leaf">✓</span>
+                      <span>{a}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </div>
