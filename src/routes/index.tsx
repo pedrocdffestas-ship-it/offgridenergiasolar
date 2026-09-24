@@ -16,6 +16,8 @@ import fotoCabos from "@/assets/foto-cabos.jpg";
 import fotoResidencial from "@/assets/foto-residencial.jpg";
 import fotoRural from "@/assets/foto-rural.jpg";
 import fotoExemplos from "@/assets/foto-exemplos.jpg";
+import fotoDorConta from "@/assets/dor-conta-luz.jpg";
+import fotoAntesDepois from "@/assets/antes-depois-energia.jpg";
 
 
 export const Route = createFileRoute("/")({
@@ -174,10 +176,11 @@ function LeafBullet() {
 /* ---------- data ---------- */
 
 const pains = [
-  { icon: "💰", bg: "bg-peach-icon", text: "Qual equipamento eu compro sem gastar à toa?" },
-  { icon: "🔧", bg: "bg-mint-icon", text: "Como eu instalo sem queimar nada?" },
-  { icon: "⚙️", bg: "bg-mint-icon", text: "Como eu configuro certo o controlador e o inversor?" },
-  { icon: "🛡️", bg: "bg-peach-icon", text: "Como eu mantenho o sistema funcionando por anos?" },
+  { icon: "💰", bg: "bg-peach-icon", text: "Cansado de ver a conta de luz subir todo mês, sem controle nenhum" },
+  { icon: "🕯️", bg: "bg-mint-icon", text: "Já levou apagão de surpresa e ficou na mão, sem energia nenhuma" },
+  { icon: "🏡", bg: "bg-mint-icon", text: "Mora ou tem um lugar (sítio, chácara, barco) onde a rede elétrica nunca é boa de verdade" },
+  { icon: "☀️", bg: "bg-peach-icon", text: "Já ouviu falar de energia solar, mas não sabe se resolve — painel sozinho só gera de dia, e à noite volta tudo ao mesmo problema" },
+  { icon: "🔧", bg: "bg-mint-icon", text: "Acha que ter energia solar de verdade é caro e complicado demais pra alguém como você" },
 ];
 
 const who = [
@@ -191,16 +194,16 @@ const who = [
 ];
 
 const before = [
-  "Perdido em termos técnicos",
-  "Medo de comprar equipamento errado",
-  "Depende de terceiro pra instalar",
-  "Trava na hora de configurar",
+  "Refém da concessionária, sem escolha",
+  "Apagão te pega desprevenido, sempre na pior hora",
+  "Acha que energia solar é só pra quem tem dinheiro sobrando",
+  "Não sabe nem por onde começar",
 ];
 const after = [
-  "Sabe exatamente o que comprar",
-  "Instala com segurança, passo a passo",
-  "Configura sozinho, sem erro",
-  "Mantém o sistema funcionando por anos",
+  "Energia funcionando o dia inteiro, com ou sem rede elétrica",
+  "Nunca mais fica no escuro quando a luz cai",
+  "Aprendeu o passo a passo sem complicação nenhuma",
+  "Percebeu que era bem mais simples — e mais barato — do que imaginava",
 ];
 
 const categories = [
@@ -415,7 +418,8 @@ const [modalOpen, setModalOpen] = useState(false);
       {/* DOR */}
       <Section bg="bg-mint">
         <div className="reveal">
-          <H2>Toda vez que você pensa em energia solar, vem a mesma dúvida...</H2>
+          <H2>Toda vez que a conta de luz chega, vem a mesma vontade de mudar alguma coisa...</H2>
+          <img src={fotoDorConta} alt="Pessoa preocupada analisando uma conta de luz alta" width={1200} height={800} loading="lazy" className="mx-auto mb-7 aspect-[3/2] w-full max-w-[640px] rounded-[22px] object-cover shadow-[0_18px_40px_-18px_rgb(27_42_65/0.32)]" />
           <div className="mx-auto grid max-w-[640px] grid-cols-1 gap-[18px] sm:grid-cols-2">
             {pains.map((p) => (
               <div
@@ -465,13 +469,8 @@ const [modalOpen, setModalOpen] = useState(false);
           </div>
 
           <div className="mx-auto grid max-w-[620px] grid-cols-1 gap-5 text-left sm:grid-cols-2">
+            <img src={fotoAntesDepois} alt="Contraste entre uma casa durante apagão e a mesma casa com autonomia solar" width={1200} height={800} loading="lazy" className="aspect-[3/2] w-full rounded-[22px] object-cover shadow-[0_18px_40px_-18px_rgb(27_42_65/0.32)] sm:col-span-2" />
             <div className="overflow-hidden rounded-[22px] bg-cream shadow-[0_10px_30px_-14px_rgb(27_42_65/0.18)]">
-              <img
-                src="/uploads/colado-20260922-211610.png"
-                alt="Dificuldades para montar um sistema solar off-grid"
-                loading="lazy"
-                className="h-[190px] w-full object-cover object-center sm:h-[210px]"
-              />
               <div className="p-[26px_22px]">
                 <h3 className="mb-5 text-sm font-bold tracking-[0.06em] text-ink-soft uppercase">
                   Contras
@@ -488,12 +487,6 @@ const [modalOpen, setModalOpen] = useState(false);
             </div>
 
             <div className="overflow-hidden rounded-[22px] bg-mint shadow-[0_10px_30px_-14px_rgb(27_42_65/0.18)]">
-              <img
-                src="/uploads/colado-20260922-211627.png"
-                alt="Benefícios de aprender a montar um sistema solar off-grid"
-                loading="lazy"
-                className="h-[190px] w-full object-cover object-center sm:h-[210px]"
-              />
               <div className="p-[26px_22px]">
                 <h3 className="mb-3 text-[clamp(20px,3vw,25px)] leading-tight font-extrabold text-navy">
                   Imagine ter segurança para produzir sua própria energia.
