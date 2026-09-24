@@ -3,6 +3,9 @@ import { ShieldCheck, Zap } from "lucide-react";
 import videoInstalacao from "@/assets/depoimento-instalacao.mp4.asset.json";
 import videoCasaOffGrid from "@/assets/depoimento-casa-off-grid.mp4.asset.json";
 import videoExperiencia from "@/assets/depoimento-experiencia.mp4.asset.json";
+import capaJorge from "@/assets/depoimento-jorge-capa.jpg.asset.json";
+import capaJulia from "@/assets/depoimento-julia-capa.jpg.asset.json";
+import capaMaicon from "@/assets/depoimento-maicon-capa.jpg.asset.json";
 import prova1 from "@/assets/prova1.png.asset.json";
 import prova3 from "@/assets/prova3.png.asset.json";
 import prova4 from "@/assets/prova4.png.asset.json";
@@ -18,9 +21,9 @@ import {
 } from "@/components/ui/carousel";
 
 const videos = [
-  { id: "instalacao", src: videoInstalacao.url, name: "Jorge", state: "Maranhão" },
-  { id: "casa-off-grid", src: videoCasaOffGrid.url, name: "Júlia", state: "Santa Catarina" },
-  { id: "experiencia", src: videoExperiencia.url, name: "Maicon", state: "Bahia" },
+  { id: "instalacao", src: videoInstalacao.url, poster: capaJorge.url, name: "Jorge", state: "Maranhão" },
+  { id: "casa-off-grid", src: videoCasaOffGrid.url, poster: capaJulia.url, name: "Júlia", state: "Santa Catarina" },
+  { id: "experiencia", src: videoExperiencia.url, poster: capaMaicon.url, name: "Maicon", state: "Bahia" },
 ];
 
 const images = [
@@ -46,11 +49,12 @@ interface TestimonialVideoProps {
   name: string;
   state: string;
   src: string;
+  poster: string;
   videoRefs: MutableRefObject<Array<HTMLVideoElement | null>>;
   onPlay: (index: number) => void;
 }
 
-function TestimonialVideo({ index, name, state, src, videoRefs, onPlay }: TestimonialVideoProps) {
+function TestimonialVideo({ index, name, state, src, poster, videoRefs, onPlay }: TestimonialVideoProps) {
   const [playing, setPlaying] = useState(false);
 
   const togglePlay = async () => {
@@ -70,7 +74,7 @@ function TestimonialVideo({ index, name, state, src, videoRefs, onPlay }: Testim
         <p className="mt-1 text-[12px] font-bold text-solar">Sobre o Guia Solar com Baterias</p>
       </div>
       <div className="relative aspect-[9/16] overflow-hidden bg-ink">
-        <video ref={(node) => { videoRefs.current[index] = node; }} src={src} playsInline preload="metadata" onPlay={() => { setPlaying(true); onPlay(index); }} onPause={() => setPlaying(false)} onEnded={() => setPlaying(false)} className="h-full w-full object-cover" aria-label={`Depoimento em vídeo de ${name} sobre o Guia Solar com Baterias`} />
+        <video ref={(node) => { videoRefs.current[index] = node; }} src={src} poster={poster} playsInline preload="metadata" onPlay={() => { setPlaying(true); onPlay(index); }} onPause={() => setPlaying(false)} onEnded={() => setPlaying(false)} className="h-full w-full object-cover" aria-label={`Depoimento em vídeo de ${name} sobre o Guia Solar com Baterias`} />
         <button type="button" onClick={togglePlay} aria-label={playing ? `Pausar depoimento de ${name}` : `Reproduzir depoimento de ${name}`} className="absolute inset-0 z-10 grid h-full w-full cursor-pointer place-items-center bg-transparent">
           {!playing && <span className="animate-btn-pulse grid h-[72px] w-[72px] place-items-center rounded-full bg-solar text-white shadow-xl"><svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg></span>}
         </button>
@@ -131,7 +135,7 @@ export default function SocialProofSection() {
             <CarouselContent>
               {videos.map((video, index) => (
                 <CarouselItem key={video.id} className="basis-[92%] sm:basis-1/2">
-                  <TestimonialVideo index={index} name={video.name} state={video.state} src={video.src} videoRefs={videoRefs} onPlay={pauseOtherVideos} />
+                  <TestimonialVideo index={index} name={video.name} state={video.state} src={video.src} poster={video.poster} videoRefs={videoRefs} onPlay={pauseOtherVideos} />
                 </CarouselItem>
               ))}
             </CarouselContent>
