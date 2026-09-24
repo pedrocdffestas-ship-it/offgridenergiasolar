@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import vslCover from "@/assets/vsl-capa.jpg.asset.json";
 
 const VIDEO_ID = "s7eixWBeBUw";
 
@@ -124,7 +125,7 @@ export default function VslPlayer() {
   return (
     <div className="relative z-[1] mx-auto mb-[26px] max-w-[400px] rounded-3xl bg-navy p-[10px] shadow-[0_24px_50px_-20px_rgb(27_42_65/0.28)]">
       <div className="relative aspect-[9/16] overflow-hidden rounded-2xl bg-ink">
-        <div className="absolute inset-0 bg-[url('https://i.ytimg.com/vi/s7eixWBeBUw/maxresdefault.jpg')] bg-cover bg-center" aria-hidden="true" />
+        <img src={vslCover.url} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover" />
         <div ref={hostRef} className="absolute inset-0 [&_iframe]:h-full [&_iframe]:w-full" />
 
         {started && (
