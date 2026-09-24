@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type MutableRefObject } from "react";
 import { ShieldCheck, Zap } from "lucide-react";
 import videoInstalacao from "@/assets/depoimento-instalacao.mp4.asset.json";
 import videoCasaOffGrid from "@/assets/depoimento-casa-off-grid.mp4.asset.json";
 import videoExperiencia from "@/assets/depoimento-experiencia.mp4.asset.json";
 import prova1 from "@/assets/prova1.png.asset.json";
-import prova2 from "@/assets/prova2.png.asset.json";
 import prova3 from "@/assets/prova3.png.asset.json";
 import prova4 from "@/assets/prova4.png.asset.json";
 import provaDiego from "@/assets/prova-social-diego.png.asset.json";
@@ -15,6 +14,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  type CarouselApi,
 } from "@/components/ui/carousel";
 
 const videos = [
@@ -46,7 +46,7 @@ interface TestimonialVideoProps {
   name: string;
   state: string;
   src: string;
-  videoRefs: React.MutableRefObject<Array<HTMLVideoElement | null>>;
+  videoRefs: MutableRefObject<Array<HTMLVideoElement | null>>;
   onPlay: (index: number) => void;
 }
 
@@ -81,7 +81,7 @@ function TestimonialVideo({ index, name, state, src, videoRefs, onPlay }: Testim
 
 export default function SocialProofSection() {
   const videoRefs = useRef<Array<HTMLVideoElement | null>>([]);
-  const [imageApi, setImageApi] = useState<Parameters<NonNullable<React.ComponentProps<typeof Carousel>["setApi"]>>[0] | undefined>();
+  const [imageApi, setImageApi] = useState<CarouselApi>();
 
   useEffect(() => {
     if (!imageApi) return;
