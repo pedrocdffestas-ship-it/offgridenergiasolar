@@ -312,3 +312,7 @@
 @utility animate-card-pulse-green {
   animation: card-pulse-green 2.6s ease-in-out infinite;
 }
+
+#lovable-badge {
+  display: none !important;
+}
