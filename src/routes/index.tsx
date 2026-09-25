@@ -18,6 +18,7 @@ import fotoRural from "@/assets/foto-rural.jpg";
 import fotoExemplos from "@/assets/foto-exemplos.jpg";
 import fotoDorConta from "@/assets/dor-conta-luz.jpg";
 import fotoAntesDepois from "@/assets/antes-depois-energia.jpg";
+import comparativoOffGrid from "@/assets/comparativo-conta-luz-off-grid.png.asset.json";
 
 
 export const Route = createFileRoute("/")({
@@ -406,8 +407,8 @@ const [modalOpen, setModalOpen] = useState(false);
       <Section bg="bg-white">
         <div className="reveal">
           <VslPlayer />
-          <BtnPrimary pulse href="#receber">
-            Quero gerar minha própria energia →
+          <BtnPrimary pulse href="#energia-off-grid">
+            Saiba mais sobre energia off-grid →
           </BtnPrimary>
           <p className="mt-[14px] text-[13px] font-bold text-ink-soft">
             Acesso imediato • Pagamento único • Garantia de 30 dias
@@ -416,6 +417,7 @@ const [modalOpen, setModalOpen] = useState(false);
       </Section>
 
       {/* DOR */}
+      <div id="energia-off-grid" className="scroll-mt-4" />
       <Section bg="bg-mint">
         <div className="reveal">
           <H2>Toda vez que a conta de luz chega, vem a mesma vontade de mudar alguma coisa...</H2>
@@ -852,6 +854,23 @@ const [modalOpen, setModalOpen] = useState(false);
             quando necessário, ser executadas ou revisadas por profissionais
             qualificados.
           </p>
+        </div>
+      </Section>
+
+      {/* COMPARATIVO OFF-GRID */}
+      <Section bg="bg-white">
+        <div className="reveal">
+          <img
+            src={comparativoOffGrid.url}
+            alt="Comparação entre conta de luz com a concessionária e sistema off-grid com energia solar e baterias"
+            width={1129}
+            height={757}
+            loading="lazy"
+            className="mx-auto mb-9 h-auto w-full max-w-[760px]"
+          />
+          <BtnPrimary pulse href="#ofertas" className="max-w-full">
+            Quero produzir minha própria energia off-grid com baterias
+          </BtnPrimary>
         </div>
       </Section>
 
