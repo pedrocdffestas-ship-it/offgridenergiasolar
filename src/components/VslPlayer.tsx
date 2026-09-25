@@ -1,151 +1,202 @@
 import { useEffect, useRef, useState } from "react";
-import vslCover from "@/assets/vsl-capa.jpg.asset.json";
 
 const VIDEO_ID = "s7eixWBeBUw";
 
 declare global {
   interface Window {
-    YT?: {
-      Player?: new (
-        element: HTMLDivElement,
-        options: {
-          videoId: string;
-          host: string;
-          playerVars: Record<string, string | number>;
-          events: {
-            onReady: (event: { target: YouTubePlayer }) => void;
-            onStateChange: (event: { data: number }) => void;
-          };
-        },
-      ) => YouTubePlayer;
-    };
+    YT?: any;
     onYouTubeIframeAPIReady?: () => void;
   }
 }
 
-interface YouTubePlayer {
-  destroy: () => void;
-  getPlayerState: () => number;
-  pauseVideo: () => void;
-  playVideo: () => void;
-  setVolume: (volume: number) => void;
+let apiPromise: Promise<any> | null = null;
+
+function loadApi(): Promise<any> {
+  if (typeof window === "undefined") return Promise.reject(new Error("ssr"));
+  if (window.YT && window.YT.Player) return Promise.resolve(window.YT);
+  if (apiPromise) return apiPromise;
+  apiPromise = new Promise((resolve) => {
+    const prev = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = () => {
+      prev?.();
+      resolve(window.YT);
+    };
+    const tag = document.createElement("script");
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.head.appendChild(tag);
+  });
+  return apiPromise;
 }
 
-let apiPromise: Promise<NonNullable<Window["YT"]>> | null = null;
-
-function loadApi(): Promise<NonNullable<Window["YT"]>> {
-  if (typeof window === "undefined") return Promise.reject(new Error("API indisponível"));
-  if (window.YT?.Player) return Promise.resolve(window.YT);
-  if (apiPromise) return apiPromise;
-
-  apiPromise = new Promise((resolve) => {
-    const previousCallback = window.onYouTubeIframeAPIReady;
-    window.onYouTubeIframeAPIReady = () => {
-      previousCallback?.();
-      if (window.YT) resolve(window.YT);
-    };
-
-    if (!document.querySelector('script[src="https://www.youtube.com/iframe_api"]')) {
-      const script = document.createElement("script");
-      script.src = "https://www.youtube.com/iframe_api";
-      script.async = true;
-      document.head.appendChild(script);
-    }
-  });
-
-  return apiPromise;
+function fmt(t: number) {
+  const s = Math.max(0, Math.floor(t));
+  return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
 }
 
 export default function VslPlayer() {
   const hostRef = useRef<HTMLDivElement | null>(null);
-  const playerRef = useRef<YouTubePlayer | null>(null);
-  const [started, setStarted] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const playerRef = useRef<any>(null);
+  const hintTimer = useRef<number | undefined>(undefined);
+  const [unmuted, setUnmuted] = useState(false);
   const [playing, setPlaying] = useState(false);
+  const [hint, setHint] = useState<"play" | "pause" | null>(null);
+  const [progress, setProgress] = useState(0);
+  const [current, setCurrent] = useState(0);
+  const [duration, setDuration] = useState(0);
 
   useEffect(() => {
-    return () => {
-      playerRef.current?.destroy();
-      playerRef.current = null;
-    };
-  }, []);
+    let cancelled = false;
+    let tickId = 0;
 
-  const startVideo = async () => {
-    if (loading || started || !hostRef.current) return;
-    setLoading(true);
-
-    try {
-      const YT = await loadApi();
-      if (!YT.Player || !hostRef.current) return;
-
+    loadApi().then((YT) => {
+      if (cancelled || !hostRef.current) return;
       playerRef.current = new YT.Player(hostRef.current, {
         videoId: VIDEO_ID,
         host: "https://www.youtube-nocookie.com",
         playerVars: {
+          autoplay: 1,
+          mute: 1,
           controls: 0,
           disablekb: 1,
           fs: 0,
           rel: 0,
           modestbranding: 1,
+          iv_load_policy: 3,
           playsinline: 1,
           origin: window.location.origin,
         },
         events: {
-          onReady: ({ target }) => {
-            target.setVolume(100);
-            target.playVideo();
-            setStarted(true);
-            setPlaying(true);
-            setLoading(false);
+          onReady: (e: any) => {
+            e.target.mute();
+            e.target.playVideo();
+            setDuration(e.target.getDuration?.() || 0);
           },
-          onStateChange: ({ data }) => {
-            if (data === 1) setPlaying(true);
-            if (data === 0 || data === 2) setPlaying(false);
+          onStateChange: (e: any) => {
+            if (e.data === 1) setPlaying(true);
+            if (e.data === 2) setPlaying(false);
+            if (e.data === 0) setPlaying(false);
           },
         },
       });
-    } catch {
-      setLoading(false);
-    }
+
+      const tick = () => {
+        const p = playerRef.current;
+        if (p?.getCurrentTime && p?.getDuration) {
+          const d = p.getDuration() || 0;
+          const c = p.getCurrentTime() || 0;
+          setCurrent(c);
+          setDuration(d);
+          setProgress(d > 0 ? Math.min(100, (c / d) * 100) : 0);
+        }
+        tickId = window.setTimeout(tick, 250);
+      };
+      tick();
+    });
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(tickId);
+      window.clearTimeout(hintTimer.current);
+      try {
+        playerRef.current?.destroy?.();
+      } catch {
+        /* noop */
+      }
+    };
+  }, []);
+
+  const showHint = (kind: "play" | "pause") => {
+    setHint(kind);
+    window.clearTimeout(hintTimer.current);
+    hintTimer.current = window.setTimeout(() => setHint(null), 700);
+  };
+
+  const enableSound = () => {
+    const p = playerRef.current;
+    if (!p) return;
+    p.seekTo(0, true);
+    p.unMute();
+    p.setVolume(100);
+    p.playVideo();
+    setUnmuted(true);
+    setPlaying(true);
   };
 
   const togglePlay = () => {
-    const player = playerRef.current;
-    if (!player) return;
-
-    if (player.getPlayerState() === 1) {
-      player.pauseVideo();
+    const p = playerRef.current;
+    if (!p) return;
+    const state = p.getPlayerState?.();
+    if (state === 1) {
+      p.pauseVideo();
       setPlaying(false);
+      showHint("pause");
     } else {
-      player.playVideo();
+      p.playVideo();
       setPlaying(true);
+      showHint("play");
     }
   };
 
   return (
     <div className="relative z-[1] mx-auto mb-[26px] max-w-[400px] rounded-3xl bg-navy p-[10px] shadow-[0_24px_50px_-20px_rgb(27_42_65/0.28)]">
-      <div className="relative aspect-[9/16] overflow-hidden rounded-2xl bg-ink">
-        <img src={vslCover.url} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover" />
-        <div ref={hostRef} className="absolute inset-0 [&_iframe]:h-full [&_iframe]:w-full" />
+      <div className="relative aspect-[9/16] overflow-hidden rounded-2xl bg-[#0B1523]">
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div
+            ref={hostRef}
+            className="pointer-events-none absolute top-1/2 left-1/2 h-[130%] w-[130%] -translate-x-1/2 -translate-y-1/2"
+          />
+        </div>
 
-        {started && (
-          <button type="button" onClick={togglePlay} aria-label={playing ? "Pausar vídeo" : "Continuar vídeo"} className="absolute inset-0 z-10 h-full w-full cursor-pointer bg-transparent" />
-        )}
+        <button
+          type="button"
+          onClick={unmuted ? togglePlay : enableSound}
+          aria-label={unmuted ? (playing ? "Pausar vídeo" : "Reproduzir vídeo") : "Ativar o som do vídeo"}
+          className="absolute inset-0 z-10 h-full w-full cursor-pointer border-0 bg-transparent p-0"
+        />
 
-        {!started && (
-          <div className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-5 bg-navy/45 px-5 text-center">
-            <button type="button" onClick={startVideo} disabled={loading} aria-label="Começar vídeo com som" className="animate-btn-pulse grid h-[82px] w-[82px] shrink-0 place-items-center rounded-full bg-solar text-white disabled:cursor-wait disabled:opacity-80">
-              <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
-            </button>
-            <p className="max-w-[320px] rounded-lg bg-navy/80 px-4 py-3 text-[14px] leading-[1.45] font-extrabold text-white">
-              {loading ? "Carregando vídeo..." : "Continue assistindo — muito importante para seu entendimento sobre o nosso Guia Off-Grid"}
-            </p>
+        {!unmuted && (
+          <div className="pointer-events-none absolute top-1/2 left-1/2 z-20 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-3">
+            <div className="animate-btn-pulse flex h-[74px] w-[74px] items-center justify-center rounded-full bg-solar">
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
           </div>
         )}
 
-        {started && !playing && (
-          <div className="pointer-events-none absolute top-1/2 left-1/2 z-20 grid h-[68px] w-[68px] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-navy/75 text-white">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+        {!unmuted && (
+          <p className="pointer-events-none absolute right-[14px] bottom-[14px] left-[14px] z-20 text-center text-[12.5px] font-extrabold text-white/80">
+            Toque para ouvir com som
+          </p>
+        )}
+
+        {unmuted && (hint || !playing) && (
+          <div className="pointer-events-none absolute top-1/2 left-1/2 z-20 flex h-[68px] w-[68px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-black/55">
+            {playing ? (
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+                <rect x="6" y="5" width="4" height="14" rx="1" />
+                <rect x="14" y="5" width="4" height="14" rx="1" />
+              </svg>
+            ) : (
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            )}
+          </div>
+        )}
+
+        {unmuted && (
+          <div className="pointer-events-none absolute right-[14px] bottom-[14px] left-[14px] z-20">
+            <div className="mb-[6px] flex justify-between text-[11px] font-extrabold text-white/75">
+              <span>{fmt(current)}</span>
+              <span>{fmt(duration)}</span>
+            </div>
+            <div className="h-[6px] w-full overflow-hidden rounded-full bg-white/25">
+              <div
+                className="h-full rounded-full bg-solar transition-[width] duration-200 ease-linear"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
           </div>
         )}
       </div>
