@@ -18,6 +18,20 @@ export default function VslPlayer() {
             allowFullScreen
             className="absolute inset-0 h-full w-full border-0"
           />
+          {/* Camada de camuflagem sobre o topo do player: esconde o título/
+              canal/etiqueta do YouTube sem afetar a reprodução. Ela bloqueia
+              cliques apenas nessa faixa superior (evita abrir o YouTube) e
+              deixa os controles nativos de baixo 100% funcionais. */}
+          <div
+            aria-hidden="true"
+            style={{
+              background:
+                "linear-gradient(to bottom, rgba(11,21,35,0.94) 0%, rgba(11,21,35,0.72) 38%, rgba(11,21,35,0.35) 68%, rgba(11,21,35,0) 100%)",
+              backdropFilter: "blur(7px)",
+              WebkitBackdropFilter: "blur(7px)",
+            }}
+            className="pointer-events-auto absolute inset-x-0 top-0 z-10 h-[78px]"
+          />
         ) : (
           <button
             type="button"
