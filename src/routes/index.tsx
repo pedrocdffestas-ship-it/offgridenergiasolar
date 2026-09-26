@@ -364,9 +364,12 @@ const [modalOpen, setModalOpen] = useState(false);
             />
           </div>
           <h1 className="font-display mx-auto mb-[14px] max-w-[600px] text-[clamp(24px,3.6vw,32px)] leading-[1.15] font-extrabold text-navy">
-            Aprenda a gerar sua própria energia solar com baterias e descubra
-            como dimensionar seu sistema off-grid antes de gastar dinheiro com
-            equipamentos que podem não ser adequados ao seu projeto.
+            <span className="inline-block rounded-[14px] bg-solar px-[10px] py-[2px] text-white shadow-[0_4px_14px_rgb(245_130_32/0.35)]">
+              +120 Projetos
+            </span>
+            : Aprenda a Gerar sua Própria Energia Solar com Baterias na Sua
+            Casa, Agora, e Dimensione seu Sistema Off-Grid Antes de Comprar os
+            Equipamentos
           </h1>
           <p className="font-display mx-auto mb-[30px] max-w-[600px] text-[clamp(15px,2.2vw,19px)] leading-[1.4] font-extrabold text-navy">
             Do básico ao avançado, entenda como calcular, escolher e planejar
