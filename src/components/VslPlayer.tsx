@@ -37,7 +37,7 @@ export default function VslPlayer() {
   const hostRef = useRef<HTMLDivElement | null>(null);
   const playerRef = useRef<any>(null);
   const hintTimer = useRef<number | undefined>(undefined);
-  const [unmuted, setUnmuted] = useState(false);
+  const [started, setStarted] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [hint, setHint] = useState<"play" | "pause" | null>(null);
   const [progress, setProgress] = useState(0);
@@ -54,8 +54,8 @@ export default function VslPlayer() {
         videoId: VIDEO_ID,
         host: "https://www.youtube-nocookie.com",
         playerVars: {
-          autoplay: 1,
-          mute: 1,
+          autoplay: 0,
+          mute: 0,
           controls: 0,
           disablekb: 1,
           fs: 0,
@@ -67,8 +67,6 @@ export default function VslPlayer() {
         },
         events: {
           onReady: (e: any) => {
-            e.target.mute();
-            e.target.playVideo();
             setDuration(e.target.getDuration?.() || 0);
           },
           onStateChange: (e: any) => {
@@ -111,20 +109,17 @@ export default function VslPlayer() {
     hintTimer.current = window.setTimeout(() => setHint(null), 700);
   };
 
-  const enableSound = () => {
+  const handleShieldClick = () => {
     const p = playerRef.current;
     if (!p) return;
-    p.seekTo(0, true);
-    p.unMute();
-    p.setVolume(100);
-    p.playVideo();
-    setUnmuted(true);
-    setPlaying(true);
-  };
 
-  const togglePlay = () => {
-    const p = playerRef.current;
-    if (!p) return;
+    if (!started) {
+      p.playVideo();
+      setStarted(true);
+      setPlaying(true);
+      return;
+    }
+
     const state = p.getPlayerState?.();
     if (state === 1) {
       p.pauseVideo();
@@ -149,13 +144,13 @@ export default function VslPlayer() {
 
         <button
           type="button"
-          onClick={unmuted ? togglePlay : enableSound}
-          aria-label={unmuted ? (playing ? "Pausar vídeo" : "Reproduzir vídeo") : "Ativar o som do vídeo"}
+          onClick={handleShieldClick}
+          aria-label={!started ? "Assistir ao vídeo" : playing ? "Pausar vídeo" : "Reproduzir vídeo"}
           className="absolute inset-0 z-10 h-full w-full cursor-pointer border-0 bg-transparent p-0"
         />
 
-        {!unmuted && (
-          <div className="pointer-events-none absolute top-1/2 left-1/2 z-20 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-3">
+        {!started && (
+          <div className="pointer-events-none absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2">
             <div className="animate-btn-pulse flex h-[74px] w-[74px] items-center justify-center rounded-full bg-solar">
               <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
                 <path d="M8 5v14l11-7z" />
@@ -164,13 +159,13 @@ export default function VslPlayer() {
           </div>
         )}
 
-        {!unmuted && (
-          <p className="pointer-events-none absolute right-[14px] bottom-[14px] left-[14px] z-20 text-center text-[12.5px] font-extrabold text-white/80">
-            Toque para ouvir com som
-          </p>
+        {!started && (
+          <div className="pointer-events-none absolute right-[14px] bottom-[14px] left-[14px] z-20 rounded-xl bg-navy/70 px-3 py-2 text-center text-[12.5px] font-extrabold text-white">
+            Continue assistindo — muito importante para seu entendimento sobre o nosso Guia Off-Grid
+          </div>
         )}
 
-        {unmuted && (hint || !playing) && (
+        {started && (hint || !playing) && (
           <div className="pointer-events-none absolute top-1/2 left-1/2 z-20 flex h-[68px] w-[68px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-black/55">
             {playing ? (
               <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
@@ -185,7 +180,7 @@ export default function VslPlayer() {
           </div>
         )}
 
-        {unmuted && (
+        {started && (
           <div className="pointer-events-none absolute right-[14px] bottom-[14px] left-[14px] z-20">
             <div className="mb-[6px] flex justify-between text-[11px] font-extrabold text-white/75">
               <span>{fmt(current)}</span>
