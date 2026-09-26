@@ -1,198 +1,45 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
+import capa from "@/assets/vsl-capa.jpg.asset.json";
 
-const VIDEO_ID = "s7eixWBeBUw";
-
-declare global {
-  interface Window {
-    YT?: any;
-    onYouTubeIframeAPIReady?: () => void;
-  }
-}
-
-let apiPromise: Promise<any> | null = null;
-
-function loadApi(): Promise<any> {
-  if (typeof window === "undefined") return Promise.reject(new Error("ssr"));
-  if (window.YT && window.YT.Player) return Promise.resolve(window.YT);
-  if (apiPromise) return apiPromise;
-  apiPromise = new Promise((resolve) => {
-    const prev = window.onYouTubeIframeAPIReady;
-    window.onYouTubeIframeAPIReady = () => {
-      prev?.();
-      resolve(window.YT);
-    };
-    const tag = document.createElement("script");
-    tag.src = "https://www.youtube.com/iframe_api";
-    document.head.appendChild(tag);
-  });
-  return apiPromise;
-}
-
-function fmt(t: number) {
-  const s = Math.max(0, Math.floor(t));
-  return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
-}
+const EMBED_URL =
+  "https://www.youtube-nocookie.com/embed/s7eixWBeBUw?autoplay=1";
 
 export default function VslPlayer() {
-  const hostRef = useRef<HTMLDivElement | null>(null);
-  const playerRef = useRef<any>(null);
-  const hintTimer = useRef<number | undefined>(undefined);
   const [started, setStarted] = useState(false);
-  const [playing, setPlaying] = useState(false);
-  const [hint, setHint] = useState<"play" | "pause" | null>(null);
-  const [progress, setProgress] = useState(0);
-  const [current, setCurrent] = useState(0);
-  const [duration, setDuration] = useState(0);
-
-  useEffect(() => {
-    let cancelled = false;
-    let tickId = 0;
-
-    loadApi().then((YT) => {
-      if (cancelled || !hostRef.current) return;
-      playerRef.current = new YT.Player(hostRef.current, {
-        videoId: VIDEO_ID,
-        host: "https://www.youtube-nocookie.com",
-        playerVars: {
-          autoplay: 0,
-          mute: 0,
-          controls: 0,
-          disablekb: 1,
-          fs: 0,
-          rel: 0,
-          modestbranding: 1,
-          iv_load_policy: 3,
-          playsinline: 1,
-          origin: window.location.origin,
-        },
-        events: {
-          onReady: (e: any) => {
-            setDuration(e.target.getDuration?.() || 0);
-          },
-          onStateChange: (e: any) => {
-            if (e.data === 1) setPlaying(true);
-            if (e.data === 2) setPlaying(false);
-            if (e.data === 0) setPlaying(false);
-          },
-        },
-      });
-
-      const tick = () => {
-        const p = playerRef.current;
-        if (p?.getCurrentTime && p?.getDuration) {
-          const d = p.getDuration() || 0;
-          const c = p.getCurrentTime() || 0;
-          setCurrent(c);
-          setDuration(d);
-          setProgress(d > 0 ? Math.min(100, (c / d) * 100) : 0);
-        }
-        tickId = window.setTimeout(tick, 250);
-      };
-      tick();
-    });
-
-    return () => {
-      cancelled = true;
-      window.clearTimeout(tickId);
-      window.clearTimeout(hintTimer.current);
-      try {
-        playerRef.current?.destroy?.();
-      } catch {
-        /* noop */
-      }
-    };
-  }, []);
-
-  const showHint = (kind: "play" | "pause") => {
-    setHint(kind);
-    window.clearTimeout(hintTimer.current);
-    hintTimer.current = window.setTimeout(() => setHint(null), 700);
-  };
-
-  const handleShieldClick = () => {
-    const p = playerRef.current;
-    if (!p) return;
-
-    if (!started) {
-      p.playVideo();
-      setStarted(true);
-      setPlaying(true);
-      return;
-    }
-
-    const state = p.getPlayerState?.();
-    if (state === 1) {
-      p.pauseVideo();
-      setPlaying(false);
-      showHint("pause");
-    } else {
-      p.playVideo();
-      setPlaying(true);
-      showHint("play");
-    }
-  };
 
   return (
     <div className="relative z-[1] mx-auto mb-[26px] max-w-[400px] rounded-3xl bg-navy p-[10px] shadow-[0_24px_50px_-20px_rgb(27_42_65/0.28)]">
       <div className="relative aspect-[9/16] overflow-hidden rounded-2xl bg-[#0B1523]">
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <div
-            ref={hostRef}
-            className="pointer-events-none absolute top-1/2 left-1/2 h-[130%] w-[130%] -translate-x-1/2 -translate-y-1/2"
+        {started ? (
+          <iframe
+            src={EMBED_URL}
+            title="Guia Off-Grid — vídeo de apresentação"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            className="absolute inset-0 h-full w-full border-0"
           />
-        </div>
-
-        <button
-          type="button"
-          onClick={handleShieldClick}
-          aria-label={!started ? "Assistir ao vídeo" : playing ? "Pausar vídeo" : "Reproduzir vídeo"}
-          className="absolute inset-0 z-10 h-full w-full cursor-pointer border-0 bg-transparent p-0"
-        />
-
-        {!started && (
-          <div className="pointer-events-none absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2">
-            <div className="animate-btn-pulse flex h-[74px] w-[74px] items-center justify-center rounded-full bg-solar">
-              <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
-                <path d="M8 5v14l11-7z" />
-              </svg>
-            </div>
-          </div>
-        )}
-
-        {!started && (
-          <div className="pointer-events-none absolute right-[14px] bottom-[14px] left-[14px] z-20 rounded-xl bg-navy/70 px-3 py-2 text-center text-[12.5px] font-extrabold text-white">
-            Continue assistindo — muito importante para seu entendimento sobre o nosso Guia Off-Grid
-          </div>
-        )}
-
-        {started && (hint || !playing) && (
-          <div className="pointer-events-none absolute top-1/2 left-1/2 z-20 flex h-[68px] w-[68px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-black/55">
-            {playing ? (
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
-                <rect x="6" y="5" width="4" height="14" rx="1" />
-                <rect x="14" y="5" width="4" height="14" rx="1" />
-              </svg>
-            ) : (
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
-                <path d="M8 5v14l11-7z" />
-              </svg>
-            )}
-          </div>
-        )}
-
-        {started && (
-          <div className="pointer-events-none absolute right-[14px] bottom-[14px] left-[14px] z-20">
-            <div className="mb-[6px] flex justify-between text-[11px] font-extrabold text-white/75">
-              <span>{fmt(current)}</span>
-              <span>{fmt(duration)}</span>
-            </div>
-            <div className="h-[6px] w-full overflow-hidden rounded-full bg-white/25">
-              <div
-                className="h-full rounded-full bg-solar transition-[width] duration-200 ease-linear"
-                style={{ width: `${progress}%` }}
-              />
-            </div>
-          </div>
+        ) : (
+          <button
+            type="button"
+            aria-label="Assistir ao vídeo"
+            onClick={() => setStarted(true)}
+            className="absolute inset-0 h-full w-full cursor-pointer border-0 p-0"
+          >
+            <img
+              src={capa.url}
+              alt="Apresentação do Guia Off-Grid com baterias"
+              className="absolute inset-0 h-full w-full object-cover"
+              width={720}
+              height={1280}
+            />
+            <span className="absolute inset-0 flex items-center justify-center">
+              <span className="animate-btn-pulse flex h-[74px] w-[74px] items-center justify-center rounded-full bg-solar">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </span>
+            </span>
+          </button>
         )}
       </div>
     </div>
