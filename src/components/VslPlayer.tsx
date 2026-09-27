@@ -27,9 +27,9 @@ export default function VslPlayer() {
               aria-hidden="true"
               style={{
                 background:
-                  "linear-gradient(to bottom, rgba(11,21,35,1) 0%, rgba(11,21,35,0.92) 50%, rgba(11,21,35,0.35) 80%, rgba(11,21,35,0) 100%)",
+                  "linear-gradient(to bottom, rgba(11,21,35,1) 0%, rgba(11,21,35,0.96) 62%, rgba(11,21,35,0.45) 85%, rgba(11,21,35,0) 100%)",
               }}
-              className="pointer-events-auto absolute inset-x-0 top-0 z-10 h-[96px] backdrop-blur-[12px]"
+              className="pointer-events-auto absolute inset-x-0 top-0 z-10 h-[112px] backdrop-blur-[13px]"
             />
             <div
               aria-hidden="true"
