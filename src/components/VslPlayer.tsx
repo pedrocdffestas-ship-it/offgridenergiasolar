@@ -35,7 +35,7 @@ export default function VslPlayer() {
               aria-hidden="true"
               style={{
                 background:
-                  "linear-gradient(to top, rgba(11,21,35,0.9) 0%, rgba(11,21,35,0.45) 60%, rgba(11,21,35,0) 100%)",
+                  "linear-gradient(to top, rgba(11,21,35,0.8) 0%, rgba(11,21,35,0.4) 55%, rgba(11,21,35,0) 100%)",
               }}
               className="pointer-events-auto absolute inset-x-0 bottom-0 z-10 h-[100px] backdrop-blur-[9px]"
             />
