@@ -27,10 +27,8 @@ export default function VslPlayer() {
             style={{
               background:
                 "linear-gradient(to bottom, rgba(11,21,35,0.94) 0%, rgba(11,21,35,0.72) 38%, rgba(11,21,35,0.35) 68%, rgba(11,21,35,0) 100%)",
-              backdropFilter: "blur(7px)",
-              WebkitBackdropFilter: "blur(7px)",
             }}
-            className="pointer-events-auto absolute inset-x-0 top-0 z-10 h-[78px]"
+            className="pointer-events-auto absolute inset-x-0 top-0 z-10 h-[78px] backdrop-blur-[7px]"
           />
         ) : (
           <button
