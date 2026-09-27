@@ -27,9 +27,17 @@ export default function VslPlayer() {
               aria-hidden="true"
               style={{
                 background:
-                  "linear-gradient(to bottom, rgba(11,21,35,0.94) 0%, rgba(11,21,35,0.72) 38%, rgba(11,21,35,0.35) 68%, rgba(11,21,35,0) 100%)",
+                  "linear-gradient(to bottom, rgba(11,21,35,0.99) 0%, rgba(11,21,35,0.93) 55%, rgba(11,21,35,0.45) 82%, rgba(11,21,35,0) 100%)",
               }}
-              className="pointer-events-auto absolute inset-x-0 top-0 z-10 h-[78px] backdrop-blur-[7px]"
+              className="pointer-events-auto absolute inset-x-0 top-0 z-10 h-[112px] backdrop-blur-[10px]"
+            />
+            <div
+              aria-hidden="true"
+              style={{
+                background:
+                  "linear-gradient(to top, rgba(11,21,35,0.92) 0%, rgba(11,21,35,0.55) 60%, rgba(11,21,35,0) 100%)",
+              }}
+              className="pointer-events-auto absolute bottom-0 right-0 z-10 h-[38px] w-[136px] backdrop-blur-[10px]"
             />
           </>
         ) : (
