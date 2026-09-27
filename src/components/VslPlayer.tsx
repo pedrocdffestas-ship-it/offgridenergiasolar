@@ -10,26 +10,28 @@ export default function VslPlayer() {
   return (
     <div className="relative z-[1] mx-auto mb-[26px] max-w-[400px] rounded-3xl bg-navy p-[10px] shadow-[0_24px_50px_-20px_rgb(27_42_65/0.28)]">
       <div className="relative aspect-[9/16] overflow-hidden rounded-2xl bg-[#0B1523]">
+        {/* Camada de camuflagem sobre o topo do player: esconde o título/canal/
+            etiqueta do YouTube sem afetar a reprodução. Bloqueia cliques apenas
+            nessa faixa superior (evita abrir o YouTube) e deixa os controles
+            nativos de baixo 100% funcionais. */}
         {started ? (
-          <iframe
-            src={EMBED_URL}
-            title="Guia Off-Grid — vídeo de apresentação"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-            className="absolute inset-0 h-full w-full border-0"
-          />
-          {/* Camada de camuflagem sobre o topo do player: esconde o título/
-              canal/etiqueta do YouTube sem afetar a reprodução. Ela bloqueia
-              cliques apenas nessa faixa superior (evita abrir o YouTube) e
-              deixa os controles nativos de baixo 100% funcionais. */}
-          <div
-            aria-hidden="true"
-            style={{
-              background:
-                "linear-gradient(to bottom, rgba(11,21,35,0.94) 0%, rgba(11,21,35,0.72) 38%, rgba(11,21,35,0.35) 68%, rgba(11,21,35,0) 100%)",
-            }}
-            className="pointer-events-auto absolute inset-x-0 top-0 z-10 h-[78px] backdrop-blur-[7px]"
-          />
+          <>
+            <iframe
+              src={EMBED_URL}
+              title="Guia Off-Grid — vídeo de apresentação"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              className="absolute inset-0 h-full w-full border-0"
+            />
+            <div
+              aria-hidden="true"
+              style={{
+                background:
+                  "linear-gradient(to bottom, rgba(11,21,35,0.94) 0%, rgba(11,21,35,0.72) 38%, rgba(11,21,35,0.35) 68%, rgba(11,21,35,0) 100%)",
+              }}
+              className="pointer-events-auto absolute inset-x-0 top-0 z-10 h-[78px] backdrop-blur-[7px]"
+            />
+          </>
         ) : (
           <button
             type="button"
