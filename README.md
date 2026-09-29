@@ -24,3 +24,13 @@ cd <repository-name>
 npm i
 npm run dev
 ```
+
+
+## Referência do projeto para manutenção
+
+- Repositório GitHub canônico: https://github.com/pedrocdffestas-ship-it/offgridenergiasolar
+- Branch de trabalho: `main`
+- Arquivo principal da página de vendas: `src/routes/index.tsx`
+- Projeto Lovable associado: Pixel Perfect Replication (identificado pelo usuário).
+
+Usar esta referência para futuras alterações solicitadas pelo usuário; realizar mudanças pelo GitHub, não diretamente pelo editor do Lovable, salvo pedido explícito em contrário.
