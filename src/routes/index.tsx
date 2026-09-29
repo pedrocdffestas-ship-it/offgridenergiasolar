@@ -16,7 +16,7 @@ import fotoCabos from "@/assets/foto-cabos.jpg";
 import fotoResidencial from "@/assets/foto-residencial.jpg";
 import fotoRural from "@/assets/foto-rural.jpg";
 import fotoExemplos from "@/assets/foto-exemplos.jpg";
-import fotoDorConta from "@/assets/dor-conta-luz.jpg";
+const fotoDorConta = "https://energyconsumersaustralia.com.au/sites/default/files/styles/hero_banner/public/wp-images/Energy-Bill-1024x576.jpg?h=c12e0b96&itok=re-C-S1f";
 import fotoAntesDepois from "@/assets/antes-depois-energia.jpg";
 import comparativoOffGrid from "@/assets/comparativo-conta-luz-off-grid.png.asset.json";
 
@@ -417,7 +417,7 @@ const [modalOpen, setModalOpen] = useState(false);
       <Section bg="bg-mint">
         <div className="reveal">
           <H2>Toda vez que a conta de luz chega, vem a mesma vontade de mudar alguma coisa...</H2>
-          <img src={fotoDorConta} alt="Pessoa preocupada analisando uma conta de luz alta" width={1200} height={800} loading="lazy" className="mx-auto mb-7 aspect-[3/2] w-full max-w-[640px] rounded-[22px] object-cover shadow-[0_18px_40px_-18px_rgb(27_42_65/0.32)]" />
+          <img src={fotoDorConta} alt="Pessoa em casa analisando uma conta de energia elétrica à mesa" width={1200} height={800} loading="lazy" referrerPolicy="no-referrer" className="mx-auto mb-7 aspect-[3/2] w-full max-w-[640px] rounded-[22px] object-cover shadow-[0_18px_40px_-18px_rgb(27_42_65/0.32)]" />
           <div className="mx-auto grid max-w-[640px] grid-cols-1 gap-[18px] sm:grid-cols-2">
             {pains.map((p) => (
               <div
