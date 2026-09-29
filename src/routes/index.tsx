@@ -352,17 +352,10 @@ const [modalOpen, setModalOpen] = useState(false);
       </div>
 
       {/* HERO */}
-      <section className="relative bg-cream pt-[52px] pb-[76px]">
+      <section className="relative bg-cream pt-[24px] pb-[76px]">
         <Glow className="top-24 -left-24 h-72 w-72 bg-solar" />
         <Glow className="top-64 -right-24 h-72 w-72 bg-leaf" />
         <div className="relative mx-auto max-w-[800px] px-6 text-center">
-          <div className="mb-[22px] flex items-center justify-center">
-            <img
-              src="/uploads/ChatGPT_Image_18_de_set._de_2026_21_32_17.png"
-              alt="Guia Solar com Baterias Off-Grid"
-              className="h-auto w-full max-w-[340px]"
-            />
-          </div>
           <h1 className="font-display mx-auto mb-[14px] max-w-[600px] text-[clamp(24px,3.6vw,32px)] leading-[1.15] font-extrabold text-navy">
             <span className="inline-block rounded-[14px] bg-solar px-[10px] py-[2px] text-white shadow-[0_4px_14px_rgb(245_130_32/0.35)]">
               +120 Projetos
