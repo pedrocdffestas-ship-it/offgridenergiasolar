@@ -727,8 +727,6 @@ const [modalOpen, setModalOpen] = useState(false);
         </div>
       </div>
 
-      <SocialProofSection />
-
       {/* OFERTAS */}
       <div id="ofertas" className="scroll-mt-4" />
       <Section bg="bg-cream">
@@ -821,6 +819,9 @@ const [modalOpen, setModalOpen] = useState(false);
           </div>
         </div>
       </Section>
+
+      {/* PROVA SOCIAL */}
+      <SocialProofSection />
 
       {/* GARANTIA */}
       <Section bg="bg-mint">
