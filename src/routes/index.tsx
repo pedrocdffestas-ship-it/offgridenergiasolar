@@ -356,18 +356,16 @@ const [modalOpen, setModalOpen] = useState(false);
         <Glow className="top-24 -left-24 h-72 w-72 bg-solar" />
         <Glow className="top-64 -right-24 h-72 w-72 bg-leaf" />
         <div className="relative mx-auto max-w-[800px] px-6 text-center">
-          <h1 className="font-display mx-auto mb-[14px] max-w-[600px] text-[clamp(24px,3.6vw,32px)] leading-[1.15] font-extrabold text-navy">
-            <span className="inline-block rounded-[14px] bg-solar px-[10px] py-[2px] text-white shadow-[0_4px_14px_rgb(245_130_32/0.35)]">
-              +120 Projetos
-            </span>
-            : Aprenda a Gerar sua Própria Energia Solar com Baterias na Sua
-            Casa, Agora, e Dimensione seu Sistema Off-Grid Antes de Comprar os
-            Equipamentos
+          <h1 className="font-display mx-auto mb-[14px] max-w-[650px] text-[clamp(24px,3.6vw,32px)] leading-[1.15] font-extrabold text-navy">
+            <span className="text-solar">Você não precisa ser especialista</span>{" "}
+            nem ter uma fortuna.
+            <br />
+            Aprenda como montar seu próprio sistema de energia off-grid.
           </h1>
-          <p className="font-display mx-auto mb-[30px] max-w-[600px] text-[clamp(15px,2.2vw,19px)] leading-[1.4] font-extrabold text-navy">
-            Do básico ao avançado, entenda como calcular, escolher e planejar
-            seu sistema para casa, comércio, barco ou fazenda.
-          </p>
+          <p className="font-display mx-auto mb-[30px] max-w-[650px] text-[clamp(17px,2.4vw,21px)] leading-[1.4] font-extrabold text-navy">
+            <span className="text-solar">Não importa se você está começando agora</span>{" "}
+            ou já entende do assunto: este é um plano prático e passo a passo,
+            feito para você aprender e colocar em prática.
 
 <div className="relative mx-auto mt-[26px] mb-[30px] max-w-[560px]">
             <Glow className="top-1/2 left-1/2 h-[340px] w-[340px] -translate-x-1/2 -translate-y-1/2 bg-solar" />
