@@ -92,13 +92,19 @@ export default function VslPlayer() {
           <>
             <iframe
               ref={iframeRef}
-              src={`https://www.youtube-nocookie.com/embed/${VIDEO_ID}?enablejsapi=1&controls=0&rel=0&modestbranding=1&playsinline=1&fs=0`}
+              src={`https://www.youtube-nocookie.com/embed/${VIDEO_ID}?enablejsapi=1&controls=0&rel=0&playsinline=1&fs=0&iv_load_policy=3&disablekb=1&cc_load_policy=0&autohide=1`}
               title="Guia Off-Grid — vídeo de apresentação"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allow="autoplay; encrypted-media; picture-in-picture"
               allowFullScreen={false}
               className="absolute inset-0 h-full w-full border-0"
             />
-
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 z-[5]"
+              style={{
+                background: "transparent",
+              }}
+            />
             <button
               type="button"
               aria-label={playing ? "Pausar vídeo" : "Reproduzir vídeo"}
