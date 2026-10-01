@@ -454,13 +454,17 @@ const [modalOpen, setModalOpen] = useState(false);
       {/* PRÓS E CONTRAS */}
       <Section bg="bg-white" className="!max-w-none">
         <div className="reveal mx-auto max-w-[800px]">
-          <div className="mx-auto mb-9 max-w-[620px] text-left">
-            <h2 className="font-display mb-3 text-[clamp(26px,4vw,36px)] leading-[1.1] font-extrabold text-navy">
-              Cansado de tanta dúvida na hora de montar seu sistema solar off-grid?
+          <div className="mx-auto mb-9 max-w-[620px] text-center">
+            <h2 className="font-display mb-4 text-[clamp(26px,4vw,36px)] leading-[1.1] font-extrabold text-navy">
+              <span className="text-solar">Você não precisa ser especialista</span>{" "}
+              nem ter uma fortuna.
+              <br />
+              Aprenda como montar seu próprio sistema de energia off-grid.
             </h2>
-            <p className="text-[15px] font-semibold leading-[1.45] text-ink-soft">
-              Você não está sozinho. Muitas pessoas se sentem perdidas com tantas informações, equipamentos e cálculos.
-              É o medo de errar e perder dinheiro.
+            <p className="mx-auto max-w-[590px] text-[clamp(16px,2.4vw,20px)] font-extrabold leading-[1.4] text-navy">
+              <span className="text-solar">Não importa se você está começando agora</span>{" "}
+              ou já entende do assunto: este é um plano prático e passo a passo,
+              feito para você aprender e colocar em prática.
             </p>
           </div>
 
