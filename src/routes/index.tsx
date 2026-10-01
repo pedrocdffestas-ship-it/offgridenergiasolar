@@ -18,7 +18,7 @@ import fotoRural from "@/assets/foto-rural.jpg";
 import fotoExemplos from "@/assets/foto-exemplos.jpg";
 const fotoDorConta = "https://cdn.mos.cms.futurecdn.net/SuyzFtJr66LfDoXgFFuNoK-1600-80.jpg";
 import fotoAntesDepois from "@/assets/antes-depois-energia.jpg";
-import comparativoOffGrid from "@/assets/comparativo-conta-luz-off-grid.png.asset.json";
+import comparativoOffGrid from "@/assets/comparativo-conta-luz-off-grid-2k.png.asset.json";
 
 
 export const Route = createFileRoute("/")({
@@ -860,8 +860,8 @@ const [modalOpen, setModalOpen] = useState(false);
           <img
             src={comparativoOffGrid.url}
             alt="Comparação entre conta de luz com a concessionária e sistema off-grid com energia solar e baterias"
-            width={1129}
-            height={757}
+            width={1920}
+            height={1364}
             loading="lazy"
             className="mx-auto mb-9 h-auto w-full max-w-[760px]"
           />
