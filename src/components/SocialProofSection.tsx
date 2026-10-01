@@ -107,11 +107,8 @@ export default function SocialProofSection() {
             <ShieldCheck aria-hidden="true" className="h-4 w-4" /> DEPOIMENTOS
           </span>
           <h2 className="font-display mx-auto mb-5 max-w-[760px] text-[clamp(34px,5vw,52px)] leading-[1.08] font-extrabold">
-            Falta pouco para você começar a produzir sua <span className="text-solar">própria energia.</span>
+            Veja como as pessoas estão colocando o conhecimento do Guia Solar com Baterias em prática.
           </h2>
-          <p className="mx-auto mb-4 max-w-[720px] text-[18px] leading-[1.65] font-bold text-white/90">
-            Veja como pessoas estão colocando o conhecimento do Guia Solar com Baterias em prática.
-          </p>
           <p className="mx-auto mb-4 max-w-[760px] text-[16px] leading-[1.7] font-semibold text-white/70">
             Chega de depender completamente da concessionária, sofrer com apagões ou continuar pagando uma conta de luz cada vez mais alta.
           </p>
