@@ -18,7 +18,7 @@ import fotoRural from "@/assets/foto-rural.jpg";
 import fotoExemplos from "@/assets/foto-exemplos.jpg";
 const fotoDorConta = "https://cdn.mos.cms.futurecdn.net/SuyzFtJr66LfDoXgFFuNoK-1600-80.jpg";
 import fotoAntesDepois from "@/assets/antes-depois-energia.jpg";
-import comparativoOffGrid from "@/assets/comparativo-conta-luz-off-grid.png.asset.json";
+import comparativoOffGrid from "@/assets/comparativo-conta-luz-off-grid-2k.png.asset.json";
 
 
 export const Route = createFileRoute("/")({
