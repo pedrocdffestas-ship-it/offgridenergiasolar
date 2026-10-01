@@ -5,6 +5,7 @@ import videoSrc from "@/assets/manual-solar-off-grid.mp4.asset.json";
 export default function VslPlayer() {
   const [soundEnabled, setSoundEnabled] = useState(false);
   const [playing, setPlaying] = useState(false);
+  const [showFinalMessage, setShowFinalMessage] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -24,6 +25,7 @@ export default function VslPlayer() {
     video.currentTime = 0;
     video.muted = false;
     setSoundEnabled(true);
+    setShowFinalMessage(false);
 
     try {
       await video.play();
@@ -39,11 +41,13 @@ export default function VslPlayer() {
     if (!video || !soundEnabled) return;
 
     if (video.paused) {
+      setShowFinalMessage(false);
       await video.play();
       setPlaying(true);
     } else {
       video.pause();
       setPlaying(false);
+      setShowFinalMessage(true);
     }
   };
 
@@ -58,7 +62,10 @@ export default function VslPlayer() {
           muted
           playsInline
           preload="auto"
-          onPlay={() => setPlaying(true)}
+          onPlay={() => {
+            setPlaying(true);
+            setShowFinalMessage(false);
+          }}
           onPause={() => setPlaying(false)}
           className="absolute inset-0 h-full w-full bg-[#0B1523] object-contain"
         />
@@ -100,6 +107,14 @@ export default function VslPlayer() {
               )}
             </span>
           </button>
+        )}
+
+        {showFinalMessage && (
+          <div className="pointer-events-none absolute inset-x-0 bottom-8 z-20 flex justify-center px-5">
+            <div className="animate-btn-pulse rounded-full bg-black/75 px-5 py-3 text-center text-sm font-extrabold text-white shadow-xl backdrop-blur-sm">
+              Assista até o final, recado importante.
+            </div>
+          </div>
         )}
       </div>
     </div>
