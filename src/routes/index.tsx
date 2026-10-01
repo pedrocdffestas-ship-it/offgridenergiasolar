@@ -860,8 +860,8 @@ const [modalOpen, setModalOpen] = useState(false);
           <img
             src={comparativoOffGrid.url}
             alt="Comparação entre conta de luz com a concessionária e sistema off-grid com energia solar e baterias"
-            width={1129}
-            height={757}
+            width={1920}
+            height={1364}
             loading="lazy"
             className="mx-auto mb-9 h-auto w-full max-w-[760px]"
           />
