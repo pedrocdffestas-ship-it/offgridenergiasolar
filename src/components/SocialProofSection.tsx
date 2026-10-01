@@ -104,7 +104,7 @@ export default function SocialProofSection() {
       <div className="relative mx-auto max-w-[960px] px-6 text-center">
         <div className="reveal">
           <h2 className="font-display mx-auto mb-5 max-w-[760px] text-[clamp(34px,5vw,52px)] leading-[1.08] font-extrabold">
-            Veja como as pessoas estão colocando o conhecimento do Guia Solar com Baterias em prática.
+            <span className="inline-block rounded-md bg-solar px-2 py-1 text-white">Veja</span> como as pessoas estão colocando o conhecimento do Guia Solar com Baterias em prática.
           </h2>
           <p className="mx-auto mb-4 max-w-[760px] text-[16px] leading-[1.7] font-semibold text-white/70">
             Chega de depender completamente da concessionária, sofrer com apagões ou continuar pagando uma conta de luz cada vez mais alta.
