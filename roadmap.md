@@ -9,3 +9,4 @@
 - [x] Adicionar o infográfico e CTA entre Garantia e FAQ.
 - [x] Atualizar o texto e o destino do botão abaixo do vídeo.
 - [x] Validar os dois novos destinos de rolagem em celular e desktop.
+- [x] Substituir player do YouTube por vídeo direto (upload 2160x3840, servido no CDN; capa + play com som no clique, controles nativos)
