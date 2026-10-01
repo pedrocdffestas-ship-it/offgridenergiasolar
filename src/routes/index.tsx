@@ -855,15 +855,15 @@ const [modalOpen, setModalOpen] = useState(false);
       </Section>
 
       {/* COMPARATIVO OFF-GRID */}
-      <Section bg="bg-white">
-        <div className="reveal">
+      <Section bg="bg-white" className="!max-w-none">
+        <div className="reveal mx-auto w-full max-w-[1000px]">
           <img
             src={comparativoOffGrid.url}
             alt="Comparação entre conta de luz com a concessionária e sistema off-grid com energia solar e baterias"
             width={1920}
             height={1364}
             loading="lazy"
-            className="mx-auto mb-9 h-auto w-full max-w-[760px]"
+            className="mx-auto mb-9 h-auto w-full max-w-[1000px]"
           />
           <BtnPrimary pulse href="#ofertas" className="max-w-full">
             Quero produzir minha própria energia off-grid com baterias
