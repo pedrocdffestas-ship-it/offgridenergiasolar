@@ -103,9 +103,6 @@ export default function SocialProofSection() {
     <section className="relative overflow-hidden bg-navy py-[76px] text-white">
       <div className="relative mx-auto max-w-[960px] px-6 text-center">
         <div className="reveal">
-          <span className="mb-5 inline-flex items-center gap-2 rounded-full bg-solar px-[18px] py-[9px] text-sm font-extrabold uppercase text-white">
-            <ShieldCheck aria-hidden="true" className="h-4 w-4" /> DEPOIMENTOS
-          </span>
           <h2 className="font-display mx-auto mb-5 max-w-[760px] text-[clamp(34px,5vw,52px)] leading-[1.08] font-extrabold">
             Veja como as pessoas estão colocando o conhecimento do Guia Solar com Baterias em prática.
           </h2>
