@@ -16,7 +16,7 @@ import fotoCabos from "@/assets/foto-cabos.jpg";
 import fotoResidencial from "@/assets/foto-residencial.jpg";
 import fotoRural from "@/assets/foto-rural.jpg";
 import fotoExemplos from "@/assets/foto-exemplos.jpg";
-const fotoDorConta = "https://energyconsumersaustralia.com.au/sites/default/files/styles/hero_banner/public/wp-images/Energy-Bill-1024x576.jpg?h=c12e0b96&itok=re-C-S1f";
+const fotoDorConta = "https://cdn.mos.cms.futurecdn.net/SuyzFtJr66LfDoXgFFuNoK-1600-80.jpg";
 import fotoAntesDepois from "@/assets/antes-depois-energia.jpg";
 import comparativoOffGrid from "@/assets/comparativo-conta-luz-off-grid.png.asset.json";
 
