@@ -143,7 +143,7 @@ export default function SocialProofSection() {
           <Carousel opts={{ align: "center", loop: true }} setApi={setImageApi} aria-label="Depoimentos em imagem" className="mx-auto max-w-[820px] px-5 sm:px-12">
             <CarouselContent>
               {images.map((image) => (
-                <CarouselItem key={image.id} className="basis-[92%] sm:basis-1/2">
+                <CarouselItem key={image.id} className="basis-[92%] sm:basis-[58%]">
                   <div className="rounded-lg border border-white/12 bg-white p-3 shadow-2xl">
                     <img src={image.src} alt={image.alt} loading="lazy" className="mx-auto w-full rounded-md" />
                   </div>
