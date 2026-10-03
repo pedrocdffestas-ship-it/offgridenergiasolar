@@ -366,6 +366,8 @@ const [modalOpen, setModalOpen] = useState(false);
             <span className="text-solar">Não importa se você está começando agora</span>{" "}
             ou já entende do assunto: este é um plano prático e passo a passo,
             feito para você aprender e colocar em prática.
+          </p>
+
 
 <div className="relative mx-auto mt-[26px] mb-[30px] max-w-[560px]">
             <Glow className="top-1/2 left-1/2 h-[340px] w-[340px] -translate-x-1/2 -translate-y-1/2 bg-solar" />
