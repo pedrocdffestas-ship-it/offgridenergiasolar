@@ -68,13 +68,13 @@ function TestimonialVideo({ index, name, state, src, poster, videoRefs, onPlay }
   };
 
   return (
-    <article className="overflow-hidden rounded-lg border border-white/12 bg-white/7 text-left shadow-2xl">
-      <div className="px-5 py-4">
+    <article className="mx-auto w-full max-w-[360px] overflow-hidden rounded-[24px] border-2 border-white/15 bg-white/7 text-left shadow-[0_24px_60px_-18px_rgb(0_0_0/0.5)]">
+      <div className="border-b border-white/10 px-5 py-4">
         <h3 className="font-display text-[17px] font-extrabold text-white">Depoimento de {name} — {state}</h3>
         <p className="mt-1 text-[12px] font-bold text-solar">Sobre o Guia Solar com Baterias</p>
       </div>
-      <div className="relative aspect-[9/16] overflow-hidden bg-ink">
-        <video ref={(node) => { videoRefs.current[index] = node; }} src={src} poster={poster} playsInline preload="metadata" onPlay={() => { setPlaying(true); onPlay(index); }} onPause={() => setPlaying(false)} onEnded={() => setPlaying(false)} className="h-full w-full object-cover" aria-label={`Depoimento em vídeo de ${name} sobre o Guia Solar com Baterias`} />
+      <div className="relative mx-3 mb-3 aspect-[9/16] overflow-hidden rounded-[18px] border-4 border-white/10 bg-black shadow-inner">
+        <video ref={(node) => { videoRefs.current[index] = node; }} src={src} poster={poster} playsInline preload="metadata" onPlay={() => { setPlaying(true); onPlay(index); }} onPause={() => setPlaying(false)} onEnded={() => setPlaying(false)} className="h-full w-full object-contain" aria-label={`Depoimento em vídeo de ${name} sobre o Guia Solar com Baterias`} />
         <button type="button" onClick={togglePlay} aria-label={playing ? `Pausar depoimento de ${name}` : `Reproduzir depoimento de ${name}`} className="absolute inset-0 z-10 grid h-full w-full cursor-pointer place-items-center bg-transparent">
           {!playing && <span className="animate-btn-pulse grid h-[72px] w-[72px] place-items-center rounded-full bg-solar text-white shadow-xl"><svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg></span>}
         </button>
@@ -128,7 +128,7 @@ export default function SocialProofSection() {
           <Carousel opts={{ align: "center" }} aria-label="Depoimentos em vídeo" className="mx-auto max-w-[820px] px-5 sm:px-12">
             <CarouselContent>
               {videos.map((video, index) => (
-                <CarouselItem key={video.id} className="basis-[92%] sm:basis-1/2">
+                <CarouselItem key={video.id} className="basis-[88%] sm:basis-[44%]">
                   <TestimonialVideo index={index} name={video.name} state={video.state} src={video.src} poster={video.poster} videoRefs={videoRefs} onPlay={pauseOtherVideos} />
                 </CarouselItem>
               ))}
