@@ -858,6 +858,20 @@ const [modalOpen, setModalOpen] = useState(false);
         </div>
       </Section>
 
+      {/* CTA ANTES DO FAQ */}
+      <Section bg="bg-white" className="!py-[44px]">
+        <div className="reveal">
+          <BtnPrimary
+            green
+            pulse
+            href="https://app.mivvo.com.br/checkout/01a09d50-91ac-7bd0-9016-3ea608924d08"
+            className="w-full max-w-[560px]"
+          >
+            QUERO O GUIA SOLAR COM BATERIAS!
+          </BtnPrimary>
+        </div>
+      </Section>
+
       {/* FAQ */}
       <Section bg="bg-cream">
         <div className="reveal">
