@@ -6,7 +6,6 @@ export default function VslPlayer() {
   const [soundEnabled, setSoundEnabled] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [showFinalMessage, setShowFinalMessage] = useState(false);
-  const [viewers, setViewers] = useState(732);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -19,19 +18,10 @@ export default function VslPlayer() {
     });
   }, []);
 
-  useEffect(() => {
-    const interval = window.setInterval(() => {
-      setViewers((current) => current + (Math.random() > 0.35 ? 1 : 0));
-    }, 7000);
-
-    return () => window.clearInterval(interval);
-  }, []);
-
   const enableSound = async () => {
     const video = videoRef.current;
     if (!video) return;
 
-    video.currentTime = 0;
     video.muted = false;
     setSoundEnabled(true);
     setShowFinalMessage(false);
@@ -62,11 +52,6 @@ export default function VslPlayer() {
 
   return (
     <div className="relative z-[1] mx-auto mb-[26px] max-w-[400px]">
-      <div className="mb-3 flex items-center justify-center gap-2 text-sm font-semibold text-navy">
-        <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-green-500 shadow-[0_0_0_4px_rgb(34_197_94/0.12)]" />
-        <span>{viewers} pessoas agora assistindo</span>
-      </div>
-
       <div className="rounded-3xl bg-navy p-[10px] shadow-[0_24px_50px_-20px_rgb(27_42_65/0.28)]">
         <div className="relative aspect-[9/16] overflow-hidden rounded-2xl bg-[#0B1523]">
           <video
@@ -76,12 +61,13 @@ export default function VslPlayer() {
             autoPlay
             muted
             playsInline
-            preload="auto"
+            preload="metadata"
             onPlay={() => {
               setPlaying(true);
               setShowFinalMessage(false);
             }}
             onPause={() => setPlaying(false)}
+            onEnded={() => setPlaying(false)}
             className="absolute inset-0 h-full w-full bg-[#0B1523] object-contain"
           />
 

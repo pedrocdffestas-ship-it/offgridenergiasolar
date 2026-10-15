@@ -3,23 +3,9 @@ import { useEffect, useState } from "react";
 import produto from "@/assets/produto.png.asset.json";
 import produtoPdf from "@/assets/produto-pdf.png.asset.json";
 import ofertaSimples from "@/assets/oferta-simples.png.asset.json";
-import solarBg from "@/assets/solar-bg.jpg.asset.json";
 import selo from "@/assets/selo-garantia.png.asset.json";
 import VslPlayer from "@/components/VslPlayer";
-import BonusMarquee from "@/components/BonusMarquee";
 import SocialProofSection from "@/components/SocialProofSection";
-import fotoBaterias from "@/assets/foto-baterias.jpg";
-import fotoPaineis from "@/assets/foto-paineis.jpg";
-import fotoControlador from "@/assets/foto-controlador.jpg";
-import fotoInversor from "@/assets/foto-inversor.jpg";
-import fotoCabos from "@/assets/foto-cabos.jpg";
-import fotoResidencial from "@/assets/foto-residencial.jpg";
-import fotoRural from "@/assets/foto-rural.jpg";
-import fotoExemplos from "@/assets/foto-exemplos.jpg";
-const fotoDorConta = "https://cdn.mos.cms.futurecdn.net/SuyzFtJr66LfDoXgFFuNoK-1600-80.jpg";
-import fotoAntesDepois from "@/assets/antes-depois-energia.jpg";
-import comparativoOffGrid from "@/assets/comparativo-conta-luz-off-grid-2k.png.asset.json";
-
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -67,10 +53,7 @@ function useReveal() {
 function useCountdown() {
   const [secs, setSecs] = useState(24 * 3600);
   useEffect(() => {
-    const id = setInterval(
-      () => setSecs((s) => (s > 0 ? s - 1 : 24 * 3600)),
-      1000,
-    );
+    const id = setInterval(() => setSecs((s) => (s > 0 ? s - 1 : 24 * 3600)), 1000);
     return () => clearInterval(id);
   }, []);
   const h = String(Math.floor(secs / 3600)).padStart(2, "0");
@@ -80,14 +63,6 @@ function useCountdown() {
 }
 
 /* ---------- UI atoms ---------- */
-
-function Eyebrow({ children }: { children: React.ReactNode }) {
-  return (
-    <span className="mb-5 inline-flex items-center gap-2 rounded-full bg-peach-icon px-[18px] py-[9px] text-sm font-extrabold uppercase tracking-[0.06em] text-solar-deep">
-      {children}
-    </span>
-  );
-}
 
 function H2({ children }: { children: React.ReactNode }) {
   return (
@@ -137,16 +112,16 @@ function Section({
   children,
   bg = "bg-cream",
   className = "",
+  padding = "py-[48px]",
 }: {
   children: React.ReactNode;
+  padding?: string;
   bg?: string;
   className?: string;
 }) {
   return (
-    <section className={`relative py-[76px] ${bg}`}>
-      <div
-        className={`relative mx-auto max-w-[800px] px-6 text-center ${className}`}
-      >
+    <section className={`relative ${padding} ${bg}`}>
+      <div className={`relative mx-auto max-w-[800px] px-6 text-center ${className}`}>
         {children}
       </div>
     </section>
@@ -176,49 +151,6 @@ function LeafBullet() {
 
 /* ---------- data ---------- */
 
-const pains = [
-  { icon: "💰", bg: "bg-peach-icon", text: "Cansado de ver a conta de luz subir todo mês, sem controle nenhum" },
-  { icon: "🕯️", bg: "bg-mint-icon", text: "Já levou apagão de surpresa e ficou na mão, sem energia nenhuma" },
-  { icon: "🏡", bg: "bg-mint-icon", text: "Mora ou tem um lugar (sítio, chácara, barco) onde a rede elétrica nunca é boa de verdade" },
-  { icon: "☀️", bg: "bg-peach-icon", text: "Já ouviu falar de energia solar, mas não sabe se resolve — painel sozinho só gera de dia, e à noite volta tudo ao mesmo problema" },
-  { icon: "🔧", bg: "bg-mint-icon", text: "Acha que ter energia solar de verdade é caro e complicado demais pra alguém como você" },
-];
-
-const who = [
-  "Quer energia solar em casa, sítio ou chácara",
-  "É eletricista e quer adicionar esse serviço",
-  "Quer instalar sistemas solares e cobrar por isso",
-  "Já travou tentando aprender sozinho",
-  "Busca ideias simples e diretas ao ponto",
-  "Quer aprender com segurança, sem tentativa e erro",
-  "Tem um comércio ou negócio e quer reduzir o custo de energia",
-];
-
-const before = [
-  "Refém da concessionária, sem escolha",
-  "Apagão te pega desprevenido, sempre na pior hora",
-  "Acha que energia solar é só pra quem tem dinheiro sobrando",
-  "Não sabe nem por onde começar",
-];
-const after = [
-  "Energia funcionando o dia inteiro, com ou sem rede elétrica",
-  "Nunca mais fica no escuro quando a luz cai",
-  "Aprendeu o passo a passo sem complicação nenhuma",
-  "Percebeu que era bem mais simples — e mais barato — do que imaginava",
-];
-
-const categories = [
-  { img: fotoBaterias, label: "Banco de baterias" },
-  { img: fotoPaineis, label: "Painéis solares" },
-  { img: fotoControlador, label: "Controlador de carga" },
-  { img: fotoInversor, label: "Inversor" },
-  { img: fotoCabos, label: "Cabos e proteções" },
-  { img: fotoResidencial, label: "Projetos residenciais" },
-  { img: fotoRural, label: "Projetos rurais" },
-  { img: fotoExemplos, label: "Exemplos práticos" },
-];
-
-
 const pillars = [
   {
     n: "1",
@@ -244,14 +176,6 @@ const receive = [
   "Material 100% digital completo",
   "Acesso imediato por e-mail",
   "Consulte sempre que precisar",
-];
-
-const receiveVideo = [
-  "Mais de 120 projetos e ângulos de uso explicados em vídeo, do básico ao avançado",
-  "Acesso pela plataforma web e pelo celular",
-  "Mesmo conteúdo do guia, explicado passo a passo em vídeo",
-  "Fica gravado, assista quantas vezes precisar",
-  "Ideal para quem aprende melhor vendo do que lendo",
 ];
 
 const bonuses = [
@@ -313,31 +237,19 @@ const faqs = [
   },
 ];
 
-const innerPages = [
-  { title: "Dimensionamento", sub: "Cálculo de consumo", img: fotoExemplos },
-  { title: "Banco de Baterias", sub: "Ligação e proteção", img: fotoBaterias },
-  { title: "Controlador de Carga", sub: "Ajustes passo a passo", img: fotoControlador },
-  { title: "Inversor", sub: "Configuração certa", img: fotoInversor },
-  { title: "Projeto Rural", sub: "Sítio off-grid", img: fotoRural },
-];
-
 /* ---------- page ---------- */
 
 function Index() {
   useReveal();
   const { h, m, s } = useCountdown();
-const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const closeModal = () => setModalOpen(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       if (window.location.hash) {
-        window.history.replaceState(
-          null,
-          "",
-          window.location.pathname + window.location.search,
-        );
+        window.history.replaceState(null, "", window.location.pathname + window.location.search);
       }
       window.scrollTo({ top: 0, behavior: "auto" });
     }
@@ -347,12 +259,11 @@ const [modalOpen, setModalOpen] = useState(false);
     <div className="overflow-x-hidden bg-cream font-body text-ink">
       {/* TOPBAR */}
       <div className="bg-navy px-4 py-[11px] text-center text-[12.5px] font-extrabold tracking-[0.02em] text-white">
-        PARA QUEM QUER ENERGIA SOLAR EM CASA E NO COMÉRCIO SEM PAGAR CARO NEM
-        ERRAR NA INSTALAÇÃO
+        PARA QUEM QUER ENERGIA SOLAR EM CASA E NO COMÉRCIO SEM PAGAR CARO NEM ERRAR NA INSTALAÇÃO
       </div>
 
       {/* HERO */}
-      <section className="relative bg-cream pt-[24px] pb-[76px]">
+      <section className="relative bg-cream pt-[24px] pb-[32px]">
         <Glow className="top-24 -left-24 h-72 w-72 bg-solar" />
         <Glow className="top-64 -right-24 h-72 w-72 bg-leaf" />
         <div className="relative mx-auto max-w-[800px] px-6 text-center">
@@ -360,16 +271,15 @@ const [modalOpen, setModalOpen] = useState(false);
             <span className="inline-block rounded-[14px] bg-solar px-[10px] py-[2px] text-white shadow-[0_4px_14px_rgb(245_130_32/0.35)]">
               +120 Projetos
             </span>
-            : Aprenda a Gerar sua Própria Energia Solar com Baterias na Sua
-            Casa, Agora, e Dimensione seu Sistema Off-Grid Antes de Comprar os
-            Equipamentos
+            : Aprenda a Gerar sua Própria Energia Solar com Baterias na Sua Casa, Agora, e
+            Dimensione seu Sistema Off-Grid Antes de Comprar os Equipamentos
           </h1>
           <p className="font-display mx-auto mb-[30px] max-w-[600px] text-[clamp(15px,2.2vw,19px)] leading-[1.4] font-extrabold text-navy">
-            Do básico ao avançado, entenda como calcular, escolher e planejar
-            seu sistema para casa, comércio, barco ou fazenda.
+            Do básico ao avançado, entenda como calcular, escolher e planejar seu sistema para casa,
+            comércio, barco ou fazenda.
           </p>
 
-<div className="relative mx-auto mt-[26px] mb-[30px] max-w-[560px]">
+          <div className="relative mx-auto mt-[26px] mb-[30px] max-w-[560px]">
             <Glow className="top-1/2 left-1/2 h-[340px] w-[340px] -translate-x-1/2 -translate-y-1/2 bg-solar" />
             <img
               src={produto.url}
@@ -379,32 +289,18 @@ const [modalOpen, setModalOpen] = useState(false);
               className="animate-floaty relative z-[1] w-full drop-shadow-[0_26px_34px_rgb(27_42_65/0.28)]"
             />
           </div>
-
-          <div className="mb-2">
-            <BonusMarquee size={110} />
-          </div>
-
-          <p className="animate-soft-pulse font-display mx-auto mt-9 mb-2 max-w-[720px] px-4 text-[clamp(20px,3vw,30px)] leading-[1.25] font-extrabold text-navy">
-            <span className="text-leaf">Economize até 80% na conta de luz</span>,
-            dependendo do consumo e da configuração do sistema. <span className="text-solar-deep">Garantia de 30 dias.</span>{" "}
-            Faça você mesmo — sem gastar muito, sabendo resolver todos os
-            cálculos sozinho.
-          </p>
-
-          <div className="animate-bob mx-auto mt-[46px] mb-[-14px] flex h-[46px] w-[46px] items-center justify-center rounded-full bg-mint-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="oklch(0.6 0.12 155)" strokeWidth="3" strokeLinecap="round">
-              <path d="M6 9l6 6 6-6" />
-            </svg>
-          </div>
         </div>
       </section>
 
       {/* VÍDEO VSL */}
-      <Section bg="bg-white">
+      <Section bg="bg-white" padding="py-[32px]">
         <div className="reveal">
+          <BtnPrimary pulse href="#ofertas" className="mb-6 w-full max-w-[400px]">
+            Ver as opções do guia →
+          </BtnPrimary>
           <VslPlayer />
-          <BtnPrimary pulse href="#energia-off-grid">
-            Saiba mais sobre energia off-grid →
+          <BtnPrimary pulse href="#ofertas">
+            Quero conhecer as ofertas →
           </BtnPrimary>
           <p className="mt-[14px] text-[13px] font-bold text-ink-soft">
             Acesso imediato • Pagamento único • Garantia de 30 dias
@@ -412,307 +308,100 @@ const [modalOpen, setModalOpen] = useState(false);
         </div>
       </Section>
 
-      {/* DOR */}
-      <div id="energia-off-grid" className="scroll-mt-4" />
+      {/* DOR ESPECÍFICA */}
       <Section bg="bg-mint">
         <div className="reveal">
-          <H2>Toda vez que a conta de luz chega, vem a mesma vontade de mudar alguma coisa...</H2>
-          <img src={fotoDorConta} alt="Pessoa em casa analisando uma conta de energia elétrica à mesa" width={1200} height={800} loading="lazy" referrerPolicy="no-referrer" className="mx-auto mb-7 aspect-[3/2] w-full max-w-[640px] rounded-[22px] object-cover shadow-[0_18px_40px_-18px_rgb(27_42_65/0.32)]" />
-          <div className="mx-auto grid max-w-[640px] grid-cols-1 gap-[18px] sm:grid-cols-2">
-            {pains.map((p) => (
-              <div
-                key={p.text}
-                className="flex items-start gap-[14px] rounded-[18px] bg-white p-[22px_18px] text-left shadow-[0_10px_30px_-14px_rgb(27_42_65/0.18)]"
-              >
-                <span
-                  className={`flex h-[42px] w-[42px] shrink-0 items-center justify-center rounded-full text-lg ${p.bg}`}
-                >
-                  {p.icon}
-                </span>
-                <p className="text-[15px] font-bold">{p.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </Section>
-
-      {/* PRA QUEM É */}
-      <Section bg="bg-cream">
-        <div className="reveal">
-          <H2>
-            Esse guia é <span className="text-solar">pra você</span> que...
-          </H2>
-          <div className="mx-auto grid max-w-[640px] grid-cols-1 gap-4 text-left sm:grid-cols-2">
-            {who.map((w) => (
-              <div key={w} className="flex items-start gap-[11px] text-[15px] font-bold">
-                <Check />
-                {w}
-              </div>
-            ))}
-          </div>
-        </div>
-      </Section>
-
-      {/* PRÓS E CONTRAS */}
-      <Section bg="bg-white" className="!max-w-none">
-        <div className="reveal mx-auto max-w-[800px]">
-          <div className="mx-auto mb-9 max-w-[620px] text-center">
-            <h2 className="font-display mb-4 text-[clamp(26px,4vw,36px)] leading-[1.1] font-extrabold text-navy">
-              <span className="text-solar">Você não precisa ser especialista</span>{" "}
-              nem ter uma fortuna.
-              <br />
-              Aprenda como montar seu próprio sistema de energia off-grid.
-            </h2>
-            <p className="mx-auto max-w-[590px] text-[clamp(16px,2.4vw,20px)] font-extrabold leading-[1.4] text-navy">
-              <span className="text-solar">Não importa se você está começando agora</span>{" "}
-              ou já entende do assunto: este é um plano prático e passo a passo,
-              feito para você aprender e colocar em prática.
-            </p>
-          </div>
-
-          <div className="mx-auto grid max-w-[620px] grid-cols-1 gap-5 text-left sm:grid-cols-2">
-            <img src={fotoAntesDepois} alt="Contraste entre uma casa durante apagão e a mesma casa com autonomia solar" width={1200} height={800} loading="lazy" className="aspect-[3/2] w-full rounded-[22px] object-cover shadow-[0_18px_40px_-18px_rgb(27_42_65/0.32)] sm:col-span-2" />
-            <div className="overflow-hidden rounded-[22px] bg-cream shadow-[0_10px_30px_-14px_rgb(27_42_65/0.18)]">
-              <div className="p-[26px_22px]">
-                <h3 className="mb-5 text-sm font-bold tracking-[0.06em] text-ink-soft uppercase">
-                  Contras
-                </h3>
-                <ul className="grid gap-[13px]">
-                  {before.map((b) => (
-                    <li key={b} className="flex items-start gap-2 text-[14.5px] font-bold text-ink-soft">
-                      <span className="mt-[-1px] text-base text-[#D95C4F]">✕</span>
-                      <span>{b}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            <div className="overflow-hidden rounded-[22px] bg-mint shadow-[0_10px_30px_-14px_rgb(27_42_65/0.18)]">
-              <div className="p-[26px_22px]">
-                <h3 className="mb-3 text-[clamp(20px,3vw,25px)] leading-tight font-extrabold text-navy">
-                  Imagine ter segurança para produzir sua própria energia.
-                </h3>
-                <p className="mb-5 text-[14px] font-semibold leading-[1.4] text-ink-soft">
-                  Com o conhecimento certo, você pode:
-                </p>
-                <ul className="grid gap-[13px]">
-                  {after.map((a) => (
-                    <li key={a} className="flex items-start gap-2 text-[14.5px] font-bold text-ink">
-                      <span className="mt-[-1px] text-base text-leaf">✓</span>
-                      <span>{a}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Section>
-
-      {/* O QUE É */}
-      <Section bg="bg-mint" className="!max-w-none">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-[0.14] blur-[2px]"
-          style={{ backgroundImage: `url(${solarBg.url})` }}
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-mint/80 via-mint/60 to-mint/90"
-        />
-        <div className="reveal relative mx-auto max-w-[800px]">
-          <H2>
-            O que é o <span className="text-solar">Guia Solar com Baterias</span>?
-          </H2>
-          <p className="mx-auto mb-[30px] max-w-[640px] text-[16.5px] font-semibold text-ink-soft">
-            O Guia Solar com Baterias não é só mais um PDF sobre energia solar
-            — é o mesmo conteúdo completo entregue em dois formatos, pra você
-            escolher o jeito que combina com você. No primeiro, você recebe um
-            material digital completo, com passo a passo ilustrado, trazendo
-            mais de 120 projetos práticos para instalar, configurar e manter um
-            sistema de energia solar com baterias — do zero até funcionando. No
-            segundo, você recebe o passo a passo em vídeo, com videoaulas do
-            básico ao avançado, como se alguém estivesse te guiando pela mão,
-            aula por aula. De um jeito ou de outro, você sai sabendo resolver
-            sozinho: sem depender de técnico, sem comprar equipamento errado,
-            sem gastar mais do que precisa.
+          <H2>Quer energia solar com baterias, mas não sabe por onde começar?</H2>
+          <p className="mx-auto max-w-[620px] text-[17px] leading-relaxed font-semibold text-ink-soft">
+            Escolher painéis, baterias e inversor sem entender o consumo e as conexões pode levar à
+            compra de equipamentos que não combinam com seu projeto. Antes de comprar, entenda o que
+            seu sistema precisa.
           </p>
-          <span className="mb-8 inline-flex items-center gap-2 rounded-full bg-mint-icon px-[18px] py-[9px] text-sm font-extrabold text-leaf">
-            ✓ Guia alinhado às normas técnicas
-          </span>
-        </div>
-
-
-        {/* marquee */}
-        <div className="reveal mt-8 overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)]">
-          <div className="animate-marquee flex w-max gap-4 hover:[animation-play-state:paused]">
-            {[...innerPages, ...innerPages].map((p, i) => (
-              <div
-                key={i}
-                className="flex aspect-[3/4] w-[180px] shrink-0 flex-col justify-between rounded-[18px] border border-ink/8 bg-white p-4 text-left shadow-[0_10px_30px_-14px_rgb(27_42_65/0.18)]"
-              >
-                <div>
-                  <span className="text-[10px] font-extrabold tracking-[0.08em] text-solar-deep uppercase">
-                    Guia Solar
-                  </span>
-                  <p className="font-display mt-1 text-[15px] leading-tight font-bold text-navy">
-                    {p.title}
-                  </p>
-                </div>
-                <div className="flex items-center justify-center overflow-hidden rounded-[12px] bg-mint-icon/60 p-2">
-                  <img
-                    src={p.img}
-                    alt={p.title}
-                    loading="lazy"
-                    className="h-20 w-20 rounded-[10px] object-cover"
-                  />
-                </div>
-                <p className="text-[11px] font-bold text-ink-soft">{p.sub}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="reveal mx-auto mt-8 grid max-w-[640px] grid-cols-1 gap-[13px] px-6 text-left sm:grid-cols-2">
-          {categories.map((c) => (
-            <div
-              key={c.label}
-              className="flex items-center gap-[11px] rounded-full bg-white px-[18px] py-3 text-[14.5px] font-extrabold shadow-[0_10px_30px_-14px_rgb(27_42_65/0.18)]"
-            >
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full bg-mint-icon ring-2 ring-white">
-                <img
-                  src={c.img}
-                  alt={c.label}
-                  loading="lazy"
-                  width={512}
-                  height={512}
-                  className="h-full w-full object-cover"
-                />
-              </span>
-
-              {c.label}
-            </div>
-          ))}
         </div>
       </Section>
 
-      {/* PILARES */}
+      {/* SOLUÇÃO / MECANISMO */}
       <Section bg="bg-cream">
         <div className="reveal">
-          <H2>
-            Instalar. Configurar. <span className="text-solar">Manter.</span>
-          </H2>
+          <H2>Planeje antes de comprar. Aprenda passo a passo.</H2>
+          <p className="mx-auto mb-7 max-w-[620px] text-[16.5px] leading-relaxed font-semibold text-ink-soft">
+            O guia reúne cálculos simplificados, diagramas e projetos para ajudar no planejamento de
+            um sistema off-grid com baterias. O caminho está dividido em três etapas:
+          </p>
           <div className="mx-auto grid max-w-[620px] gap-[15px] text-left">
             {pillars.map((p) => (
               <div
                 key={p.n}
-                className="flex items-start gap-4 rounded-[18px] bg-white p-[18px_20px] shadow-[0_10px_30px_-14px_rgb(27_42_65/0.18)]"
+                className="flex items-start gap-4 rounded-[18px] bg-white p-[18px_20px]"
               >
                 <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-solar text-sm font-extrabold text-white">
                   {p.n}
                 </span>
                 <div>
-                  <h4 className="font-display mb-[3px] text-[15.5px] font-bold">{p.title}</h4>
-                  <p className="text-[13.5px] font-semibold text-ink-soft">{p.text}</p>
+                  <h3 className="font-display mb-1 text-[16px] font-bold">{p.title}</h3>
+                  <p className="text-[14px] font-semibold text-ink-soft">{p.text}</p>
                 </div>
               </div>
             ))}
           </div>
-          <div className="mx-auto mt-7 max-w-[620px] rounded-2xl bg-peach-icon p-[18px_22px] text-[13.5px] font-bold text-solar-deep">
-            Assim, você não recebe só um material digital: recebe um passo a passo com
-            intenção prática, do básico ao avançado.
-          </div>
+          <p className="mx-auto mt-6 max-w-[620px] text-sm leading-relaxed text-ink-soft">
+            Material educacional para planejamento e dimensionamento preliminar. Instalações
+            elétricas devem seguir as normas e contar com profissionais qualificados quando
+            necessário.
+          </p>
         </div>
       </Section>
 
-      {/* O QUE VOCÊ VAI RECEBER */}
+      {/* O QUE É / O QUE RECEBE */}
       <div id="receber" className="scroll-mt-4" />
       <Section bg="bg-white">
         <div className="reveal">
-          <H2>O que você vai receber</H2>
-
-          <div className="mx-auto mb-8 max-w-[620px] rounded-[24px] bg-cream p-[26px_22px] shadow-[0_10px_30px_-14px_rgb(27_42_65/0.18)]">
-            <span className="mb-5 inline-flex items-center rounded-full bg-peach-icon px-[14px] py-[6px] text-xs font-extrabold tracking-[0.06em] text-solar-deep uppercase">
-              Material Digital Completo
-            </span>
-            <img
-              src={produtoPdf.url}
-              alt="Guia Solar com Baterias em material digital completo"
-              width={1536}
-              height={1024}
-              loading="lazy"
-              className="mx-auto mb-7 w-full max-w-[300px]"
-            />
-            <div className="mx-auto grid max-w-[580px] grid-cols-1 gap-[13px] text-left sm:grid-cols-2">
-              {receive.map((r) => (
-                <div key={r} className="flex items-start gap-[10px] text-[14.5px] font-bold">
-                  <Check />
-                  {r}
-                </div>
-              ))}
+          <H2>O que é o Guia Solar com Baterias?</H2>
+          <p className="mx-auto mb-7 max-w-[620px] text-[16.5px] leading-relaxed font-semibold text-ink-soft">
+            É um material 100% digital sobre energia solar com baterias. Não é um kit de
+            equipamentos nem um serviço de instalação. Escolha o guia digital ou a oferta completa
+            com videoaulas e bônus.
+          </p>
+          <img
+            src={produtoPdf.url}
+            alt="Mockup do guia digital Solar com Baterias"
+            width={1536}
+            height={1024}
+            loading="lazy"
+            className="mx-auto mb-7 w-full max-w-[300px]"
+          />
+          <div className="mx-auto grid max-w-[620px] gap-4 text-left sm:grid-cols-2">
+            <div className="rounded-2xl bg-cream p-6">
+              <h3 className="font-display mb-4 text-lg font-bold">No guia digital</h3>
+              <ul className="grid gap-3">
+                {receive.slice(0, 5).map((item) => (
+                  <li key={item} className="flex items-start gap-2 text-sm font-semibold">
+                    <Check />
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
-
-          <div className="mx-auto max-w-[620px] rounded-[24px] bg-cream p-[26px_22px] shadow-[0_10px_30px_-14px_rgb(27_42_65/0.18)]">
-            <span className="mb-5 inline-flex items-center rounded-full bg-mint-icon px-[14px] py-[6px] text-xs font-extrabold tracking-[0.06em] text-leaf uppercase">
-              Videoaulas
-            </span>
-            <img
-              src={produto.url}
-              alt="Guia Solar com Baterias em videoaulas"
-              width={1370}
-              height={1031}
-              loading="lazy"
-              className="mx-auto mb-7 w-full max-w-[300px]"
-            />
-            <div className="mx-auto grid max-w-[580px] grid-cols-1 gap-[13px] text-left sm:grid-cols-2">
-              {receiveVideo.map((r) => (
-                <div key={r} className="flex items-start gap-[10px] text-[14.5px] font-bold">
-                  <Check />
-                  {r}
-                </div>
-              ))}
+            <div className="rounded-2xl bg-mint p-6">
+              <h3 className="font-display mb-4 text-lg font-bold">Na oferta completa</h3>
+              <p className="mb-3 text-sm font-semibold">
+                Guia digital + videoaulas passo a passo + estes 5 bônus:
+              </p>
+              <ul className="grid gap-3">
+                {bonuses.map((bonus) => (
+                  <li key={bonus.n} className="flex items-start gap-2 text-sm font-semibold">
+                    <Check />
+                    {bonus.title}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
-
       </Section>
 
-      {/* BÔNUS */}
-      <Section bg="bg-mint" className="!max-w-none">
-        <div className="reveal mx-auto max-w-[800px]">
-          <H2>
-            Você ainda ganha <span className="text-solar">5 Super Bônus</span>:
-          </H2>
-        </div>
-        <div className="reveal mb-9">
-          <BonusMarquee size={190} />
-        </div>
-
-        <div className="reveal mx-auto grid max-w-[620px] gap-[13px] px-6 text-left">
-          {bonuses.map((b) => (
-            <div
-              key={b.n}
-              className="grid grid-cols-[auto_1fr_auto] items-center gap-4 rounded-2xl bg-white p-[16px_20px] shadow-[0_10px_30px_-14px_rgb(27_42_65/0.18)]"
-            >
-              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-mint-icon text-[13.5px] font-extrabold text-leaf">
-                {b.n}
-              </span>
-              <div>
-                <h4 className="mb-[2px] text-[15px] font-bold">{b.title}</h4>
-                <p className="text-[12.5px] font-semibold text-ink-soft">{b.text}</p>
-              </div>
-              <span className="rounded-full bg-mint-icon px-[14px] py-[6px] text-[12.5px] font-extrabold whitespace-nowrap text-leaf">
-                BÔNUS
-              </span>
-            </div>
-          ))}
-        </div>
-        <div className="reveal mx-auto mt-6 max-w-[620px] rounded-2xl bg-solar p-[18px] text-[15px] font-extrabold text-white">
-          Somente hoje, você leva todos os bônus de graça!
-        </div>
-      </Section>
+      {/* PROVA SOCIAL: imagens fornecidas e aprovadas pelo proprietário */}
+      <SocialProofSection />
 
       {/* COUNTDOWN */}
       <div className="bg-navy py-6 text-center">
@@ -749,19 +438,19 @@ const [modalOpen, setModalOpen] = useState(false);
                 className="mx-auto mb-3 w-full max-w-[150px]"
               />
               <h3 className="font-display mb-1 text-lg font-bold">Oferta Simples</h3>
-              <p className="mb-[18px] text-[12.5px] font-bold text-ink-soft">
-                Ideal para começar
-              </p>
+              <p className="mb-[18px] text-[12.5px] font-bold text-ink-soft">Ideal para começar</p>
               <p className="font-display mb-5 text-[31px] font-extrabold">R$19,90</p>
               <ul className="mb-[22px] grid flex-1 gap-[9px]">
-                {["Guia Solar com Baterias", "Acesso ao produto principal", "Garantia de 30 dias"].map(
-                  (f) => (
-                    <li key={f} className="flex gap-2 text-[13.5px] font-bold">
-                      <LeafBullet />
-                      {f}
-                    </li>
-                  ),
-                )}
+                {[
+                  "Guia Solar com Baterias",
+                  "Acesso ao produto principal",
+                  "Garantia de 30 dias",
+                ].map((f) => (
+                  <li key={f} className="flex gap-2 text-[13.5px] font-bold">
+                    <LeafBullet />
+                    {f}
+                  </li>
+                ))}
               </ul>
               <button
                 onClick={() => setModalOpen(true)}
@@ -786,12 +475,8 @@ const [modalOpen, setModalOpen] = useState(false);
                 Guia + Videoaulas + 5 Super Bônus
               </p>
               <p className="mb-5">
-                <span className="mr-[7px] text-sm text-ink-soft line-through">
-                  de R$297
-                </span>
-                <span className="font-display text-[31px] font-extrabold text-leaf">
-                  R$47,90
-                </span>
+                <span className="mr-[7px] text-sm text-ink-soft line-through">de R$297</span>
+                <span className="font-display text-[31px] font-extrabold text-leaf">R$47,90</span>
               </p>
               <ul className="mb-[22px] grid flex-1 gap-[9px]">
                 {[
@@ -824,9 +509,6 @@ const [modalOpen, setModalOpen] = useState(false);
         </div>
       </Section>
 
-      {/* PROVA SOCIAL */}
-      <SocialProofSection />
-
       {/* GARANTIA */}
       <Section bg="bg-mint">
         <div className="reveal">
@@ -840,35 +522,19 @@ const [modalOpen, setModalOpen] = useState(false);
             className="animate-floaty mx-auto mb-6 w-[190px] drop-shadow-[0_22px_30px_rgb(27_42_65/0.28)]"
           />
           <p className="font-display mx-auto max-w-[760px] text-[clamp(22px,3.4vw,34px)] leading-[1.3] font-extrabold text-ink">
-            Se no prazo de <span className="text-leaf">30 dias</span> você optar
-            por não continuar, devolvemos{" "}
-            <span className="text-leaf">100% do valor pago</span>.
+            Se no prazo de <span className="text-leaf">30 dias</span> você optar por não continuar,
+            devolvemos <span className="text-leaf">100% do valor pago</span>.
           </p>
           <p className="mx-auto mt-4 max-w-[560px] text-[17px] font-bold text-ink-soft">
             Assumimos o compromisso com a sua satisfação — o risco é todo nosso.
           </p>
 
           <p className="mx-auto mt-6 max-w-[580px] text-xs font-semibold text-ink-soft opacity-80">
-            Aviso de segurança: este material tem finalidade educacional e
-            auxilia no planejamento e dimensionamento preliminar. As
-            instalações elétricas devem seguir as normas regulamentares e,
-            quando necessário, ser executadas ou revisadas por profissionais
+            Aviso de segurança: este material tem finalidade educacional e auxilia no planejamento e
+            dimensionamento preliminar. As instalações elétricas devem seguir as normas
+            regulamentares e, quando necessário, ser executadas ou revisadas por profissionais
             qualificados.
           </p>
-        </div>
-      </Section>
-
-      {/* CTA ANTES DO FAQ */}
-      <Section bg="bg-white" className="!py-[44px]">
-        <div className="reveal">
-          <BtnPrimary
-            green
-            pulse
-            href="https://app.mivvo.com.br/checkout/01a09d50-91ac-7bd0-9016-3ea608924d08"
-            className="w-full max-w-[560px]"
-          >
-            QUERO O GUIA SOLAR COM BATERIAS!
-          </BtnPrimary>
         </div>
       </Section>
 
@@ -894,14 +560,28 @@ const [modalOpen, setModalOpen] = useState(false);
         </div>
       </Section>
 
+      {/* CTA FINAL */}
+      <Section bg="bg-white" padding="py-[44px]">
+        <div className="reveal">
+          <BtnPrimary
+            green
+            pulse
+            href="https://app.mivvo.com.br/checkout/01a09d50-91ac-7bd0-9016-3ea608924d08"
+            className="w-full max-w-[560px]"
+          >
+            QUERO O GUIA SOLAR COM BATERIAS!
+          </BtnPrimary>
+        </div>
+      </Section>
+
       {/* FOOTER */}
       <footer className="bg-white py-9 text-center text-[13px] font-bold text-ink-soft">
         <p className="font-display mb-[7px] text-[16.5px] font-extrabold text-ink">
           GUIA SOLAR <span className="text-solar">COM BATERIAS</span>
         </p>
         <p className="mx-auto mb-2 max-w-[420px]">
-          O guia prático para instalar, configurar e manter sistemas de energia
-          solar independentes na sua casa.
+          O guia prático para instalar, configurar e manter sistemas de energia solar independentes
+          na sua casa.
         </p>
         <p>© 2026 Guia Solar com Baterias. Todos os direitos reservados.</p>
       </footer>
@@ -926,12 +606,10 @@ const [modalOpen, setModalOpen] = useState(false);
             <span className="animate-soft-pulse mb-[14px] inline-block rounded-full bg-leaf px-[14px] py-[6px] text-xs font-extrabold text-white">
               OFERTA ÚNICA
             </span>
-            <h3 className="font-display mb-[10px] text-[22px] font-bold">
-              Espera! 🙌
-            </h3>
+            <h3 className="font-display mb-[10px] text-[22px] font-bold">Espera! 🙌</h3>
             <p className="animate-soft-pulse font-display mb-5 text-[clamp(20px,5.2vw,28px)] leading-[1.25] font-extrabold text-ink">
-              Por apenas mais <span className="text-leaf">R$7,10</span> você
-              leva o guia completo + 2 bônus exclusivos
+              Por apenas mais <span className="text-leaf">R$7,10</span> você leva o guia completo +
+              2 bônus exclusivos
             </p>
             <img
               src={produto.url}
@@ -941,9 +619,7 @@ const [modalOpen, setModalOpen] = useState(false);
               loading="lazy"
               className="mx-auto mb-4 w-full max-w-[180px]"
             />
-            <p className="font-display mb-[18px] text-[30px] font-extrabold text-leaf">
-              R$27,00
-            </p>
+            <p className="font-display mb-[18px] text-[30px] font-extrabold text-leaf">R$27,00</p>
             <ul className="mb-6 grid gap-[9px] text-left text-[13.5px] font-bold">
               {[
                 "Videoaulas passo a passo",
