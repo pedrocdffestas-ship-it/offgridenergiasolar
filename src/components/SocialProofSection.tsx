@@ -1,3 +1,4 @@
+import { useCallback, useEffect, useRef, useState } from "react";
 import alunoBaterias from "@/assets/prova-baterias";
 import grupoSolar from "@/assets/prova-grupo";
 import alunoPainel from "@/assets/prova-painel";
@@ -49,55 +50,114 @@ const testimonialPrints: ProofImage[] = [
   },
 ];
 
+interface ProofCarouselProps {
+  images: ProofImage[];
+  labelPrefix: string;
+}
+
+/** Horizontal snap carousel with side arrows; scrolls one card per click. */
+function ProofCarousel({ images, labelPrefix }: ProofCarouselProps) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [canPrev, setCanPrev] = useState(false);
+  const [canNext, setCanNext] = useState(true);
+
+  const updateArrows = useCallback(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    setCanPrev(el.scrollLeft > 4);
+    setCanNext(el.scrollLeft < el.scrollWidth - el.clientWidth - 4);
+  }, []);
+
+  useEffect(() => {
+    updateArrows();
+    const el = trackRef.current;
+    if (!el) return;
+    el.addEventListener("scroll", updateArrows, { passive: true });
+    window.addEventListener("resize", updateArrows);
+    return () => {
+      el.removeEventListener("scroll", updateArrows);
+      window.removeEventListener("resize", updateArrows);
+    };
+  }, [updateArrows]);
+
+  const scrollByCard = (dir: 1 | -1) => {
+    const el = trackRef.current;
+    if (!el) return;
+    const card = el.querySelector<HTMLElement>("[data-card]");
+    const step = card ? card.offsetWidth + 24 : el.clientWidth * 0.8;
+    el.scrollBy({ left: dir * step, behavior: "smooth" });
+  };
+
+  const arrowBase =
+    "grid h-11 w-11 shrink-0 place-items-center rounded-full text-xl font-bold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2";
+
+  return (
+    <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 sm:gap-3">
+      <button
+        type="button"
+        onClick={() => scrollByCard(-1)}
+        disabled={!canPrev}
+        aria-label={`Imagem anterior — ${labelPrefix}`}
+        className={`${arrowBase} bg-solar text-white shadow-[0_4px_14px_rgb(245_130_32/0.35)] enabled:hover:opacity-85 disabled:opacity-30`}
+      >
+        ‹
+      </button>
+
+      <div
+        ref={trackRef}
+        className="flex min-w-0 snap-x snap-mandatory gap-6 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {images.map((image) => (
+          <figure
+            key={image.src}
+            data-card
+            className="w-[86%] shrink-0 snap-center overflow-hidden rounded-2xl bg-white/10 p-2 sm:w-[46%]"
+          >
+            <img
+              src={image.src}
+              alt={image.alt}
+              loading="lazy"
+              width={image.width}
+              height={image.height}
+              className="mx-auto h-auto max-h-[70vh] w-auto max-w-full rounded-xl"
+            />
+          </figure>
+        ))}
+      </div>
+
+      <button
+        type="button"
+        onClick={() => scrollByCard(1)}
+        disabled={!canNext}
+        aria-label={`Próxima imagem — ${labelPrefix}`}
+        className={`${arrowBase} bg-solar text-white shadow-[0_4px_14px_rgb(245_130_32/0.35)] enabled:hover:opacity-85 disabled:opacity-30`}
+      >
+        ›
+      </button>
+    </div>
+  );
+}
+
 export default function SocialProofSection() {
   if (approvedProofImages.length === 0) return null;
 
   return (
     <section className="bg-navy py-12 text-white" aria-labelledby="proof-title">
-      <div className="mx-auto max-w-[900px] px-6 text-center">
+      <div className="mx-auto max-w-[900px] px-4 text-center sm:px-6">
         <h2
           id="proof-title"
           className="font-display mb-8 text-[clamp(26px,4vw,36px)] leading-tight font-bold"
         >
           Instalações na prática
         </h2>
-        <div className="grid items-start gap-6 sm:grid-cols-2">
-          {approvedProofImages.slice(0, 3).map((image) => (
-            <figure key={image.src} className="overflow-hidden rounded-2xl bg-white/10 p-2">
-              <img
-                src={image.src}
-                alt={image.alt}
-                loading="lazy"
-                width={image.width}
-                height={image.height}
-                className="h-auto w-full rounded-xl"
-              />
-            </figure>
-          ))}
-        </div>
+        <ProofCarousel images={approvedProofImages} labelPrefix="instalações" />
 
         {testimonialPrints.length > 0 && (
           <>
             <h3 className="font-display mt-12 mb-8 text-[clamp(20px,3vw,26px)] leading-tight font-bold">
-              Prints de quem já comprou
+              Grupo exclusivo
             </h3>
-            <div className="grid items-start gap-6 sm:grid-cols-2">
-              {testimonialPrints.map((image) => (
-                <figure
-                  key={image.src}
-                  className="overflow-hidden rounded-2xl bg-white/10 p-2"
-                >
-                  <img
-                    src={image.src}
-                    alt={image.alt}
-                    loading="lazy"
-                    width={image.width}
-                    height={image.height}
-                    className="h-auto w-full rounded-xl"
-                  />
-                </figure>
-              ))}
-            </div>
+            <ProofCarousel images={testimonialPrints} labelPrefix="depoimentos" />
           </>
         )}
       </div>
