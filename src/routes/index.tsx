@@ -268,11 +268,8 @@ function Index() {
         <Glow className="top-64 -right-24 h-72 w-72 bg-leaf" />
         <div className="relative mx-auto max-w-[800px] px-6 text-center">
           <h1 className="font-display mx-auto mb-[14px] max-w-[600px] text-[clamp(24px,3.6vw,32px)] leading-[1.15] font-extrabold text-navy">
-            <span className="inline-block rounded-[14px] bg-solar px-[10px] py-[2px] text-white shadow-[0_4px_14px_rgb(245_130_32/0.35)]">
-              +120 Projetos
-            </span>
-            : Aprenda a Gerar sua Própria Energia Solar com Baterias na Sua Casa, Agora, e
-            Dimensione seu Sistema Off-Grid Antes de Comprar os Equipamentos
+            Chega de depender da concessionária. Este guia de energia solar off-grid ensina, do
+            básico ao avançado, como produzir a sua própria energia gastando pouco.
           </h1>
           <p className="font-display mx-auto mb-[30px] max-w-[600px] text-[clamp(15px,2.2vw,19px)] leading-[1.4] font-extrabold text-navy">
             Do básico ao avançado, entenda como calcular, escolher e planejar seu sistema para casa,
