@@ -26,14 +26,14 @@ const testimonialPrints: ProofImage[] = [
   {
     src: provaDiego.url,
     alt: "Depoimento de cliente sobre o Guia Solar com Baterias",
-    width: 1080,
-    height: 2340,
+    width: 941,
+    height: 1672,
   },
   {
     src: provaCarlos.url,
     alt: "Depoimento de cliente sobre o Guia Solar com Baterias",
-    width: 1080,
-    height: 1478,
+    width: 1086,
+    height: 1448,
   },
   {
     src: provaPrint1.url,
