@@ -1,12 +1,19 @@
+import alunoBaterias from "@/assets/prova-baterias";
+import grupoSolar from "@/assets/prova-grupo";
+import alunoPainel from "@/assets/prova-painel";
+
 /** Add only owner-supplied images whose use and content have been checked. */
 interface ProofImage {
   src: string;
   alt: string;
 }
 
-// No old video testimonials or unverified screenshots are retained.
-// The section stays hidden on the public page until approved images are supplied.
-const approvedProofImages: ProofImage[] = [];
+// Installation photos supplied by the owner; no written testimonials or names.
+const approvedProofImages: ProofImage[] = [
+  { src: alunoBaterias, alt: "Instalação de sistema solar com banco de baterias" },
+  { src: alunoPainel, alt: "Instalação de painel solar no telhado" },
+  { src: grupoSolar, alt: "Print do grupo de energia solar, com dados pessoais ocultos" },
+];
 
 export default function SocialProofSection() {
   if (approvedProofImages.length === 0) return null;
@@ -18,16 +25,18 @@ export default function SocialProofSection() {
           id="proof-title"
           className="font-display mb-8 text-[clamp(26px,4vw,36px)] leading-tight font-bold"
         >
-          Mensagens de quem já conhece o guia
+          Instalações na prática
         </h2>
         <div className="grid items-start gap-6 sm:grid-cols-2">
           {approvedProofImages.slice(0, 3).map((image) => (
-            <figure key={image.src} className="overflow-hidden rounded-xl bg-white p-3">
+            <figure key={image.src} className="overflow-hidden rounded-2xl bg-white/10 p-2">
               <img
                 src={image.src}
                 alt={image.alt}
                 loading="lazy"
-                className="h-auto w-full rounded-md"
+                width={image.src === grupoSolar ? 474 : 1086}
+                height={image.src === grupoSolar ? 589 : 1448}
+                className="h-auto w-full rounded-xl"
               />
             </figure>
           ))}
