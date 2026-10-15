@@ -268,9 +268,13 @@ function Index() {
         <Glow className="top-64 -right-24 h-72 w-72 bg-leaf" />
         <div className="relative mx-auto max-w-[800px] px-6 text-center">
           <h1 className="font-display mx-auto mb-[14px] max-w-[600px] text-[clamp(24px,3.6vw,32px)] leading-[1.15] font-extrabold text-navy">
-            <span className="text-solar-deep">Chega de depender da concessionária.</span> Este guia
-            de energia solar off-grid ensina, do básico ao avançado, como produzir a sua própria
-            energia gastando pouco.
+            <span className="mb-2 block leading-[1.45]">
+              <span className="box-decoration-clone rounded-md bg-solar-deep px-2 py-0.5 text-white">
+                Chega de depender da concessionária.
+              </span>
+            </span>
+            Este guia de energia solar off-grid ensina, do básico ao avançado, como produzir a sua
+            própria energia gastando pouco.
           </h1>
           <p className="font-display mx-auto mb-[30px] max-w-[600px] text-[clamp(15px,2.2vw,19px)] leading-[1.4] font-extrabold text-navy">
             Entenda como calcular, escolher e planejar seu sistema para casa, comércio, barco ou
