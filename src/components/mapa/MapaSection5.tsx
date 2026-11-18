@@ -30,7 +30,7 @@ export function MapaSection5() {
             src={mapaAssets[22].url}
             width={1952}
             height={1280}
-            alt="Apostila do Mapa do Crist\u00e3o aberta, com as p\u00e1ginas-mapa dos livros da B\u00edblia"
+            alt="Apostila do Mapa do Cristão aberta, com as páginas-mapa dos livros da Bíblia"
           />
         </figure>
         <figure className="real-img">
@@ -38,7 +38,7 @@ export function MapaSection5() {
             src={mapaAssets[23].url}
             width={1696}
             height={1472}
-            alt="P\u00e1gina-mapa do livro de G\u00eanesis do Mapa do Crist\u00e3o"
+            alt="Página-mapa do livro de Gênesis do Mapa do Cristão"
           />
         </figure>
         <div className="mech-text">
