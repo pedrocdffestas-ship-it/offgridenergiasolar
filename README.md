@@ -1,36 +1,9 @@
-# Pixel Perfect Replication
+# Mapa do Cristão
 
-Implement exactly the screenshot and nothing else
+Página de vendas baseada no HTML fornecido pelo proprietário, no mesmo projeto Lovable.
 
-This project was built with [Lovable](https://lovable.dev).
+Os textos e imagens do material enviado foram preservados. A compra é demonstrativa: o HTML não fornece um endereço de checkout.
 
-**Live app**: https://offgridenergiasolar.lovable.app
+## Desenvolvimento
 
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/ba2f1258-81ba-4f95-9f4a-c29a9f1d643e).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
-
-
-## Referência do projeto para manutenção
-
-- Repositório GitHub canônico: https://github.com/pedrocdffestas-ship-it/offgridenergiasolar
-- Branch de trabalho: `main`
-- Arquivo principal da página de vendas: `src/routes/index.tsx`
-- Projeto Lovable associado: Pixel Perfect Replication (identificado pelo usuário).
-
-Usar esta referência para futuras alterações solicitadas pelo usuário; realizar mudanças pelo GitHub, não diretamente pelo editor do Lovable, salvo pedido explícito em contrário.
+Use `bun install` e `bun run dev`. A aplicação mantém TanStack Start e os materiais visuais usam ponteiros de ativos.

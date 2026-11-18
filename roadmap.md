@@ -1,5 +1,9 @@
 # Roadmap
 
+- [ ] Substituir integralmente a página off-grid pelo HTML do Mapa do Cristão (os dois arquivos enviados são iguais).
+- [ ] Remover conteúdo, imagens e rastreamentos exclusivos da página antiga.
+- [ ] Conferir imagens, carrosséis, FAQ e oferta em celular e computador.
+
 - [x] Reescrever a seção de dor cotidiana e substituir sua imagem.
 - [x] Atualizar os blocos antes/depois e adicionar imagem de contraste energético.
 - [x] Corrigir o player móvel e os nomes dos três depoimentos em vídeo.
