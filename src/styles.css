@@ -1038,6 +1038,15 @@ footer .f-brand {
   .hero-car {
     margin-top: 2px;
   }
+  section {
+    padding: 34px 0;
+  }
+  .mapa-inline-6 {
+    padding-bottom: 54px;
+  }
+  .pos-vsl {
+    padding-top: 54px;
+  }
   .sec-title {
     font-size: 1.8rem;
   }
