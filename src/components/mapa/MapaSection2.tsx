@@ -34,7 +34,7 @@ export function MapaSection2() {
                 src={mapaAssets[0].url}
                 width={1776}
                 height={1264}
-                alt="Capa do Mapa do Crist\u00e3o"
+                alt="Capa do Mapa do Cristão"
               />
             </figure>
             <figure className="hslide">
@@ -42,7 +42,7 @@ export function MapaSection2() {
                 src={mapaAssets[1].url}
                 width={1856}
                 height={1296}
-                alt="P\u00e1gina-mapa do Evangelho de Jo\u00e3o, do Mapa do Crist\u00e3o"
+                alt="Página-mapa do Evangelho de João, do Mapa do Cristão"
                 loading="lazy"
               />
             </figure>
@@ -51,7 +51,7 @@ export function MapaSection2() {
                 src={mapaAssets[2].url}
                 width={1776}
                 height={1264}
-                alt="P\u00e1gina-mapa do livro de G\u00eanesis, do Mapa do Crist\u00e3o"
+                alt="Página-mapa do livro de Gênesis, do Mapa do Cristão"
                 loading="lazy"
               />
             </figure>
@@ -60,7 +60,7 @@ export function MapaSection2() {
                 src={mapaAssets[3].url}
                 width={1776}
                 height={1264}
-                alt="Linha do Tempo do Antigo Testamento, do Mapa do Crist\u00e3o"
+                alt="Linha do Tempo do Antigo Testamento, do Mapa do Cristão"
                 loading="lazy"
               />
             </figure>
@@ -69,7 +69,7 @@ export function MapaSection2() {
                 src={mapaAssets[4].url}
                 width={1776}
                 height={1264}
-                alt="P\u00e1gina-mapa Cronologia de Jesus Cristo, do Mapa do Crist\u00e3o"
+                alt="Página-mapa Cronologia de Jesus Cristo, do Mapa do Cristão"
                 loading="lazy"
               />
             </figure>
@@ -78,7 +78,7 @@ export function MapaSection2() {
                 src={mapaAssets[5].url}
                 width={1696}
                 height={1472}
-                alt="Panorama B\u00edblico com a estrutura da B\u00edblia, do Mapa do Crist\u00e3o"
+                alt="Panorama Bíblico com a estrutura da Bíblia, do Mapa do Cristão"
                 loading="lazy"
               />
             </figure>
