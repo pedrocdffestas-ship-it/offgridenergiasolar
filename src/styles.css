@@ -1014,15 +1014,29 @@ footer .f-brand {
   font-size: 2.3rem;
 }
 @media (max-width: 759px) {
+  .hero {
+    padding: 8px 0 6px;
+  }
   .hero .brand {
-    padding-top: 12px;
+    padding: 6px 0 2px;
+    font-size: 1.08rem;
+    gap: 8px;
   }
   .hero h1 {
-    font-size: 1.6rem;
-    margin: 16px auto 14px;
+    font-size: 1.45rem;
+    line-height: 1.22;
+    letter-spacing: 0;
+    margin: 10px auto 10px;
+    color: #1e4f9e;
+    text-wrap: balance;
   }
   .hero .sub {
-    font-size: 0.98rem;
+    font-size: 0.95rem;
+    line-height: 1.45;
+    margin-bottom: 12px;
+  }
+  .hero-car {
+    margin-top: 2px;
   }
   .sec-title {
     font-size: 1.8rem;
@@ -1040,6 +1054,7 @@ footer .f-brand {
   }
   .topbar {
     font-size: 0.8rem;
+    padding: 6px 12px;
   }
 }
 *:focus-visible {
