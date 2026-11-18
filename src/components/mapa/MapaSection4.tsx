@@ -15,7 +15,7 @@ export function MapaSection4() {
               src={mapaAssets[6].url}
               width={1136}
               height={2016}
-              alt="Print de depoimento de cliente sobre o Mapa do Crist\u00e3o"
+              alt="Print de depoimento de cliente sobre o Mapa do Cristão"
               loading="lazy"
             />
           </figure>
@@ -24,7 +24,7 @@ export function MapaSection4() {
               src={mapaAssets[7].url}
               width={640}
               height={1137}
-              alt="Print de depoimento de cliente sobre o Mapa do Crist\u00e3o"
+              alt="Print de depoimento de cliente sobre o Mapa do Cristão"
               loading="lazy"
             />
           </figure>
@@ -33,7 +33,7 @@ export function MapaSection4() {
               src={mapaAssets[8].url}
               width={1136}
               height={2016}
-              alt="Print de depoimento de cliente sobre o Mapa do Crist\u00e3o"
+              alt="Print de depoimento de cliente sobre o Mapa do Cristão"
               loading="lazy"
             />
           </figure>
@@ -42,7 +42,7 @@ export function MapaSection4() {
               src={mapaAssets[9].url}
               width={640}
               height={1138}
-              alt="Print de depoimento de cliente sobre o Mapa do Crist\u00e3o"
+              alt="Print de depoimento de cliente sobre o Mapa do Cristão"
               loading="lazy"
             />
           </figure>
@@ -51,7 +51,7 @@ export function MapaSection4() {
               src={mapaAssets[10].url}
               width={1136}
               height={2016}
-              alt="Print de depoimento de cliente sobre o Mapa do Crist\u00e3o"
+              alt="Print de depoimento de cliente sobre o Mapa do Cristão"
               loading="lazy"
             />
           </figure>
@@ -60,7 +60,7 @@ export function MapaSection4() {
               src={mapaAssets[11].url}
               width={1136}
               height={2016}
-              alt="Print de depoimento de cliente sobre o Mapa do Crist\u00e3o"
+              alt="Print de depoimento de cliente sobre o Mapa do Cristão"
               loading="lazy"
             />
           </figure>
@@ -69,7 +69,7 @@ export function MapaSection4() {
               src={mapaAssets[12].url}
               width={640}
               height={1138}
-              alt="Print de depoimento de cliente sobre o Mapa do Crist\u00e3o"
+              alt="Print de depoimento de cliente sobre o Mapa do Cristão"
               loading="lazy"
             />
           </figure>
@@ -78,7 +78,7 @@ export function MapaSection4() {
               src={mapaAssets[13].url}
               width={1184}
               height={2096}
-              alt="Print de depoimento de cliente sobre o Mapa do Crist\u00e3o"
+              alt="Print de depoimento de cliente sobre o Mapa do Cristão"
               loading="lazy"
             />
           </figure>
@@ -87,7 +87,7 @@ export function MapaSection4() {
               src={mapaAssets[14].url}
               width={640}
               height={1137}
-              alt="Print de depoimento de cliente sobre o Mapa do Crist\u00e3o"
+              alt="Print de depoimento de cliente sobre o Mapa do Cristão"
               loading="lazy"
             />
           </figure>
@@ -96,7 +96,7 @@ export function MapaSection4() {
               src={mapaAssets[15].url}
               width={1184}
               height={2096}
-              alt="Print de depoimento de cliente sobre o Mapa do Crist\u00e3o"
+              alt="Print de depoimento de cliente sobre o Mapa do Cristão"
               loading="lazy"
             />
           </figure>
@@ -105,7 +105,7 @@ export function MapaSection4() {
               src={mapaAssets[16].url}
               width={1136}
               height={2016}
-              alt="Print de depoimento de cliente sobre o Mapa do Crist\u00e3o"
+              alt="Print de depoimento de cliente sobre o Mapa do Cristão"
               loading="lazy"
             />
           </figure>
@@ -114,7 +114,7 @@ export function MapaSection4() {
               src={mapaAssets[17].url}
               width={1136}
               height={2016}
-              alt="Print de depoimento de cliente sobre o Mapa do Crist\u00e3o"
+              alt="Print de depoimento de cliente sobre o Mapa do Cristão"
               loading="lazy"
             />
           </figure>
@@ -123,7 +123,7 @@ export function MapaSection4() {
               src={mapaAssets[18].url}
               width={1184}
               height={2096}
-              alt="Print de depoimento de cliente sobre o Mapa do Crist\u00e3o"
+              alt="Print de depoimento de cliente sobre o Mapa do Cristão"
               loading="lazy"
             />
           </figure>
@@ -132,7 +132,7 @@ export function MapaSection4() {
               src={mapaAssets[19].url}
               width={1184}
               height={2096}
-              alt="Print de depoimento de cliente sobre o Mapa do Crist\u00e3o"
+              alt="Print de depoimento de cliente sobre o Mapa do Cristão"
               loading="lazy"
             />
           </figure>
@@ -141,7 +141,7 @@ export function MapaSection4() {
               src={mapaAssets[20].url}
               width={1136}
               height={2016}
-              alt="Print de depoimento de cliente sobre o Mapa do Crist\u00e3o"
+              alt="Print de depoimento de cliente sobre o Mapa do Cristão"
               loading="lazy"
             />
           </figure>
@@ -150,7 +150,7 @@ export function MapaSection4() {
               src={mapaAssets[21].url}
               width={1136}
               height={2016}
-              alt="Print de depoimento de cliente sobre o Mapa do Crist\u00e3o"
+              alt="Print de depoimento de cliente sobre o Mapa do Cristão"
               loading="lazy"
             />
           </figure>
@@ -170,7 +170,7 @@ export function MapaSection4() {
             type="button"
             className="car-btn"
             id="carNext"
-            aria-label="Pr\u00f3ximos depoimentos"
+            aria-label="Próximos depoimentos"
           >
             →
           </Button>
