@@ -30,7 +30,7 @@ export function MapaSection9() {
             src={mapaAssets[22].url}
             width={1952}
             height={1280}
-            alt="Apostila do Mapa do Crist\u00e3o aberta, com as p\u00e1ginas-mapa dos livros da B\u00edblia"
+            alt="Apostila do Mapa do Cristão aberta, com as páginas-mapa dos livros da Bíblia"
           />
         </figure>
         <div className="offer-box">
