@@ -43,7 +43,7 @@ export function MapaSection8() {
             src={mapaAssets[26].url}
             width={1600}
             height={1600}
-            alt="Celular com o Evangelho do dia no grupo de Whatsapp do Mapa do Crist\u00e3o"
+            alt="Celular com o Evangelho do dia no grupo de Whatsapp do Mapa do Cristão"
           />
           <div>
             <h3>Evangelho no Whatsapp</h3>
@@ -60,7 +60,7 @@ export function MapaSection8() {
             src={mapaAssets[27].url}
             width={850}
             height={750}
-            alt="Di\u00e1rio da Ora\u00e7\u00e3o do Mapa do Crist\u00e3o, planner de leitura e ora\u00e7\u00e3o"
+            alt="Diário da Oração do Mapa do Cristão, planner de leitura e oração"
           />
           <div>
             <h3>Diário da Oração</h3>
