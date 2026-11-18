@@ -3,7 +3,7 @@ import { mapaAssets } from "./assets";
 
 export function MapaSection5() {
   return (
-    <section id="conhecer">
+    <section id="conhecer" className="pos-vsl">
       <div className="wrap">
         <div className="brand">
           <span className="b-icon">
