@@ -16,7 +16,7 @@ export function MapaSection6() {
             src={mapaAssets[23].url}
             width={1696}
             height={1472}
-            alt="P\u00e1gina-mapa do livro de G\u00eanesis, do Mapa do Crist\u00e3o"
+            alt="Página-mapa do livro de Gênesis, do Mapa do Cristão"
             loading="lazy"
           />
           <div>
@@ -107,7 +107,7 @@ export function MapaSection6() {
             src={mapaAssets[24].url}
             width={850}
             height={750}
-            alt="Linha do tempo com os eventos cronol\u00f3gicos da B\u00edblia, do Mapa do Crist\u00e3o"
+            alt="Linha do tempo com os eventos cronológicos da Bíblia, do Mapa do Cristão"
           />
           <div>
             <h3>Eventos Cronológicos</h3>
@@ -168,7 +168,7 @@ export function MapaSection6() {
             src={mapaAssets[5].url}
             width={1696}
             height={1472}
-            alt="Panorama com a estrutura da B\u00edblia, do Mapa do Crist\u00e3o"
+            alt="Panorama com a estrutura da Bíblia, do Mapa do Cristão"
           />
           <div>
             <h3>Panorama da Bíblia</h3>
@@ -243,7 +243,7 @@ export function MapaSection6() {
             src={mapaAssets[25].url}
             width={1696}
             height={1472}
-            alt="Plano de leitura da B\u00edblia em 365 dias, do Mapa do Crist\u00e3o"
+            alt="Plano de leitura da Bíblia em 365 dias, do Mapa do Cristão"
           />
           <div>
             <h3>Plano de Leitura</h3>
