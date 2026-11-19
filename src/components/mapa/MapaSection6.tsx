@@ -5,10 +5,10 @@ export function MapaSection6() {
   return (
     <section>
       <div className="wrap">
-        <h2 className="sec-title">O que você vai receber</h2>
-        <p className="sec-sub">
+        <p className="kicker">O que você vai receber</p>
+        <h2 className="sec-title">
           Simplificando sua jornada espiritual e fortalecendo sua conexão com Deus
-        </p>
+        </h2>
         <div className="mapa-inline-7"></div>
         <div className="feat-card">
           <img
