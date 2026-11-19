@@ -560,6 +560,38 @@ section {
 }
 
 /* ---------- Text testimonial cards ---------- */
+.proof-car {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  margin-top: 26px;
+  scrollbar-width: none;
+}
+.proof-car::-webkit-scrollbar {
+  display: none;
+}
+.proof-car .proof-card {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+  box-sizing: border-box;
+}
+.proof-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 14px;
+}
+.proof-dots i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--mapa-palette-24);
+  transition: background 0.3s;
+}
+.proof-dots i.on {
+  background: var(--blue);
+}
 .proof-grid {
   display: grid;
   gap: 14px;
