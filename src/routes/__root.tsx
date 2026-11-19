@@ -106,9 +106,15 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="pt-BR">
       <head>
         <HeadContent />
+        <script src="https://api.mivvo.com.br/tracking/utm.js" async />
       </head>
       <body>
         {children}
+        <script
+          src="https://mark2traker.lovable.app/mark2.js"
+          data-track="https://zfwxdiwxcwqjzwfhmkcf.supabase.co/functions/v1/track"
+          async
+        />
         <Scripts />
       </body>
     </html>
