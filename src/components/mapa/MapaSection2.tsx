@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { mapaAssets } from "./assets";
+import { ProofAvatar, PortraitDisclosure } from "./ProofAvatar";
 
 export function MapaSection2() {
   return (
@@ -102,10 +103,10 @@ export function MapaSection2() {
         </div>
         <div className="proof-strip">
           <div className="avatars" aria-hidden="true">
-            <span className="av mapa-inline-1">M</span>
-            <span className="av mapa-inline-2">J</span>
-            <span className="av mapa-inline-3">A</span>
-            <span className="av mapa-inline-4">R</span>
+            <ProofAvatar portrait="Mariana Lopes" />
+            <ProofAvatar portrait="José Marcos" />
+            <ProofAvatar portrait="Ana Paula" />
+            <ProofAvatar portrait="Roberto Lima" />
           </div>
           <div>
             <div className="stars" aria-hidden="true">
@@ -116,6 +117,7 @@ export function MapaSection2() {
             </div>
           </div>
         </div>
+        <PortraitDisclosure />
       </div>
     </header>
   );

@@ -3,7 +3,8 @@
 - [ ] Substituir integralmente a página off-grid pelo HTML do Mapa do Cristão (os dois arquivos enviados são iguais).
 - [ ] Remover conteúdo, imagens e rastreamentos exclusivos da página antiga.
 - [ ] Conferir imagens, carrosséis, FAQ e oferta em celular e computador.
-- [ ] Substituir iniciais por fotos autorizadas dos respectivos depoentes, respeitando o gênero (aguarda fotos/identificação).
+- [x] Substituir apenas as bolinhas da prova social por retratos ultrarrealistas gerados com IA, respeitando o gênero e identificando-os como ilustrativos.
+- Demais tarefas pausadas a pedido do usuário; não executar nesta etapa.
 
 - [x] Reescrever a seção de dor cotidiana e substituir sua imagem.
 - [x] Atualizar os blocos antes/depois e adicionar imagem de contraste energético.

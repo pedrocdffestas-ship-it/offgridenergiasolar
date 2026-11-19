@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { mapaAssets } from "./assets";
+import { ProofAvatar, PortraitDisclosure } from "./ProofAvatar";
 
 export function MapaSection10() {
   return (
@@ -16,7 +17,7 @@ export function MapaSection10() {
               tudo de forma clara e organizada. Agora, minha leitura tem muito mais sentido!
             </blockquote>
             <div className="who">
-              <span className="av mapa-inline-1">PR</span>
+              <ProofAvatar portrait="Priscila Rocha" />
               <span className="nm">Priscila Rocha</span>
             </div>
           </div>
@@ -29,7 +30,7 @@ export function MapaSection10() {
               Bíblia de maneira lógica. Meu estudo nunca foi tão proveitoso!
             </blockquote>
             <div className="who">
-              <span className="av mapa-inline-2">RS</span>
+              <ProofAvatar portrait="Ricardo Silva" />
               <span className="nm">Ricardo Silva</span>
             </div>
           </div>
@@ -42,7 +43,7 @@ export function MapaSection10() {
               abriu meus olhos para um estudo mais profundo e esclarecedor.
             </blockquote>
             <div className="who">
-              <span className="av mapa-inline-3">CS</span>
+              <ProofAvatar portrait="Camila Santos" />
               <span className="nm">Camila Santos</span>
             </div>
           </div>
@@ -55,7 +56,7 @@ export function MapaSection10() {
               me trouxe uma visão panorâmica que fez toda a diferença!
             </blockquote>
             <div className="who">
-              <span className="av mapa-inline-4">JM</span>
+              <ProofAvatar portrait="José Marcos" />
               <span className="nm">José Marcos</span>
             </div>
           </div>
@@ -68,7 +69,7 @@ export function MapaSection10() {
               contextos, as conexões e a mensagem central de cada livro.
             </blockquote>
             <div className="who">
-              <span className="av mapa-inline-1">FS</span>
+              <ProofAvatar portrait="Fernanda Silva" />
               <span className="nm">Fernanda Silva</span>
             </div>
           </div>
@@ -81,7 +82,7 @@ export function MapaSection10() {
               Mapa do Cristão foi a solução que eu precisava!
             </blockquote>
             <div className="who">
-              <span className="av mapa-inline-2">AP</span>
+              <ProofAvatar portrait="Ana Paula" />
               <span className="nm">Ana Paula</span>
             </div>
           </div>
@@ -94,7 +95,7 @@ export function MapaSection10() {
               melhor a Palavra de Deus e me sinto mais próximo d'Ele.
             </blockquote>
             <div className="who">
-              <span className="av mapa-inline-3">JB</span>
+              <ProofAvatar portrait="João Batista" />
               <span className="nm">João Batista</span>
             </div>
           </div>
@@ -107,7 +108,7 @@ export function MapaSection10() {
               simples e envolvente. Não estudo mais sem ele!
             </blockquote>
             <div className="who">
-              <span className="av mapa-inline-4">ML</span>
+              <ProofAvatar portrait="Mariana Lopes" />
               <span className="nm">Mariana Lopes</span>
             </div>
           </div>
@@ -120,7 +121,7 @@ export function MapaSection10() {
               estrutura de uma forma que nunca imaginei ser possível.
             </blockquote>
             <div className="who">
-              <span className="av mapa-inline-1">TC</span>
+              <ProofAvatar portrait="Thiago Costa" />
               <span className="nm">Thiago Costa</span>
             </div>
           </div>
@@ -133,11 +134,12 @@ export function MapaSection10() {
               um propósito e faz muito mais sentido para mim!
             </blockquote>
             <div className="who">
-              <span className="av mapa-inline-2">JR</span>
+              <ProofAvatar portrait="Juliana Ramos" />
               <span className="nm">Juliana Ramos</span>
             </div>
           </div>
         </div>
+        <PortraitDisclosure />
       </div>
     </section>
   );

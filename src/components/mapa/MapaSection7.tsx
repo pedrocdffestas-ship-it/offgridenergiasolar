@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { mapaAssets } from "./assets";
+import { ProofAvatar, PortraitDisclosure } from "./ProofAvatar";
 
 export function MapaSection7() {
   return (
@@ -30,7 +31,7 @@ export function MapaSection7() {
               me trouxe uma visão panorâmica que fez toda a diferença!
             </blockquote>
             <div className="who">
-              <span className="av mapa-inline-1">JM</span>
+              <ProofAvatar portrait="José Marcos" />
               <span className="nm">José Marcos</span>
             </div>
           </div>
@@ -43,7 +44,7 @@ export function MapaSection7() {
               contextos, as conexões e a mensagem de cada livro.
             </blockquote>
             <div className="who">
-              <span className="av mapa-inline-2">FS</span>
+              <ProofAvatar portrait="Fernanda Silva" />
               <span className="nm">Fernanda Silva</span>
             </div>
           </div>
@@ -56,11 +57,12 @@ export function MapaSection7() {
               minha vida. Sou muito grato por esse material!
             </blockquote>
             <div className="who">
-              <span className="av mapa-inline-3">RL</span>
+              <ProofAvatar portrait="Roberto Lima" />
               <span className="nm">Roberto Lima</span>
             </div>
           </div>
         </div>
+        <PortraitDisclosure />
       </div>
     </section>
   );
