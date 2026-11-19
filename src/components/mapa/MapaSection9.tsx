@@ -87,6 +87,20 @@ export function MapaSection9() {
                   ></path>
                 </svg>
               </span>
+              Recebimento pelo WhatsApp e pelo E-mail
+            </li>
+            <li>
+              <span className="ck">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path
+                    d="M2 8.5 6 12 14 3.5"
+                    stroke="var(--mapa-palette-13)"
+                    strokeWidth="2.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  ></path>
+                </svg>
+              </span>
               30 Dias de Garantia
             </li>
           </ul>
