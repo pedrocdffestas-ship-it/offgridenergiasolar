@@ -61,6 +61,51 @@ export function useMapaInteractions(root: RefObject<HTMLDivElement | null>) {
       cleanup.push(() => button.removeEventListener("click", move));
     }
 
+    const proofTrack = page.querySelector<HTMLElement>("#proofCarTrack");
+    const proofDots = page.querySelector<HTMLElement>("#proofCarDots");
+    if (proofTrack && proofDots) {
+      const total = proofTrack.children.length;
+      for (let i = 0; i < total; i++) {
+        const dot = document.createElement("i");
+        if (i === 0) dot.classList.add("on");
+        proofDots.appendChild(dot);
+      }
+      let timer: ReturnType<typeof setInterval> | undefined;
+      const stop = () => {
+        if (timer) clearInterval(timer);
+      };
+      const updateDots = () => {
+        const index = Math.round(proofTrack.scrollLeft / Math.max(1, proofTrack.clientWidth));
+        proofDots
+          .querySelectorAll("i")
+          .forEach((dot, i) => dot.classList.toggle("on", i === index));
+      };
+      const start = () => {
+        stop();
+        if (reduced || document.hidden || total === 0) return;
+        timer = setInterval(() => {
+          const next =
+            (Math.round(proofTrack.scrollLeft / Math.max(1, proofTrack.clientWidth)) + 1) % total;
+          proofTrack.scrollTo({ left: next * proofTrack.clientWidth, behavior });
+        }, 4000);
+      };
+      proofTrack.addEventListener("scroll", updateDots, { passive: true });
+      for (const event of ["pointerdown", "touchstart", "wheel"]) {
+        proofTrack.addEventListener(event, start, { passive: true });
+        cleanup.push(() => proofTrack.removeEventListener(event, start));
+      }
+      document.addEventListener("visibilitychange", start);
+      cleanup.push(
+        stop,
+        () => proofTrack.removeEventListener("scroll", updateDots),
+        () => document.removeEventListener("visibilitychange", start),
+        () => {
+          proofDots.innerHTML = "";
+        },
+      );
+      start();
+    }
+
     const buy = page.querySelector("#buyBtn");
     const notice = page.querySelector("#prototypeMsg");
     if (buy && notice) {
