@@ -5,8 +5,7 @@ export function MapaSection14() {
   return (
     <div className="sticky-cta" id="stickyCta" aria-hidden="true">
       <div className="s-price">
-        <s>R$97</s>
-        <strong>R$47</strong>
+        <strong>R$ 37,90</strong>
       </div>
       <Button variant="mapa" asChild>
         <a className="btn" href="#oferta" tabIndex="-1">
