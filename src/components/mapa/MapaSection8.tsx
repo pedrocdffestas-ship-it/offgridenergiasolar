@@ -5,8 +5,8 @@ export function MapaSection8() {
   return (
     <section>
       <div className="wrap">
-        <h2 className="sec-title">🎁 Ganhe esses Bônus hoje!</h2>
-        <p className="sec-sub">Receba esses presentes para potencializar seus estudos cristãos</p>
+        <p className="kicker">Ganhe esses Bônus hoje!</p>
+        <h2 className="sec-title">Receba esses presentes para potencializar seus estudos cristãos</h2>
         <div className="mapa-inline-7"></div>
         <div className="feat-card">
           <div className="phone-mock" aria-hidden="true">
