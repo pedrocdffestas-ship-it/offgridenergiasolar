@@ -65,7 +65,15 @@ export function MapaSection12() {
         <div className="faq-cta">
           <Button variant="mapa" asChild>
             <a className="btn" href="#oferta">
-              QUERO O MEU! 📖
+              QUERO O MEU! <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path
+                d="M12 5.5C10.4 4.2 8.3 3.5 4.5 3.5v15c3.8 0 5.9.7 7.5 2 1.6-1.3 3.7-2 7.5-2v-15c-3.8 0-5.9.7-7.5 2Zm0 0v15"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              ></path>
+            </svg>
             </a>
           </Button>
         </div>
