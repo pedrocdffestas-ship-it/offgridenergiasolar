@@ -56,4 +56,4 @@ export const mapaAssets = [
   asset26,
   asset27,
   asset28,
-];
+] as const;

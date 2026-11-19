@@ -8,7 +8,7 @@ export function MapaSection14() {
         <strong>R$ 37,90</strong>
       </div>
       <Button variant="mapa" asChild>
-        <a className="btn" href="#oferta" tabIndex="-1">
+        <a className="btn" href="#oferta" tabIndex={-1}>
           QUERO O MEU!
         </a>
       </Button>
