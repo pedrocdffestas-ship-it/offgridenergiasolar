@@ -106,7 +106,7 @@ svg {
   padding: 0 20px;
 }
 section {
-  padding: 54px 0;
+  padding: 40px 0;
 }
 
 /* ---------- Top bar ---------- */
@@ -354,10 +354,10 @@ section {
 .pain-list {
   list-style: none;
   max-width: 640px;
-  margin: 32px auto 0;
+  margin: 24px auto 0;
   padding: 0;
   display: grid;
-  gap: 13px;
+  gap: 12px;
   text-align: left;
 }
 .pain-list li {
@@ -448,7 +448,7 @@ section {
 }
 /* ---------- Real images ---------- */
 .real-img {
-  margin: 42px auto 10px;
+  margin: 26px auto 6px;
   max-width: 560px;
 }
 .real-img.wide {
@@ -466,7 +466,7 @@ section {
   width: 100%;
   height: auto;
   border-radius: 14px;
-  box-shadow: 0 14px 34px var(--mapa-palette-24);
+  box-shadow: 0 4px 14px var(--mapa-palette-24);
 }
 .video-slot {
   max-width: 720px;
@@ -514,30 +514,39 @@ section {
 }
 
 /* ---------- Mechanism text ---------- */
+#conhecer .real-img.overlap-panel {
+  margin-bottom: -64px;
+  position: relative;
+  z-index: 2;
+}
 .mech-text {
   max-width: 760px;
-  margin: 34px auto 0;
-  text-align: center;
+  margin: 0 auto;
+  text-align: left;
+  background: var(--blue);
+  border-radius: 24px;
+  padding: 92px 30px 16px;
+  box-shadow: 0 18px 40px var(--mapa-palette-19);
 }
 .mech-text p {
   font-size: 1.13rem;
   line-height: 1.65;
-  color: var(--gray);
+  color: oklch(0.96 0.02 255 / 1);
   margin: 0 0 20px;
 }
 .mech-text p strong {
-  color: var(--ink);
+  color: oklch(1 0 89.876 / 1);
 }
 .mech-cta {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 22px;
 }
 
 /* ---------- Text testimonial cards ---------- */
 .proof-grid {
   display: grid;
-  gap: 18px;
-  margin-top: 38px;
+  gap: 14px;
+  margin-top: 26px;
 }
 @media (min-width: 820px) {
   .proof-grid {
@@ -593,11 +602,11 @@ section {
 .feat-card {
   background: var(--card);
   border-radius: var(--radius);
-  margin-bottom: 26px;
+  margin-bottom: 18px;
   box-shadow: 0 10px 30px var(--mapa-palette-25);
-  padding: 34px 28px;
+  padding: 26px 22px;
   display: grid;
-  gap: 28px;
+  gap: 20px;
   align-items: center;
 }
 @media (min-width: 820px) {
@@ -609,6 +618,7 @@ section {
 }
 .feat-card h3 {
   font-size: 1.65rem;
+  font-weight: 700;
   margin: 0 0 14px;
   line-height: 1.25;
 }
@@ -713,7 +723,7 @@ section {
 }
 .offer-box {
   max-width: 560px;
-  margin: 36px auto 0;
+  margin: 18px auto 0;
   background: var(--mapa-palette-13);
   border-radius: 22px;
   box-shadow: 0 26px 60px var(--mapa-palette-30);
@@ -721,32 +731,32 @@ section {
   text-align: center;
   border: 1px solid var(--mapa-palette-31);
 }
-.offer-box .ob-label {
-  color: var(--gray);
-  font-size: 1rem;
-  margin-bottom: 6px;
-}
-.offer-box .ob-label strong {
-  color: var(--blue);
-}
-.offer-box .from {
-  color: var(--gray);
-  font-size: 1.15rem;
-}
-.offer-box .from s {
-  color: var(--mapa-palette-22);
+.date-bar {
+  max-width: 560px;
+  margin: 6px auto 14px;
+  background: var(--blue);
+  color: var(--mapa-palette-13);
   font-weight: 700;
+  font-size: 0.95rem;
+  text-align: center;
+  padding: 10px 16px;
+  border-radius: 10px;
+  text-transform: capitalize;
 }
-.offer-box .price {
+.offer-price-flat {
+  text-align: center;
+  margin: 8px auto 4px;
+}
+.offer-price-flat .price {
   font-size: 3.6rem;
   font-weight: 700;
   color: var(--blue);
   line-height: 1.1;
   margin: 2px 0;
 }
-.offer-box .once {
+.offer-price-flat .once {
   color: var(--gray);
-  margin-bottom: 22px;
+  margin-bottom: 10px;
 }
 .offer-box ul {
   list-style: none;
@@ -760,7 +770,8 @@ section {
   display: flex;
   gap: 10px;
   align-items: center;
-  color: var(--ink);
+  color: var(--blue-deep);
+  font-weight: 600;
   font-size: 1.02rem;
 }
 .offer-box li .ck {
@@ -768,7 +779,7 @@ section {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: var(--green);
+  background: var(--blue);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -806,6 +817,11 @@ section {
   gap: 6px 18px;
   justify-content: center;
   flex-wrap: wrap;
+}
+.offer-box .secure svg {
+  display: inline-block;
+  vertical-align: -2px;
+  margin-right: 2px;
 }
 
 /* ---------- Guarantee ---------- */
@@ -886,12 +902,12 @@ section {
 }
 .faq-cta {
   text-align: center;
-  margin-top: 36px;
+  margin-top: 24px;
 }
 
 /* ---------- Footer ---------- */
 footer {
-  padding: 36px 0 96px;
+  padding: 28px 0 72px;
   text-align: center;
   color: var(--gray);
   font-size: 0.9rem;
