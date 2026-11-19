@@ -25,20 +25,12 @@ export function MapaSection5() {
         </h2>
 
         <div className="video-slot" aria-hidden="true"></div>
-        <figure className="real-img wide">
+        <figure className="real-img wide overlap-panel">
           <img
             src={mapaAssets[22].url}
             width={1952}
             height={1280}
             alt="Apostila do Mapa do Cristão aberta, com as páginas-mapa dos livros da Bíblia"
-          />
-        </figure>
-        <figure className="real-img">
-          <img
-            src={mapaAssets[23].url}
-            width={1696}
-            height={1472}
-            alt="Página-mapa do livro de Gênesis do Mapa do Cristão"
           />
         </figure>
         <div className="mech-text">
