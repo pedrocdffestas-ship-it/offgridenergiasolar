@@ -7,7 +7,7 @@ export function MapaSection10() {
     <section className="mapa-inline-8">
       <div className="wrap">
         <h2 className="sec-title">O que dizem os cristãos que já estudam com o Mapa</h2>
-        <div className="proof-grid">
+        <div className="proof-car" id="proofCarTrack">
           <div className="proof-card">
             <div className="stars" aria-hidden="true">
               ★★★★★
@@ -139,6 +139,7 @@ export function MapaSection10() {
             </div>
           </div>
         </div>
+        <div className="proof-dots" id="proofCarDots" aria-hidden="true"></div>
         <PortraitDisclosure />
       </div>
     </section>
