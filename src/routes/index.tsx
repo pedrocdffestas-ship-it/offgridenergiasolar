@@ -3,7 +3,6 @@ import { useRef } from "react";
 import { useMapaInteractions } from "@/components/mapa/useMapaInteractions";
 import { MapaSection1 } from "@/components/mapa/MapaSection1";
 import { MapaSection2 } from "@/components/mapa/MapaSection2";
-import { MapaSection3 } from "@/components/mapa/MapaSection3";
 import { MapaSection4 } from "@/components/mapa/MapaSection4";
 import { MapaSectionVsl } from "@/components/mapa/MapaSectionVsl";
 import { MapaSection5 } from "@/components/mapa/MapaSection5";
@@ -48,7 +47,7 @@ function MapaPage() {
     <div ref={ref} className="mapa-page">
       <MapaSection1 />
       <MapaSection2 />
-      <MapaSection3 />
+
       <MapaSection4 />
       <MapaSectionVsl />
       <MapaSection5 />
