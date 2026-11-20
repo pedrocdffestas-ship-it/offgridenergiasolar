@@ -796,6 +796,13 @@ section {
   text-align: center;
   margin: 8px auto 4px;
 }
+.offer-price-flat .price-anchor {
+  color: var(--gray);
+  font-size: 1.3rem;
+}
+.offer-price-flat .price-anchor .old {
+  text-decoration: line-through;
+}
 .offer-price-flat .price {
   font-size: 3.6rem;
   font-weight: 700;
