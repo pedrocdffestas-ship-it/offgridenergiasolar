@@ -42,6 +42,7 @@ export function MapaSection9() {
         </figure>
         <div className="date-bar">Oferta Especial: {dataHoje}</div>
         <div className="offer-price-flat">
+          <div className="price-anchor">De <span className="old">R$ 97</span> por apenas</div>
           <div className="price">R$ 37,90</div>
           <div className="once">Pagamento único</div>
         </div>
