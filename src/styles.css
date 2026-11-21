@@ -498,6 +498,75 @@ section {
 .vsl-ph {
   padding: 10px 0 26px;
 }
+.vsl-ph .box.player {
+  aspect-ratio: 3 / 4;
+  max-width: 400px;
+  border: none;
+  background: #000;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  display: block;
+}
+.vsl-ph .box.player video {
+  position: absolute;
+  inset: 0;
+}
+.vsl-ph .vsl-hit {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.vsl-ph .vsl-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 58px;
+  padding: 12px 20px;
+  border-radius: 999px;
+  background: rgb(0 0 0 / 0.65);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.35);
+  animation: vsl-pulse 1.6s ease-in-out infinite;
+}
+.vsl-ph .vsl-pill-ico {
+  font-size: 1.25rem;
+}
+@keyframes vsl-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.07); }
+}
+.vsl-ph .vsl-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgb(0 0 0 / 0.45);
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.vsl-ph .vsl-hit:hover .vsl-toggle,
+.vsl-ph .vsl-toggle.show {
+  opacity: 1;
+}
+.vsl-ph .box.player video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
 .vsl-ph .box {
   max-width: 720px;
   margin: 0 auto;
