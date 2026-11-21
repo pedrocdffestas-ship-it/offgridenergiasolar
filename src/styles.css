@@ -501,10 +501,10 @@ section {
 .vsl-ph .box {
   position: relative;
   overflow: hidden;
-  max-width: 720px;
+  max-width: 420px;
   margin: 0 auto;
-  aspect-ratio: 16 / 9;
-  border: 2px dashed var(--blue);
+  aspect-ratio: 3 / 4;
+  border: 3px solid var(--blue);
   border-radius: 16px;
   background: var(--mapa-palette-13);
   display: flex;
@@ -519,7 +519,7 @@ section {
   height: 100%;
   position: absolute;
   inset: 0;
-  object-fit: contain;
+  object-fit: cover;
 }
 .vsl-ph .minivsl-sound {
   position: relative;
