@@ -478,15 +478,6 @@ section {
   border-radius: 14px;
   box-shadow: 0 4px 14px var(--mapa-palette-24);
 }
-.video-slot {
-  max-width: 720px;
-  margin: 4px auto 30px;
-  aspect-ratio: 16 / 9;
-  background: var(--mapa-palette-13);
-  border: 1px solid var(--line);
-  border-radius: 14px;
-}
-
 /* ---------- Mini VSL ---------- */
 .vsl-ph {
   padding: 10px 0 26px;
@@ -1071,7 +1062,7 @@ footer .f-brand {
     gap: 8px;
   }
   .hero h1 {
-    font-size: 1.45rem;
+    font-size: 2rem;
     line-height: 1.22;
     letter-spacing: 0;
     margin: 10px auto 10px;
