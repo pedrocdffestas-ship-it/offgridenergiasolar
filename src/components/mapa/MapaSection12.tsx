@@ -21,10 +21,9 @@ export function MapaSection12() {
             <summary>O Mapa do Cristão é digital ou físico?</summary>
             <div className="faq-body">
               <p>
-                Oferecemos as duas opções! Você pode escolher a <strong>Versão Digital</strong> para
-                baixar e acessar de onde quiser, ou a <strong>Versão Impressa (Livro)</strong>, que
-                enviamos diretamente para sua casa com frete grátis. Em ambas as opções, você recebe
-                acesso à nossa área de membros exclusiva com a versão digital do Mapa do Cristão.
+                O Mapa do Cristão é um <strong>material 100% digital</strong>: você acessa de onde
+                quiser, no celular, tablet ou computador, e, se preferir, <strong>pode imprimir</strong>{" "}
+                em casa ou em uma gráfica para estudar no papel. Não trabalhamos com livro físico.
               </p>
             </div>
           </details>
@@ -32,11 +31,9 @@ export function MapaSection12() {
             <summary>Como vou receber o material?</summary>
             <div className="faq-body">
               <p>
-                Para a <strong>Versão Digital</strong>, o acesso chega no seu e-mail logo após a
-                confirmação (certifique-se de preencher o e-mail e whatsapp corretamente, pois
-                enviamos o acesso por ambos). Para a <strong>Versão Impressa</strong>, o envio é
-                feito via Correios ou transportadora, ambos com rastreio, e você também recebe o
-                acesso digital por e-mail imediatamente!
+                Após a confirmação da compra, o acesso chega pelo seu <strong>WhatsApp</strong>{" "}
+                e também no seu <strong>e-mail</strong>. Por isso, certifique-se de preencher os
+                dois corretamente na hora de finalizar o pedido.
               </p>
             </div>
           </details>
