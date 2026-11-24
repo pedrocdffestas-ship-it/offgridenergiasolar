@@ -24,7 +24,6 @@ export function MapaSection5() {
           base na Bíblia Almeida.
         </h2>
 
-        <div className="video-slot" aria-hidden="true"></div>
         <figure className="real-img wide overlap-panel">
           <img
             src={mapaAssets[22].url}
