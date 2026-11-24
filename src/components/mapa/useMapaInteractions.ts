@@ -106,16 +106,6 @@ export function useMapaInteractions(root: RefObject<HTMLDivElement | null>) {
       start();
     }
 
-    const buy = page.querySelector("#buyBtn");
-    if (buy) {
-      const checkoutUrl = "https://app.mivvo.com.br/checkout/01a1f173-963d-7335-8529-5034dbfa2a89";
-      const go = () => {
-        window.location.href = checkoutUrl;
-      };
-      buy.addEventListener("click", go);
-      cleanup.push(() => buy.removeEventListener("click", go));
-    }
-
     const sticky = page.querySelector<HTMLElement>("#stickyCta");
     const hero = page.querySelector(".hero");
     const offer = page.querySelector("#oferta");
