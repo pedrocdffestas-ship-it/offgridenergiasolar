@@ -315,13 +315,6 @@ section {
   height: 100%;
   object-fit: cover;
 }
-.portrait-disclosure {
-  margin: 12px 0 0;
-  text-align: center;
-  font-size: 0.75rem;
-  line-height: 1.5;
-  color: var(--gray);
-}
 .proof-strip .stars {
   color: var(--blue);
   letter-spacing: 0.18em;

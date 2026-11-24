@@ -38,7 +38,3 @@ export function ProofAvatar({ portrait, className, ...props }: ProofAvatarProps)
     </span>
   );
 }
-
-export function PortraitDisclosure() {
-  return <p className="portrait-disclosure">Retratos ilustrativos gerados por IA; não são fotos dos depoentes.</p>;
-}

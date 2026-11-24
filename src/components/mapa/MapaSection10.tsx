@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { mapaAssets } from "./assets";
-import { ProofAvatar, PortraitDisclosure } from "./ProofAvatar";
+import { ProofAvatar } from "./ProofAvatar";
 
 export function MapaSection10() {
   return (
@@ -140,7 +140,6 @@ export function MapaSection10() {
           </div>
         </div>
         <div className="proof-dots" id="proofCarDots" aria-hidden="true"></div>
-        <PortraitDisclosure />
       </div>
     </section>
   );

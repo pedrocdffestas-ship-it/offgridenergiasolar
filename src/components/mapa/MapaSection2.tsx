@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { mapaAssets } from "./assets";
-import { ProofAvatar, PortraitDisclosure } from "./ProofAvatar";
+import { ProofAvatar } from "./ProofAvatar";
 
 export function MapaSection2() {
   return (
@@ -117,7 +117,6 @@ export function MapaSection2() {
             </div>
           </div>
         </div>
-        <PortraitDisclosure />
       </div>
     </header>
   );
