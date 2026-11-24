@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button";
 import { mapaAssets } from "./assets";
+import appMockup from "@/assets/mapa/app-mapa-cristao-mockup.png.asset.json";
 
 export function MapaSection8() {
   return (
@@ -9,23 +9,14 @@ export function MapaSection8() {
         <h2 className="sec-title">Receba esses presentes para potencializar seus estudos cristãos</h2>
         <div className="mapa-inline-7"></div>
         <div className="feat-card">
-          <div className="phone-mock" aria-hidden="true">
-            <div className="ph-head">App Mapa do Cristão</div>
-            <div className="ph-sub">Seu companheiro diário de oração</div>
-            <div className="ph-card">
-              <b>Oração Diária</b>
-              <span>A leitura e a reflexão do dia, direto no celular.</span>
-            </div>
-            <div className="ph-card">
-              <b>Oração guiada</b>
-              <span>Um roteiro para guiar o seu momento de oração.</span>
-            </div>
-            <div className="ph-card">
-              <b>Planos de leitura</b>
-              <span>Acompanhe o plano da Bíblia em 365 dias.</span>
-            </div>
-            <div className="ph-btn">Abrir o app</div>
-          </div>
+          <img
+            className="feat-img"
+            src={appMockup.url}
+            width={1224}
+            height={1285}
+            alt="Dois celulares exibindo o App Mapa do Cristão, com Oração Diária, Oração guiada e Planos de leitura"
+            loading="lazy"
+          />
           <div>
             <h3>App Mapa do Cristão</h3>
             <p className="f-body">
